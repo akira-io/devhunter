@@ -23,12 +23,8 @@ export default function ConfirmPassword() {
     };
 
     return (
-        <AuthLayout
-            title="Confirm your password"
-            description="This is a secure area of the application. Please confirm your password before continuing."
-        >
+        <AuthLayout title="Confirmar password" description="Por favor, confirme a sua password para continuar.">
             <Head title="Confirm password" />
-
             <form onSubmit={submit}>
                 <div className="space-y-6">
                     <div className="grid gap-2">
@@ -43,14 +39,12 @@ export default function ConfirmPassword() {
                             autoFocus
                             onChange={(e) => setData('password', e.target.value)}
                         />
-
                         <InputError message={errors.password} />
                     </div>
-
                     <div className="flex items-center">
                         <Button className="w-full" disabled={processing}>
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                            Confirm password
+                            Confirmar password
                         </Button>
                     </div>
                 </div>

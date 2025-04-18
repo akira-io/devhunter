@@ -36,7 +36,7 @@ export function AppSidebar() {
                         <SidebarMenuButton size="lg" asChild>
                             <Link href="/dashboard" prefetch>
                                 {/*<AppLogo />*/}
-                                <BoxesIcon /> Digital Hubs
+                                <BoxesIcon /> Digital Hub
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
