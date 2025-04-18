@@ -99,7 +99,7 @@ e escreva testes para novas funcionalidades.
 Para executar os testes, use o seguinte comando:
 
 ```bash
-php artisan test
+composer test
 ```
 
 ## Mantido por:
