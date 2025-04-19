@@ -11,7 +11,7 @@ on:
       - main
 
 jobs:
-  ci:
+  code_base_test:
     runs-on: ubuntu-latest
 
     steps:
