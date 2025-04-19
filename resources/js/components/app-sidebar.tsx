@@ -1,15 +1,23 @@
-import { NavFooter } from '@/components/nav-footer';
-import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import { BookOpen, BoxesIcon, Folder, LayoutGrid } from 'lucide-react';
+import {NavFooter} from '@/components/nav-footer';
+import {NavMain} from '@/components/nav-main';
+import {NavUser} from '@/components/nav-user';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem
+} from '@/components/ui/sidebar';
+import {type NavItem} from '@/types';
+import {Link} from '@inertiajs/react';
+import {BookOpen, Folder, LayoutGrid, TerminalIcon} from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: '/dashboard',
+        title: 'Feed',
+        href: '/feed',
         icon: LayoutGrid,
     },
 ];
@@ -29,26 +37,26 @@ const footerNavItems: NavItem[] = [
 
 export function AppSidebar() {
     return (
-        <Sidebar collapsible="icon" variant="inset">
-            <SidebarHeader>
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
-                                {/*<AppLogo />*/}
-                                <BoxesIcon /> Digital Hub
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                </SidebarMenu>
-            </SidebarHeader>
-            <SidebarContent>
-                <NavMain items={mainNavItems} />
-            </SidebarContent>
-            <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
-                <NavUser />
-            </SidebarFooter>
-        </Sidebar>
+      <Sidebar collapsible='icon' variant='sidebar'>
+          <SidebarHeader>
+              <SidebarMenu>
+                  <SidebarMenuItem>
+                      <SidebarMenuButton size='lg' asChild>
+                          <Link href='/feed' prefetch>
+                              {/*<AppLogo />*/}
+                              <TerminalIcon/> Dev Hunter
+                          </Link>
+                      </SidebarMenuButton>
+                  </SidebarMenuItem>
+              </SidebarMenu>
+          </SidebarHeader>
+          <SidebarContent>
+              <NavMain items={mainNavItems}/>
+          </SidebarContent>
+          <SidebarFooter>
+              <NavFooter items={footerNavItems} className='mt-auto'/>
+              <NavUser/>
+          </SidebarFooter>
+      </Sidebar>
     );
 }

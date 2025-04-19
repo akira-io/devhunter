@@ -1,120 +1,116 @@
-# Hub Digital cabo Verde
+# Dev Hunter
 
-Hub Digital é uma plataforma colaborativa para descoberta, divulgação e apoio a produtos e projetos tecnológicos criados
-em Cabo Verde.
+**Dev Hunter** is a social network for developers to showcase their projects, share ideas, and connect with others in
+the tech community. It's a platform built by developers, for developers, focusing on the human side of coding and
+fostering collaboration and growth.
 
-Inspirada por iniciativas como Product Hunt, esta plataforma visa criar um ecossistema onde makers, devs, designers,
-estudantes e empreendedores locais possam lançar suas ideias, obter feedback e ganhar visibilidade.
+---
 
-O projeto está em seu estágio inicial e procura seus primeiros contribuidores. O objetivo é construir um MVP simples e,
-posteriormente, migrar para tecnologias mais robustas
+## 🚀 Features
 
-## Conteúdo
+- **Developer Profiles**: Create your profile with tech stack, bio, and achievements.
+- **Project Showcase**: Share your coding projects, highlight your best work.
+- **Devlogs & Posts**: Post ideas, reflections, devlogs, and share your learning experiences.
+- **Interactive Feed**: Like, comment, and follow other devs for engagement and collaboration.
+- **Explore by Stack**: Discover projects based on programming language, framework, and more.
+- **Community First**: A 100% developer-focused community, without algorithms hiding your content.
 
-- [Instalação](#installation)
-- [Utilização](#usage)
-- [Como Contribuir](#contributing)
-- [Licença](#license)
+---
 
-## Instalação
+## 💡 Problem
 
-Este projeto foi desenvolvido com Laravel 12 e React como frontend.
-Para executar o projeto, você precisará ter o PHP, Composer e Node.js instalados em sua máquina
-nas versões recomendadas.
+Current platforms don’t fully value the developer as a creator:
 
-- [PHP](https://www.php.net/downloads.php) >= 8.4
-- [Composer](https://getcomposer.org/download/) >= 2.0
-- [Node.js](https://nodejs.org/en/download/) >= 22.0
+- Portfolios are often static and lack personality.
+- GitHub, while technical, is impersonal.
+- There is little space for devs to share ideas, thoughts, and reflections.
+- Communities are often fragmented, making it hard to build relationships and grow.
 
-Siga estas etapas para instalar e configurar o projeto:
+---
 
-```bash
-# Clone este repositório
-git clone https://github.com/digitalhub/digitalhub.git
+## 🔧 The Solution
 
-cd digitalhub
+**Dev Hunter** offers a platform where developers can:
 
-git checkout -b feat/your-feature
+- Create detailed profiles and showcase their skills and achievements.
+- Share devlogs, thoughts, and project updates in a meaningful way.
+- Engage with a like-minded community, collaborate, and grow together.
+- Explore other developers’ projects by their tech stack and interests.
 
-```
+---
 
-> **Nota:** Não faça push diretamente para a branch `main`. Crie uma nova branch para suas alterações.
+## 🛠️ How It Works
 
-### Instale as dependências usando o [Composer](https://getcomposer.org) e [NPM](https://www.npmjs.com):
+1. **Create Your Profile**: Add your tech stack, bio, and showcase your best work.
+2. **Post and Share**: Write quick posts or long devlogs to share your experiences and ideas.
+3. **Interactive Feed**: Engage with others through likes, comments, and follow developers.
+4. **Explore by Stack**: Filter projects by programming language, framework, or tool.
 
-```bash  
-# Instale as dependências do PHP
-composer install
-# Instale as dependências do Node.js
-npm install
-```
+---
 
-### Crie uma cópia do arquivo `.env.example` e renomeie-o para `.env`:
+## 🎯 Why It’s Different
 
-```bash
-cp .env.example .env
-php artisan key:generate
-```
+- **Developer-Centered**: A platform 100% focused on developers.
+- **No Algorithms**: Your content is displayed to the community without hidden algorithms or content restrictions.
+- **Dev-Friendly Interface**: A clean, dark-mode interface designed for ease of use.
+- **Human Focused**: We emphasize the human side of coding—your thoughts, your journey, your story.
 
-### Prepare a base de dados e execute as migrações:
+---
 
-```bash
-  touch database/database.sqlite
-    php artisan migrate
-```
+## 🌍 Market Opportunity
 
-### Link o diretório de armazenamento:
+There are millions of developers worldwide who want to be seen, heard, and valued:
 
-```bash
-php artisan storage:link
-```
+- A growing audience of indie devs, freelancers, and content creators.
+- A trend toward niche, authentic communities over generic platforms.
+- Open source, SaaS, and tech content are more popular than ever.
 
-Em um terminal separado compile os assets:
+---
 
-```bash
-npm run dev
-```
+## 🚧 Roadmap
 
-### Execute o servidor  do Laravel:
+### Next Steps:
 
-```bash
-php artisan serve
-```
+- MVP with user authentication, posts, and following.
+- Beta testing with the developer community.
+- Organic growth via content creators.
+- Ethical and transparent monetization planning.
 
-## Como Contribuir
+---
 
-Contribuições são bem-vindas! Siga estas etapas para contribuir:
+## 📝 Contributing
 
-1. Fork o projeto.
-2. Crie sua branch de recurso (`git checkout -b feature/AmazingFeature`).
-3. Commit suas alterações (`git commit -m 'feat: add some AmazingFeature'`).
-4. Envie para a branch (`git push origin feature/AmazingFeature`).
-5. Abra um pull request.
+We welcome contributions to **Dev Hunter**! To get started:
 
-Por favor, siga as diretrizes de contribuição e mantenha o código limpo e bem documentado,
-e escreva testes para novas funcionalidades.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature-name`).
+5. Create a new Pull Request.
 
-## Testes
+---
 
-Para executar os testes, use o seguinte comando:
+## 📬 Contact
 
-```bash
-composer test
-```
+Want to get involved, support the project, or learn more?
 
-## Mantido por:
+- Email us at: geral@akira-io.com
+- Join our community: [Dicord](https://discord.gg/ghPqZg3RcZ)
 
-- [Nuno Lima](https://github.com/NunoLima10)
-- [kidiatoliny Gonçalves](https://github.com/kidiatoliny)
-- [Outros contribuidores](../../contributors)
+Let’s build this community together!
 
-## Licença
+---
 
-Distribuido sob a licença **[GNU Affero General Public License](LICENSE.md)**
+## ⚙️ Technologies
 
+- **Frontend**: React
+- **Backend**: Laravel
+- **Database**: [Sqlite, Postgres.]
+- **Authentication**: Laravel Auth
+- **Hosting**: [Digital Ocean, AWS]
 
+---
 
+## 🤝 License
 
-
-
-
+This project is licensed under the **[GNU Affero General Public License](LICENSE.md)**
