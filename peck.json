@@ -1,0 +1,18 @@
+{
+  "preset": "laravel",
+  "ignore": {
+    "words": [
+      "php",
+      "ssr",
+      "tsconfig",
+      "utils",
+      "tooltip",
+      "filesystems"
+    ],
+    "paths": [
+      "resources",
+      "eslint.config.js",
+      "public/favicon.ico"
+    ]
+  }
+}
