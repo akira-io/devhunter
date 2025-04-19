@@ -84,7 +84,7 @@
     "plugins": {
       "@release-it/conventional-changelog": {
         "infile": "CHANGELOG.md",
-        "preset": "angular",
+        "preset": "conventionalcommits",
         "types": {
           "feat": {
             "section": "Features"
