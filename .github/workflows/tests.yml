@@ -48,3 +48,15 @@ jobs:
 
       - name: Tests
         run: composer test
+
+      - name: Format Frontend
+        run: npm run format
+
+      - name: Lint Frontend
+        run: npm run lint
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: frontend linting"
+          commit_options: '--no-verify'
