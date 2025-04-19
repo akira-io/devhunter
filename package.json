@@ -81,10 +81,10 @@
           "name": "angular"
         },
         "infile": "CHANGELOG.md"
-      },
-      "overrides": {
-        "conventional-changelog-conventionalcommits": "8.0.0"
       }
     }
+  },
+  "overrides": {
+    "conventional-changelog-conventionalcommits": "8.0.0"
   }
 }
