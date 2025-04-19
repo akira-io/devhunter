@@ -12,7 +12,7 @@
     "paths": [
       "resources",
       "eslint.config.js",
-      "public/favicon.ico"
+      "public"
     ]
   }
 }

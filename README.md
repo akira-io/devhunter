@@ -4,8 +4,8 @@
 the tech community. It's a platform built by developers, for developers, focusing on the human side of coding and
 fostering collaboration and growth.
 
-![img.png](img.png)
-![img_1.png](img_1.png)
+![img.png](public/img.png)
+![img_1.png](public/img_1.png)
 
 ---
 
