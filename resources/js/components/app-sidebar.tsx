@@ -17,12 +17,12 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Repositório',
-        href: 'https://github.com/made-in-cape-verde/digital-hub',
+        href: 'https://github.com/akira-io/devhunter',
         icon: Folder,
     },
     {
         title: 'Documentação',
-        href: 'https://github.com/made-in-cape-verde/digital-hub/blob/main/README.md',
+        href: 'https://github.com/akira-io/devhunter/blob/main/README.md',
         icon: BookOpen,
     },
 ];
