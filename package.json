@@ -66,40 +66,5 @@
     "@rollup/rollup-linux-x64-gnu": "4.9.5",
     "@tailwindcss/oxide-linux-x64-gnu": "^4.0.1",
     "lightningcss-linux-x64-gnu": "^1.29.1"
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore(release): ${version}"
-    },
-    "github": {
-      "release": true,
-      "releaseName": "v${version}",
-      "draft": false,
-      "preRelease": false,
-      "tokenRef": "GITHUB_TOKEN"
-    },
-    "npm": {
-      "publish": false
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "infile": "CHANGELOG.md",
-        "preset": "angular",
-        "types": {
-          "feat": {
-            "section": "Features"
-          },
-          "fix": {
-            "section": "Bug Fixes"
-          },
-          "chore": {
-            "section": "Miscellaneous Chores"
-          },
-          "refactor": {
-            "section": "Code Refactoring"
-          }
-        }
-      }
-    }
   }
 }
