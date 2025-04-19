@@ -84,7 +84,7 @@
     "plugins": {
       "@release-it/conventional-changelog": {
         "infile": "CHANGELOG.md",
-        "preset": "conventionalcommits",
+        "preset": "angular",
         "types": {
           "feat": {
             "section": "Features"
@@ -97,21 +97,6 @@
           },
           "refactor": {
             "section": "Code Refactoring"
-          },
-          "revert": {
-            "section": "Reverts"
-          },
-          "docs": {
-            "section": "Documentation",
-            "hidden": true
-          },
-          "style": {
-            "section": "Styles",
-            "hidden": true
-          },
-          "test": {
-            "section": "Tests",
-            "hidden": true
           }
         }
       }
