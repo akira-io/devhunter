@@ -16,6 +16,7 @@
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.19.0",
     "@release-it/conventional-changelog": "^10.0.1",
+    "@release-it/keep-a-changelog": "^7.0.0",
     "@types/node": "^22.13.5",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^10.0.1",
@@ -75,26 +76,8 @@
     "github": {
       "release": true
     },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": {
-          "name": "conventionalcommits",
-          "types": [
-            {
-              "type": "feat",
-              "section": "Features"
-            },
-            {
-              "type": "fix",
-              "section": "Bug Fixes"
-            }
-          ]
-        },
-        "infile": "CHANGELOG.md"
-      }
+    "@release-it/keep-a-changelog": {
+      "filename": "CHANGELOG.md"
     }
-  },
-  "overrides": {
-    "conventional-changelog-conventionalcommits": "8.0.0"
   }
 }
