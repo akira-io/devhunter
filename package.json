@@ -80,7 +80,10 @@
         "preset": {
           "name": "angular"
         },
-        "infile": "CHANGELOG.md"
+        "infile": "CHANGELOG.md",
+        "writerOpts": {
+          "groupBy": "scope"
+        }
       }
     }
   }
