@@ -1,6 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useState } from 'react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
+import { RiGithubFill } from '@remixicon/react';
 
 type LoginForm = {
     email: string;
@@ -22,6 +23,7 @@ interface LoginProps {
 }
 
 export default function Login({ status, canResetPassword }: LoginProps) {
+    const [loadingGithub, setLoadingGithub] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm<Required<LoginForm>>({
         email: '',
         password: '',
@@ -33,6 +35,11 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         post(route('login'), {
             onFinish: () => reset('password'),
         });
+    };
+
+    const handleGithubLogin = () => {
+        setLoadingGithub(true);
+        window.location.assign(route('github.login'));
     };
 
     return (
@@ -89,6 +96,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Iniciar sessão
+                    </Button>
+                    <Button variant="outline" type="button" className="w-full" onClick={handleGithubLogin} tabIndex={6} disabled={loadingGithub}>
+                        {loadingGithub ? (
+                            <LoaderCircle className="h-4 w-4 animate-spin" />
+                        ) : (
+                            <RiGithubFill className="me-1 text-[#333333] dark:text-white/60" size={16} aria-hidden="true" />
+                        )}
+                        Login com GitHub
                     </Button>
                 </div>
                 <div className="text-muted-foreground text-center text-sm">

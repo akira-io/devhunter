@@ -1,10 +1,11 @@
+import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, TerminalIcon } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
@@ -34,9 +35,8 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href="/feed" prefetch>
-                                {/*<AppLogo />*/}
-                                <TerminalIcon /> Dev Hunter
+                            <Link href="/" prefetch>
+                                <AppLogo />
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
