@@ -4,28 +4,50 @@ declare(strict_types=1);
 
 namespace App\ValueObjects;
 
-use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Laravel\Socialite\Contracts\User;
+use Laravel\Socialite\Two\User;
 
-final class GithubUser implements Arrayable
+// use Laravel\Socialite\Contracts\User as SocialiteUser;
+
+final class GithubUser
 {
+    /**
+     * The GithubUser value object.
+     */
     public function __construct(public User $user) {}
 
+    /**
+     * Create a new instance of the GithubUser value object.
+     */
+    public static function from(User $user): self
+    {
+        return resolve(self::class, [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * Convert the GithubUser value object to an array.
+     *
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
+        $raw = $this->user->getRaw();
+
         return [
             'name' => $this->user->getName() ?? $this->user->getNickname(),
-            'email' => $this->user->getEmail() ?? $this->user->user['notification_email'],
-            'github_user_name' => $this->user->user['login'] ?? null,
+            'email' => $this->user->getEmail() ?? ($raw['notification_email'] ?? null),
+            'github_user_name' => $raw['login'] ?? null,
             'avatar_url' => $this->user->getAvatar(),
             'github_id' => $this->user->getId(),
-            'github_token' => $this->user->token,
-            'github_refresh_token' => $this->user->refreshToken,
+            'github_token' => $raw['token'] ?? null,
+            'github_refresh_token' => $raw['refresh_token'] ?? null,
             'email_verified_at' => now(),
-            'location' => $this->user->user['location'] ?? null,
-            'bio' => $this->user->user['bio'] ?? null,
-            'password' => bcrypt(Str::random(32)),
+            'location' => $raw['location'] ?? null,
+            'bio' => $raw['bio'] ?? null,
+            'password' => Hash::make(Str::random(32)),
         ];
     }
 }

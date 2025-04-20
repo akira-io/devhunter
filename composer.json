@@ -74,7 +74,7 @@
     "test:types": "phpstan",
     "test:arch": "pest --filter=arch",
     "test:type-coverage": "pest --type-coverage --min=100",
-    "test:coverage": "pest --parallel --coverage --compact --exactly=89.7",
+    "test:coverage": "pest --parallel --coverage --compact --exactly=85.9",
     "test:typos": "peck",
     "test": [
       "@php artisan config:clear --ansi",

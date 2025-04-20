@@ -11,7 +11,7 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table): void {
             $table->string('github_user_name')->nullable();
             $table->string('avatar_url')->nullable();
             $table->string('location')->nullable();
