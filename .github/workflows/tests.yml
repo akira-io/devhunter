@@ -1,13 +1,8 @@
 name: tests
-permissions:
-  contents: read
-  pull-requests: write
-
 on:
   push:
     branches:
-      - develop
-      - main
+      - '*'
   pull_request:
     branches:
       - develop
@@ -66,5 +61,5 @@ jobs:
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: frontend linting"
+          commit_message: "chore: format frontend"
           commit_options: '--no-verify'
