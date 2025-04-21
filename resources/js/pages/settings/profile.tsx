@@ -80,6 +80,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                         <div className="*:not-first:mt-2">
                             <Label htmlFor="bio">Bio</Label>
                             <Textarea id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} />
+                            <span className="text-muted-foreground float-end flex-1 text-sm">{data.bio.length} / 200</span>
                             <InputError className="mt-2" message={errors.bio} />
                         </div>
                         {mustVerifyEmail && auth.user.email_verified_at === null && (

@@ -1,5 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle, LogInIcon } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
 
 import InputError from '@/components/input-error';
@@ -94,7 +94,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         <Label htmlFor="remember">Lembrar-me</Label>
                     </div>
                     <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
-                        {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
+                        {processing ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <LogInIcon />}
                         Iniciar sessão
                     </Button>
                     <Button variant="outline" type="button" className="w-full" onClick={handleGithubLogin} tabIndex={6} disabled={loadingGithub}>

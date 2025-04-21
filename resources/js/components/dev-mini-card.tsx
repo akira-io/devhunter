@@ -1,21 +1,26 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import AvatarGenenerator, { genConfig } from 'react-nice-avatar';
 
 type DevCardMini = {
     title: string;
-    description: string;
-    image: string;
+    description?: string;
+    image?: string;
 };
 
 export function DevMiniCard({ title, description, image }: DevCardMini) {
+    const config = genConfig({ hairStyle: 'thick' });
     return (
-        <Card className="h-30 w-full overflow-hidden py-4 md:max-w-150">
-            <CardHeader className={'flex flex-col items-start justify-center text-center lg:flex-row lg:justify-start lg:text-left'}>
-                <img src={image} className="h-auto w-20 rounded-2xl" alt={image} />
-                <CardContent className={'flex-1'}>
+        <Card className="w-full overflow-hidden">
+            <CardContent className="flex items-start justify-center gap-4">
+                <Avatar className="h-20 w-auto">
+                    {image ? <AvatarImage src={image} alt={title} /> : <AvatarGenenerator className="h-20 w-20" {...config} />}
+                </Avatar>
+                <div className="flex-1">
                     <CardTitle className="mb-2 cursor-pointer text-xl">{title}</CardTitle>
                     <CardDescription className="mb-4 text-sm">{description}</CardDescription>
-                </CardContent>
-            </CardHeader>
+                </div>
+            </CardContent>
         </Card>
     );
 }
