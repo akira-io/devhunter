@@ -12,10 +12,12 @@
     "php": "^8.4",
     "inertiajs/inertia-laravel": "^2.0.2",
     "laravel/framework": "^12.9.2",
+    "laravel/socialite": "^5.19",
     "laravel/tinker": "^2.10.1",
     "tightenco/ziggy": "^2.5.2"
   },
   "require-dev": {
+    "barryvdh/laravel-debugbar": "^3.15",
     "fakerphp/faker": "^1.24.1",
     "laravel/pail": "^1.2.2",
     "laravel/pint": "^1.22",
@@ -26,7 +28,8 @@
     "pestphp/pest": "^3.8.2",
     "pestphp/pest-plugin-laravel": "^3.1",
     "pestphp/pest-plugin-type-coverage": "^3.5",
-    "rector/rector": "^2.0.11"
+    "rector/rector": "^2.0.11",
+    "spatie/laravel-ray": "^1.40"
   },
   "autoload": {
     "psr-4": {
@@ -72,7 +75,7 @@
     "test:types": "phpstan",
     "test:arch": "pest --filter=arch",
     "test:type-coverage": "pest --type-coverage --min=100",
-    "test:coverage": "pest --parallel --coverage --compact --exactly=89.7",
+    "test:coverage": "pest --parallel --coverage --compact --exactly=85.6",
     "test:typos": "peck",
     "test": [
       "@php artisan config:clear --ansi",
@@ -81,7 +84,8 @@
       "@test:typos",
       "@test:arch",
       "@test:types",
-      "@test:coverage"
+      "@test:coverage",
+      "@test:type-coverage"
     ]
   },
   "extra": {

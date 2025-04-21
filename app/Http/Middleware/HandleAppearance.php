@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
 
-final class HandleAppearance
+final readonly class HandleAppearance
 {
     /**
      * Handle an incoming request.

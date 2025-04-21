@@ -9,6 +9,7 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 
@@ -22,6 +23,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 type ProfileForm = {
     name: string;
     email: string;
+    bio: string;
 };
 
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
@@ -30,6 +32,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         name: auth.user.name,
         email: auth.user.email,
+        bio: auth.user.bio ?? '',
     });
 
     const submit: FormEventHandler = (e) => {
@@ -73,6 +76,12 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                                 placeholder="Email address"
                             />
                             <InputError className="mt-2" message={errors.email} />
+                        </div>
+                        <div className="*:not-first:mt-2">
+                            <Label htmlFor="bio">Bio</Label>
+                            <Textarea id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} />
+                            <span className="text-muted-foreground float-end flex-1 text-sm">{data.bio.length} / 200</span>
+                            <InputError className="mt-2" message={errors.bio} />
                         </div>
                         {mustVerifyEmail && auth.user.email_verified_at === null && (
                             <div>

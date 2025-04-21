@@ -7,12 +7,15 @@
       "tsconfig",
       "utils",
       "tooltip",
-      "filesystems"
+      "filesystems",
+      "cors"
     ],
     "paths": [
       "resources",
       "eslint.config.js",
-      "public"
+      "public",
+      "tests",
+      "storage"
     ]
   }
 }
