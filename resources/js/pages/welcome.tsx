@@ -61,7 +61,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                         </p>
                         <DevCount users={users} />
                         <div className="my-10 w-full max-w-xl dark:text-white">
-                            <div className="relative mb-20">
+                            <div className="relative mb-10 md:mb-20">
                                 <Input id="search" className="peer h-12 border ps-9 pe-9" placeholder="procurar..." type="search" />
                                 <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
                                     <SearchIcon size={16} />
@@ -69,12 +69,12 @@ export default function Welcome({ users }: { users: DataProps }) {
                             </div>
                         </div>
                     </div>
-                    <ScrollDown className="text-muted-foreground -mt-10 mb-10" />
                     <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 md:grid-cols-2 md:px-10 xl:grid-cols-3">
                         {users.data.map((user) => (
                             <DevMiniCard user={user} key={user.email} />
                         ))}
                     </div>
+                    <ScrollDown className="bg-foreground fixed bottom-0 h-8 w-8 rounded-md text-white dark:text-zinc-900" />
                 </div>
             </div>
         </>

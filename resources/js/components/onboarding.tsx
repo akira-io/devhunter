@@ -95,7 +95,7 @@ export default function Onboarding({ user, className, ...props }: OnboardingProp
                         <DialogHeader>
                             {step === 1 && (
                                 <div className="flex flex-col items-start gap-4">
-                                    <div className="flex w-full items-center justify-between">
+                                    <div className="flex w-full items-center justify-center">
                                         <Avatar className="h-20 w-auto">
                                             {user.avatar_url ? (
                                                 <AvatarImage src={user.avatar_url} alt={user.name} className="h-20 w-20" />
@@ -104,33 +104,32 @@ export default function Onboarding({ user, className, ...props }: OnboardingProp
                                             )}
                                         </Avatar>
                                         <div className="flex w-full items-center justify-between text-left">
-                                            <div className="ml-2 flex flex-col">
-                                                <DialogTitle className=""> {user.name}</DialogTitle>
-                                                <small className="text-muted flex-1 text-xs">Desde: {user.created_at}</small>
-                                            </div>
-                                            <div className="flex gap-1.5">
-                                                <Link href={''}>
-                                                    <RiGithubFill />
-                                                </Link>
-                                                <Link href={''}>
-                                                    <RiLinkedinBoxFill size={24} />
-                                                </Link>
-                                                <Link href={''}>
-                                                    <RiDiscordFill size={24} />
-                                                </Link>
-                                                <Link href={''}>
-                                                    <RiTwitterXFill size={22} />
-                                                </Link>
-                                                <Link href={''}>
-                                                    <RiBlueskyFill size={22} />
-                                                </Link>
-                                                <Link href={''}>
-                                                    <RiYoutubeFill size={22} />
-                                                </Link>
+                                            <div className="ml-2 flex flex-col gap-2">
+                                                <DialogTitle className="text-2xl"> {user.name}</DialogTitle>
+                                                <div className="text-muted-foreground flex gap-1.5">
+                                                    <Link href={''}>
+                                                        <RiGithubFill size={20} />
+                                                    </Link>
+                                                    <Link href={''}>
+                                                        <RiLinkedinBoxFill size={20} />
+                                                    </Link>
+                                                    <Link href={''}>
+                                                        <RiDiscordFill size={20} />
+                                                    </Link>
+                                                    <Link href={''}>
+                                                        <RiTwitterXFill size={22} />
+                                                    </Link>
+                                                    <Link href={''}>
+                                                        <RiBlueskyFill size={20} />
+                                                    </Link>
+                                                    <Link href={''}>
+                                                        <RiYoutubeFill size={20} />
+                                                    </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                                    <div className="mt-2 flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                                         {devLanguages.map((lang, index) => (
                                             <Badge key={index} variant="outline" className="items-center gap-1.5">
                                                 {langIcons[lang] || <FaCode className="text-muted-foreground" />}
@@ -138,8 +137,8 @@ export default function Onboarding({ user, className, ...props }: OnboardingProp
                                             </Badge>
                                         ))}
                                     </div>
-                                    <DialogDescription className="pt-2">{user.bio}</DialogDescription>
                                     <ScrollDown className="self-center" />
+                                    <DialogDescription className="pt-2">{user.bio}</DialogDescription>
                                 </div>
                             )}
                             {step === 2 && (
