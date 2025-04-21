@@ -10,7 +10,7 @@ use Laravel\Socialite\Two\User;
 
 // use Laravel\Socialite\Contracts\User as SocialiteUser;
 
-final class GithubUser
+final readonly class GithubUser
 {
     /**
      * The GithubUser value object.

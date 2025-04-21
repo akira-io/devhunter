@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\ValueObjects\GithubUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-final class GithubAuthController extends Controller
+final class GithubAuthController
 {
     /**
      * Redirect the user to the GitHub authentication page.

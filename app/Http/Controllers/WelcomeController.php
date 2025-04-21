@@ -6,14 +6,18 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Inertia\Inertia;
+use Inertia\Response;
 
-final class WelcomeController extends Controller
+final readonly class WelcomeController
 {
-    public function index()
+    /**
+     * Display the welcome page.
+     */
+    public function index(): Response
     {
 
         return Inertia::render('welcome', [
-            'users' => User::get(),
+            'users' => User::query()->get(),
         ]);
     }
 }
