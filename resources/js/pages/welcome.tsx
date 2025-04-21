@@ -6,7 +6,12 @@ import { type SharedData, User } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
 
-export default function Welcome({ users }: { users: User[] }) {
+export interface DataProps {
+    total: number;
+    data: User[];
+}
+
+export default function Welcome({ users }: { users: DataProps }) {
     const { auth } = usePage<SharedData>().props;
     return (
         <>
@@ -64,7 +69,7 @@ export default function Welcome({ users }: { users: User[] }) {
                         </div>
                     </div>
                     <div className="grid w-full max-w-6xl grid-cols-1 justify-center gap-4 md:grid-cols-2 md:px-10 xl:grid-cols-3">
-                        {users.map((dev) => (
+                        {users.data.map((dev) => (
                             <DevMiniCard title={dev.name} description={dev?.bio} key={dev.email} image={dev?.avatar_url} />
                         ))}
                     </div>

@@ -17,7 +17,7 @@ final readonly class WelcomeController
     {
 
         return Inertia::render('welcome', [
-            'users' => User::query()->get(),
+            'users' => User::query()->paginate(20),
         ]);
     }
 }
