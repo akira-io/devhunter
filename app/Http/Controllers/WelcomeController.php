@@ -20,7 +20,7 @@ final readonly class WelcomeController
     {
 
         return Inertia::render('welcome', [
-            'users' => User::query()->paginate(20)->toResourceCollection(),
+            'users' => User::query()->inRandomOrder()->paginate(20)->toResourceCollection(),
         ]);
     }
 }
