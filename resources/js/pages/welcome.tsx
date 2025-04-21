@@ -69,13 +69,13 @@ export default function Welcome({ users }: { users: DataProps }) {
                             </div>
                         </div>
                     </div>
+                    <ScrollDown className="text-muted-foreground -mt-10 mb-10" />
                     <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 md:grid-cols-2 md:px-10 xl:grid-cols-3">
                         {users.data.map((user) => (
                             <DevMiniCard user={user} key={user.email} />
                         ))}
                     </div>
                 </div>
-                <ScrollDown className="text-muted-foreground" />
             </div>
         </>
     );
