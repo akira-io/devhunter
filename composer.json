@@ -84,8 +84,7 @@
       "@test:typos",
       "@test:arch",
       "@test:types",
-      "@test:coverage",
-      "@test:type-coverage"
+      "@test:coverage"
     ]
   },
   "extra": {
