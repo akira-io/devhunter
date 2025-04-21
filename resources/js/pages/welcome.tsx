@@ -1,6 +1,7 @@
 import AppLogo from '@/components/app-logo';
 import DevCount from '@/components/dev-count';
 import { DevMiniCard } from '@/components/dev-mini-card';
+import { ScrollDown } from '@/components/scroll-down';
 import { Input } from '@/components/ui/input';
 import { type SharedData, User } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
@@ -68,12 +69,13 @@ export default function Welcome({ users }: { users: DataProps }) {
                             </div>
                         </div>
                     </div>
-                    <div className="grid w-full max-w-6xl grid-cols-1 justify-center gap-4 md:grid-cols-2 md:px-10 xl:grid-cols-3">
-                        {users.data.map((dev) => (
-                            <DevMiniCard title={dev.name} description={dev?.bio} key={dev.email} image={dev?.avatar_url} />
+                    <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 md:grid-cols-2 md:px-10 xl:grid-cols-3">
+                        {users.data.map((user) => (
+                            <DevMiniCard user={user} key={user.email} />
                         ))}
                     </div>
                 </div>
+                <ScrollDown className="text-muted-foreground" />
             </div>
         </>
     );
