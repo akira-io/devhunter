@@ -39,7 +39,7 @@ export function ScrollDown({ className, ...props }: React.ComponentProps<'div'>)
     return (
         <>
             {isScrollable && !isScrolled && (
-                <div className={cn('flex transform animate-bounce flex-col items-center justify-center', className)} {...props}>
+                <div className={cn('flex transform animate-bounce cursor-pointer flex-col items-center justify-center', className)} {...props}>
                     <Button variant="ghost" className="flex items-center justify-center" onClick={handleClick}>
                         <ArrowDownIcon size={24} />
                     </Button>

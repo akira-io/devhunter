@@ -1,4 +1,3 @@
-import { ScrollDown } from '@/components/scroll-down';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -18,7 +17,7 @@ import { Link } from '@inertiajs/react';
 import { RiBlueskyFill, RiDiscordFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon } from 'lucide-react';
 import * as React from 'react';
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useState } from 'react';
 import { FaCode, FaJava, FaJsSquare, FaPython } from 'react-icons/fa';
 import { SiCplusplus, SiGo, SiRubyonrails, SiRust } from 'react-icons/si';
 import AvatarGenenerator, { genConfig } from 'react-nice-avatar';
@@ -28,17 +27,6 @@ interface OnboardingProps extends React.ComponentProps<'div'> {
 }
 
 const devLanguages = ['JavaScript', 'TypeScript', 'Python', 'Go', 'Rust', 'Java', 'Ruby', 'C++'];
-const langColors: Record<string, string> = {
-    JavaScript: 'bg-yellow-400',
-    TypeScript: 'bg-blue-500',
-    Python: 'bg-blue-400',
-    Go: 'bg-cyan-500',
-    Rust: 'bg-orange-500',
-    Java: 'bg-red-500',
-    Ruby: 'bg-pink-500',
-    'C++': 'bg-indigo-500',
-};
-
 const langIcons: Record<string, JSX.Element> = {
     JavaScript: <FaJsSquare className="text-yellow-500" />,
     Python: <FaPython className="text-blue-400" />,
@@ -51,7 +39,6 @@ const langIcons: Record<string, JSX.Element> = {
 
 export default function Onboarding({ user, className, ...props }: OnboardingProps) {
     const [step, setStep] = useState(1);
-    const [isScrolled, setIsScrolled] = useState(false);
     const config = genConfig(user.name);
 
     const totalSteps = 4;
@@ -67,16 +54,6 @@ export default function Onboarding({ user, className, ...props }: OnboardingProp
             setStep(step - 1);
         }
     };
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 0);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
         <div className={cn(className)} {...props}>
@@ -137,7 +114,6 @@ export default function Onboarding({ user, className, ...props }: OnboardingProp
                                             </Badge>
                                         ))}
                                     </div>
-                                    <ScrollDown className="self-center" />
                                     <DialogDescription className="pt-2">{user.bio}</DialogDescription>
                                 </div>
                             )}
