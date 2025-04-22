@@ -26,6 +26,7 @@ arch('avoid mutation')
         'App\Http\Controllers\Auth\GithubAuthController',
         'App\Http\Middleware\HandleInertiaRequests',
         'App\Http\Requests',
+        'App\Http\Resources',
 
     ]);
 
@@ -41,6 +42,7 @@ arch('avoid inheritance')
         'App\Services',
         'App\Http\Middleware\HandleInertiaRequests',
         'App\Http\Requests',
+        'App\Http\Resources',
     ]);
 
 arch('annotations')

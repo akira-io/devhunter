@@ -4,12 +4,30 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property-read int $id
+ * @property-read  string $name
+ * @property-read  string $email
+ * @property-read  string $password
+ * @property-read  string $remember_token
+ * @property-read  string $avatar_url
+ * @property-read  string $location
+ * @property-read  string $bio
+ * @property-read  string $github_id
+ * @property-read  string $github_token
+ * @property-read  string $github_refresh_token
+ * @property-read  string $github_user_name
+ * @property-read  string $email_verified_at
+ * @property-read  CarbonImmutable $created_at
+ * @property-read  CarbonImmutable $updated_at
+ */
 final class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
