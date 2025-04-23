@@ -1,13 +1,22 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { SidebarTrigger } from '@/components/ui/sidebar';
-import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
+import { NavUser } from '@/components/nav-user';
+import { SidebarTrigger, useSidebar } from '@/components/ui/sidebar';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { type BreadcrumbItem as BreadcrumbItemType, type SharedData } from '@/types';
+import { usePage } from '@inertiajs/react';
 
 export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItemType[] }) {
+    const { auth } = usePage<SharedData>().props;
+    const isMobile = useIsMobile();
+    const { state } = useSidebar();
     return (
         <header className="bg-background border-sidebar-border/50 fixed z-50 flex h-16 w-full shrink-0 items-center gap-2 border-b px-6 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 md:px-4">
             <div className="flex items-center gap-2">
                 <SidebarTrigger className="-ml-1" />
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
+                <div className="fixed right-4">
+                    <NavUser />
+                </div>
             </div>
         </header>
     );
