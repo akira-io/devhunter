@@ -5,7 +5,7 @@ import { User } from '@/types';
 import AvatarGenenerator, { genConfig } from 'react-nice-avatar';
 
 export function DevMiniCard({ user }: { user: User }) {
-    const config = genConfig(user.name);
+    const config = genConfig({ sex: 'man', hairStyle: 'thick' });
     return (
         <Card className="relative w-full">
             <Onboarding className="scroll absolute top-2 right-0" user={user} />

@@ -21,7 +21,7 @@ export default function DevCount({ users }: { users: DataProps }) {
                             <AvatarImage src={user.avatar_url} alt={user.name} key={user.email} />
                         </Avatar>
                     ) : (
-                        <GenAvatar className="h-10 w-10" {...genConfig(user.name || user.email)} key={user.email} />
+                        <GenAvatar className="h-10 w-10" {...genConfig({ sex: 'man' })} key={user.email} />
                     ),
                 )}
             </div>

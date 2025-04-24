@@ -39,7 +39,7 @@ const langIcons: Record<string, JSX.Element> = {
 
 export default function Onboarding({ user, className, ...props }: OnboardingProps) {
     const [step, setStep] = useState(1);
-    const config = genConfig(user.name);
+    const config = genConfig({ sex: 'man' });
 
     const totalSteps = 4;
 
