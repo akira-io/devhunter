@@ -18,8 +18,6 @@ final readonly class WelcomeController
      */
     public function index(): Response
     {
-        //        dd(User::query()->inRandomOrder()->paginate(20)->toResourceCollection());
-
         return Inertia::render('welcome', [
             'users' => User::query()->inRandomOrder()->paginate(20),
         ]);

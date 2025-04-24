@@ -38,7 +38,7 @@ final readonly class GithubUser
 
         return [
             'name' => $this->user->getName() ?? $this->user->getNickname(),
-            'email' => $this->user->getEmail() ?? ($raw['notification_email'] ?? null),
+            'email' => $this->user->getEmail() ?? ($raw['notification_email'] ?? $this->generateFakeUniqUrl()),
             'github_user_name' => $raw['login'] ?? null,
             'avatar_url' => $this->user->getAvatar(),
             'github_id' => $this->user->getId(),
@@ -49,5 +49,14 @@ final readonly class GithubUser
             'bio' => $raw['bio'] ?? null,
             'password' => Hash::make(Str::random(32)),
         ];
+    }
+
+    /**
+     * Generate a fake unique email.
+     */
+    private function generateFakeUniqEmail(): string
+    {
+        return 'private'.Str::random(32).time().'@'.'devhunter.cv';
+
     }
 }
