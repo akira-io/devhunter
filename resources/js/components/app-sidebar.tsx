@@ -1,11 +1,10 @@
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, MessageCircleMore } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
@@ -16,6 +15,11 @@ const mainNavItems: NavItem[] = [
 ];
 
 const footerNavItems: NavItem[] = [
+    {
+        title: 'Comunidade',
+        href: 'https://discord.gg/ghPqZg3RcZ',
+        icon: MessageCircleMore,
+    },
     {
         title: 'Repositório',
         href: 'https://github.com/akira-io/devhunter',
@@ -47,7 +51,6 @@ export function AppSidebar() {
             </SidebarContent>
             <SidebarFooter>
                 <NavFooter items={footerNavItems} className="mt-auto" />
-                <NavUser />
             </SidebarFooter>
         </Sidebar>
     );
