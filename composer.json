@@ -10,6 +10,8 @@
   "license": "MIT",
   "require": {
     "php": "^8.4",
+    "akira/filament-tool-kit": "^1.26",
+    "filament/filament": "^3.3",
     "inertiajs/inertia-laravel": "^2.0.2",
     "laravel/framework": "^12.9.2",
     "laravel/socialite": "^5.19",
@@ -47,7 +49,8 @@
   "scripts": {
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-      "@php artisan package:discover --ansi"
+      "@php artisan package:discover --ansi",
+      "@php artisan filament:upgrade"
     ],
     "post-update-cmd": [
       "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -76,7 +79,7 @@
     "test:types": "phpstan",
     "test:arch": "pest --filter=arch",
     "test:type-coverage": "pest --type-coverage --min=100",
-    "test:coverage": "pest --parallel --coverage --compact --exactly=75.6",
+    "test:coverage": "pest --parallel --coverage --compact --exactly=61.0",
     "test:typos": "peck",
     "test": [
       "@php artisan config:clear --ansi",

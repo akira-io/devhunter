@@ -6,10 +6,14 @@ namespace App\Models;
 
 use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
+use Exception;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 /**
  * @property-read int $id
@@ -29,7 +33,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read  CarbonImmutable $updated_at
  * @property-read  list<mixed> $skills
  */
-final class User extends Authenticatable implements MustVerifyEmail
+final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -65,6 +69,20 @@ final class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+
+    /**
+     *Validate if the user can access the panel
+     *
+     * @throws Exception
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+            return Str::contains($this->email, ['@akira-io.com', 'kidiatoliny']);
+        }
+
+        return true;
+    }
 
     /**
      * Get the attributes that should be cast.

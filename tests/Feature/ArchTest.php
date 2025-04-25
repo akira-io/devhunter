@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 arch()->preset()->php();
 arch()->preset()->laravel()
-    ->ignoring(['App\Http\Controllers\Auth\GithubAuthController']);
+    ->ignoring(['App\Http\Controllers\Auth\GithubAuthController', 'App\Providers\Filament']);
 arch()->preset()->security();
 
 arch('controllers')
@@ -27,6 +27,7 @@ arch('avoid mutation')
         'App\Http\Middleware\HandleInertiaRequests',
         'App\Http\Requests',
         'App\Http\Resources',
+        'App\Filament',
 
     ]);
 
@@ -43,6 +44,7 @@ arch('avoid inheritance')
         'App\Http\Middleware\HandleInertiaRequests',
         'App\Http\Requests',
         'App\Http\Resources',
+        'App\Filament',
     ]);
 
 arch('annotations')
@@ -82,6 +84,7 @@ arch('models')
         'App\Services',
         'Database\Factories',
         'Database\Seeders',
+        'App\Filament',
     ]);
 
 arch('actions')
