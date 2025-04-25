@@ -1,7 +1,7 @@
 import DeleteUser from '@/components/delete-user';
 import InputError from '@/components/input-error';
 import { ProfileCard } from '@/components/profile-card';
-import { About } from '@/components/profile/About';
+import { About } from '@/components/profile/about';
 import { HighlightSkills } from '@/components/profile/highlight-skills';
 import { Skills } from '@/components/profile/skills';
 import { Badge } from '@/components/ui/badge';
