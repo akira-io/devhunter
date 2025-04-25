@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 final class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +33,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->configureModels();
         $this->configureUrl();
         $this->configureDates();
+        $this->configurePulse();
 
     }
 
@@ -70,5 +74,13 @@ final class AppServiceProvider extends ServiceProvider
     {
 
         Date::use(CarbonImmutable::class);
+    }
+
+    private function configurePulse()
+    {
+        Gate::define('viewPulse', function (User $user) {
+            return Str::contains($user->email, ['@akira-io.com', 'kidiatoliny']);
+        });
+
     }
 }
