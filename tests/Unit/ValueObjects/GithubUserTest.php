@@ -59,3 +59,25 @@ it('returns correct structure from toArray', function () {
         'password' => 'mocked_hashed_password',
     ]);
 });
+
+it(/**
+ * @throws ReflectionException
+ */ /**
+ * @throws ReflectionException
+ */ 'generates a unique fake email with correct format', function () {
+
+    $socialiteUserMock = Mockery::mock(User::class);
+
+    $githubUser = new GithubUser($socialiteUserMock);
+
+    $reflection = new ReflectionClass($githubUser);
+    $method = $reflection->getMethod('generateFakeEmail');
+
+    $email1 = $method->invoke($githubUser);
+    $email2 = $method->invoke($githubUser);
+
+    expect($email1)->toBeString()
+        ->and($email1)->toStartWith('private')
+        ->and($email1)->toEndWith('@devhunter.cv')
+        ->and($email1)->not->toBe($email2); // Verifica unicidade
+});

@@ -12,8 +12,7 @@ test('profile page is displayed', function () {
 
     $response = $this
         ->actingAs($user)
-        ->get('/settings/profile');
-
+        ->get(route('profile.edit'));
     $response->assertOk();
 });
 
