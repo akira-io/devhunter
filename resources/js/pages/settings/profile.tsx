@@ -3,6 +3,7 @@ import InputError from '@/components/input-error';
 import { ProfileCard } from '@/components/profile-card';
 import { About } from '@/components/profile/about';
 import { HighlightSkills } from '@/components/profile/highlight-skills';
+import { Highlights } from '@/components/profile/highlights';
 import { Skills } from '@/components/profile/skills';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -77,7 +78,7 @@ export default function Profile({ mustVerifyEmail, status, skills, authSkills }:
                         </CardContent>
                         <HighlightSkills skills={skills} authSkills={authSkills} />
                         <div className="mt-2 flex flex-wrap items-center justify-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                            {authSkills.length && <Skills techs={authSkills} />}
+                            {authSkills && authSkills.length && <Skills techs={authSkills} />}
                         </div>
                         <p className="mt-0 border-t-1 py-2 text-xs text-gray-500">Embarcou na Dev Hunter em {auth.user.created_at}</p>
                     </Card>
@@ -153,6 +154,7 @@ export default function Profile({ mustVerifyEmail, status, skills, authSkills }:
                     </section>
                     {/* Sections: Sobre, Destaques */}
                     <About />
+                    <Highlights />
                     <section className="space-y-6">
                         <ProfileCard title="Formação Académica" icon={<PlusIcon />}>
                             <GraduationCap />
