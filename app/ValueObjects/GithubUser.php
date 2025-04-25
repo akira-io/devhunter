@@ -56,6 +56,7 @@ final readonly class GithubUser
      */
     private function generateFakeEmail(): string
     {
+
         return 'private'.Str::random(32).time().'@'.'devhunter.cv';
 
     }

@@ -15,7 +15,8 @@
       "eslint.config.js",
       "public",
       "tests",
-      "storage"
+      "storage",
+      "app/Enums/SkillsEnum.php"
     ]
   }
 }

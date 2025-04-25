@@ -22,5 +22,6 @@ test('to array', function () {
             'github_id',
             'github_token',
             'github_refresh_token',
+            'skills',
         ]);
 });
