@@ -76,11 +76,12 @@ final class AppServiceProvider extends ServiceProvider
         Date::use(CarbonImmutable::class);
     }
 
-    private function configurePulse()
+    /**
+     * Configure the application's pulse.
+     */
+    private function configurePulse(): void
     {
-        Gate::define('viewPulse', function (User $user) {
-            return Str::contains($user->email, ['@akira-io.com', 'kidiatoliny']);
-        });
+        Gate::define('viewPulse', fn (User $user) => Str::contains($user->email, ['@akira-io.com', 'kidiatoliny']));
 
     }
 }
