@@ -1,21 +1,23 @@
 import DeleteUser from '@/components/delete-user';
 import InputError from '@/components/input-error';
 import { ProfileCard } from '@/components/profile-card';
+import { About } from '@/components/profile/about';
+import { HighlightSkills } from '@/components/profile/highlight-skills';
+import { Skills } from '@/components/profile/skills';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Option } from '@/components/ui/multiselect';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { RiGithubFill } from '@remixicon/react';
-import { Award, Code, EditIcon, GraduationCap, PlusIcon, Star, UserIcon } from 'lucide-react';
-import { FormEventHandler, JSX, useState } from 'react';
-import { FaCode, FaJava, FaJsSquare, FaPython } from 'react-icons/fa';
+import { Award, GraduationCap, PlusIcon } from 'lucide-react';
+import { FormEventHandler } from 'react';
 import { GoLocation } from 'react-icons/go';
 import { PiNotePencilBold } from 'react-icons/pi';
-import { SiCplusplus, SiGo, SiRubyonrails, SiRust } from 'react-icons/si';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -30,33 +32,15 @@ type ProfileForm = {
     bio: string;
 };
 
-const devLanguages = ['JavaScript', 'TypeScript', 'Python', 'Go', 'Rust', 'Java', 'Ruby', 'C++'];
-const langIcons: Record<string, JSX.Element> = {
-    JavaScript: <FaJsSquare className="text-yellow-500" />,
-    Python: <FaPython className="text-blue-400" />,
-    Go: <SiGo className="text-cyan-500" />,
-    Rust: <SiRust className="text-orange-500" />,
-    Java: <FaJava className="text-red-600" />,
-    Ruby: <SiRubyonrails className="text-pink-500" />,
-    'C++': <SiCplusplus className="text-indigo-500" />,
-};
+interface ProfileProps {
+    mustVerifyEmail: boolean;
+    status?: string;
+    skills: Option[];
+    authSkills: Option[];
+}
 
-// function CustomCard({ title, className, icon, children }: CustomCardProps) {
-//     return (
-//         <Card className={cn('mt-4 w-full p-4', className)}>
-//             <CardDescription className="flex items-center justify-between text-sm">
-//                 {title}
-//                 <Button variant="ghost">{icon}</Button>
-//             </CardDescription>
-//             <CardContent className="-mt-4 flex items-center justify-center gap-2 p-2">{children}</CardContent>
-//         </Card>
-//     );
-// }
-
-export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
+export default function Profile({ mustVerifyEmail, status, skills, authSkills }: ProfileProps) {
     const { auth } = usePage<SharedData>().props;
-
-    const [openBioDialog, setOpenBioDialog] = useState(false);
 
     const { data, setData, patch, errors } = useForm<Required<ProfileForm>>({
         name: auth.user.name,
@@ -66,9 +50,6 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-
-        setOpenBioDialog(false);
-
         patch(route('profile.update'), {
             preserveScroll: true,
         });
@@ -94,17 +75,9 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                                 </p>
                             </div>
                         </CardContent>
-                        <Button variant="default">
-                            <Code />
-                            Destacar tecnologias
-                        </Button>
+                        <HighlightSkills skills={skills} authSkills={authSkills} />
                         <div className="mt-2 flex flex-wrap items-center justify-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                            {devLanguages.map((lang, index) => (
-                                <Badge key={index} variant="outline" className="items-center gap-1.5">
-                                    {langIcons[lang] || <FaCode className="text-muted-foreground" />}
-                                    {lang}
-                                </Badge>
-                            ))}
+                            {authSkills.length && <Skills techs={authSkills} />}
                         </div>
                         <p className="mt-0 border-t-1 py-2 text-xs text-gray-500">Embarcou na Dev Hunter em {auth.user.created_at}</p>
                     </Card>
@@ -179,73 +152,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                         </div>
                     </section>
                     {/* Sections: Sobre, Destaques */}
-                    <section className="space-y-6">
-                        <ProfileCard title="Apresentação" icon={auth?.user.bio ? <EditIcon /> : <PlusIcon />} onClick={() => setOpenBioDialog(true)}>
-                            {!auth.user.bio && (
-                                <>
-                                    <UserIcon />
-                                    <p className="max-w-100 text-center">
-                                        Compartilhe um pouco sobre você e suas experiências. Isso ajudará os recrutadores a conhecerem melhor o seu
-                                        perfil.
-                                    </p>
-                                </>
-                            )}
-                            <p className="block w-full break-all whitespace-normal">{auth.user.bio}</p>
-                            <Dialog open={openBioDialog} onOpenChange={setOpenBioDialog}>
-                                <DialogTrigger asChild>
-                                    <Button variant="secondary">
-                                        <UserIcon />
-                                        {auth.user.bio ? 'Atualizar Apresentação' : 'Adicionar Apresentação'}
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader>
-                                        <DialogTitle>Apresentação</DialogTitle>
-                                        <DialogDescription>
-                                            Adicione uma breve descrição sobre você. Isso ajudará os recrutadores a conhecerem melhor o seu perfil.
-                                        </DialogDescription>
-                                    </DialogHeader>
-                                    <Textarea id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} maxLength={200} />
-                                    <InputError className="mt-2" message={errors.bio} />
-                                    <div className="flex flex-col sm:flex-row sm:justify-end">
-                                        <span className="text-muted-foreground float-end flex-1 text-sm">{data.bio.length} / 200</span>
-                                        <Button onClick={submit}>Guardar</Button>
-                                    </div>
-                                </DialogContent>
-                            </Dialog>
-                        </ProfileCard>
-                        {/* Destaques */}
-                        <ProfileCard title="Destaques" icon={<PlusIcon />}>
-                            <Star />
-                            <p className="mb-4 max-w-100 text-center">
-                                Compartilhe o link dos seus melhores projetos para se destacar e conquistar oportunidades
-                            </p>
-                            <Dialog>
-                                <DialogTrigger asChild>
-                                    <Button variant="secondary">
-                                        <Star />
-                                        Adicionar Destaques
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader>
-                                        <DialogTitle>Apresentação</DialogTitle>
-                                        <DialogDescription>
-                                            Adicione uma breve descrição sobre você. Isso ajudará os recrutadores a conhecerem melhor o seu perfil.
-                                        </DialogDescription>
-                                    </DialogHeader>
-                                    <Textarea id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} maxLength={200} />
-                                    <InputError className="mt-2" message={errors.bio} />
-                                    <div className="flex flex-col sm:flex-row sm:justify-end">
-                                        <span className="text-muted-foreground float-end flex-1 text-sm">{data.bio.length} / 200</span>
-                                        <Button type="button" onClick={submit}>
-                                            <DialogClose>Guardar</DialogClose>
-                                        </Button>
-                                    </div>
-                                </DialogContent>
-                            </Dialog>
-                        </ProfileCard>
-                    </section>
+                    <About />
                     <section className="space-y-6">
                         <ProfileCard title="Formação Académica" icon={<PlusIcon />}>
                             <GraduationCap />

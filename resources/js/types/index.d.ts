@@ -1,3 +1,4 @@
+import { Option } from '@/components/ui/multiselect';
 import { LucideIcon } from 'lucide-react';
 import type { Config } from 'ziggy-js';
 
@@ -42,6 +43,7 @@ export interface User {
     created_at: string;
     updated_at: string;
     location?: string;
+    skills?: Option[];
 
     [key: string]: unknown; // This allows for additional properties...
 }

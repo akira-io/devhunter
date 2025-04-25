@@ -24,9 +24,10 @@ use Illuminate\Notifications\Notifiable;
  * @property-read  string $github_token
  * @property-read  string $github_refresh_token
  * @property-read  string $github_user_name
- * @property-read  string $email_verified_at
+ * @property string $email_verified_at
  * @property-read  CarbonImmutable $created_at
  * @property-read  CarbonImmutable $updated_at
+ * @property-read  list<mixed> $skills
  */
 final class User extends Authenticatable implements MustVerifyEmail
 {
@@ -51,6 +52,7 @@ final class User extends Authenticatable implements MustVerifyEmail
         'github_token',
         'github_refresh_token',
         'github_user_name',
+        'skills',
 
     ];
 
@@ -75,6 +77,7 @@ final class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'created_at' => 'datetime:d-m-Y',
+            'skills' => 'array',
         ];
     }
 }

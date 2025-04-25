@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\SkillsEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -38,6 +39,7 @@ final class UserFactory extends Factory
             'github_refresh_token' => fake()->uuid(),
             'location' => fake()->city(),
             'bio' => fake()->sentence(),
+            'skills' => fake()->randomElements(SkillsEnum::get(), 10),
         ];
     }
 
