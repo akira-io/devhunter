@@ -6,20 +6,83 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { useTruncate } from '@/hooks/use-truncate-text';
 import { cn } from '@/lib/utils';
 import { User } from '@/types';
-import { Link } from '@inertiajs/react';
-import { RiBlueskyFill, RiDiscordFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon } from 'lucide-react';
+import { RiBlueskyFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe } from 'lucide-react';
 import * as React from 'react';
 import { useState } from 'react';
-import AvatarGenerator, { genConfig } from 'react-nice-avatar';
+import AvatarGenerator, { AvatarFullConfig, genConfig } from 'react-nice-avatar';
 
 interface OnboardingProps extends React.ComponentProps<'div'> {
     user: User;
 }
 
+function OnboardingAvatar(props: { avatarUrl: string | undefined; alt: string; config: Required<AvatarFullConfig> }) {
+    return (
+        <Avatar className="h-20 w-auto">
+            {props.avatarUrl ? (
+                <AvatarImage src={props.avatarUrl} alt={props.alt} className="h-20 w-20" />
+            ) : (
+                <AvatarGenerator className="h-20 w-20" {...props.config} />
+            )}
+        </Avatar>
+    );
+}
+
+function OnboardingLinks({ links }: { links: { name: string; url: string | undefined; icon: React.ReactNode }[] }) {
+    return (
+        <div className="flex gap-2">
+            {links.map(
+                (link) =>
+                    link.url && (
+                        <a
+                            key={link.name}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-muted-foreground hover:text-primary"
+                        >
+                            {link.icon}
+                        </a>
+                    ),
+            )}
+        </div>
+    );
+}
+
+function OnboardingSkills({ skills }: { skills: User['skills'] }) {
+    return (
+        <>
+            <small className="text-muted-foreground">Skills</small>
+            {!skills && <small className="text-muted -mt-6 text-xs">nenhuma skill definida</small>}
+            <div className="-mt-4 flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {skills && <Skills techs={skills} />}
+            </div>
+        </>
+    );
+}
+
+function OnboardingAbout({ about }: { about: string | undefined }) {
+    return (
+        <>
+            <small className="text-muted-foreground">Sobre</small>
+            {!about && <small className="text-muted -mt-6 text-xs">nenhuma informação disponivel</small>}
+            {about && <div className="-mt-4">{about}</div>}
+        </>
+    );
+}
+
 export default function Onboarding({ user, ...props }: OnboardingProps) {
     const [step, setStep] = useState(1);
     const [open, setOpen] = useState(false);
+
+    const links = [
+        { name: 'GitHub', url: user.github_url, icon: <RiGithubFill /> },
+        { name: 'Twitter', url: user.twitter_url, icon: <RiTwitterXFill /> },
+        { name: 'YouTube', url: user.youtube_url, icon: <RiYoutubeFill /> },
+        { name: 'LinkedIn', url: user.linkedin_url, icon: <RiLinkedinBoxFill /> },
+        { name: 'Bluesky', url: user.bluesky_url, icon: <RiBlueskyFill /> },
+        { name: 'Website', url: user.website_url, icon: <Globe /> },
+    ];
 
     const { truncate } = useTruncate();
     const config = genConfig({ sex: 'man', hairStyle: 'thick' });
@@ -43,13 +106,7 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
         <div {...props}>
             <Card className="relative h-40 w-full cursor-pointer overflow-hidden" onClick={handleCardClick}>
                 <CardContent className="flex w-full flex-1 items-start justify-center gap-4">
-                    <Avatar className="h-20 w-auto">
-                        {user.avatar_url ? (
-                            <AvatarImage src={user.avatar_url} alt={user.name} className="h-20 w-20" />
-                        ) : (
-                            <AvatarGenerator className="h-20 w-20" {...config} />
-                        )}
-                    </Avatar>
+                    <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                     <div className="w-full">
                         <div className="mb-2 flex items-center justify-between">
                             <CardTitle className="text-xl">{user.name}</CardTitle>
@@ -71,46 +128,17 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                     <div className="space-y-6 overflow-y-auto px-6 pt-6 pb-6">
                         <DialogHeader className="bg-background 0 sticky top-0 w-full shrink-0 items-center justify-between pb-10">
                             <div className="flex w-full items-center justify-start">
-                                <Avatar className="h-20 w-auto">
-                                    {user.avatar_url ? (
-                                        <AvatarImage src={user.avatar_url} alt={user.name} className="h-20 w-20" />
-                                    ) : (
-                                        <AvatarGenerator className="h-20 w-20" {...config} />
-                                    )}
-                                </Avatar>
+                                <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                                 <div className="ml-2 flex flex-col gap-2 text-left">
                                     <DialogTitle className="text-2xl">{user.name}</DialogTitle>
-                                    <div className="text-muted-foreground flex gap-1.5">
-                                        <Link href={''}>
-                                            <RiGithubFill size={20} />
-                                        </Link>
-                                        <Link href={''}>
-                                            <RiLinkedinBoxFill size={20} />
-                                        </Link>
-                                        <Link href={''}>
-                                            <RiDiscordFill size={20} />
-                                        </Link>
-                                        <Link href={''}>
-                                            <RiTwitterXFill size={22} />
-                                        </Link>
-                                        <Link href={''}>
-                                            <RiBlueskyFill size={20} />
-                                        </Link>
-                                        <Link href={''}>
-                                            <RiYoutubeFill size={20} />
-                                        </Link>
-                                    </div>
+                                    <OnboardingLinks links={links} />
                                 </div>
                             </div>
                         </DialogHeader>
                         {step === 1 && (
                             <div className="top-0 flex shrink-0 flex-col items-start gap-8">
-                                <small className="text-muted-foreground">Skills</small>
-                                <div className="-mt-4 flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                                    {user.skills && <Skills techs={user.skills} />}
-                                </div>
-                                <small className="text-muted-foreground">Sobre</small>
-                                <div className="-mt-4">{user.bio}</div>
+                                <OnboardingSkills skills={user.skills} />
+                                <OnboardingAbout about={user.bio} />
                             </div>
                         )}
                         {step === 2 && (

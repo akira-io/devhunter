@@ -24,8 +24,6 @@ it('returns correct structure from toArray', function () {
     $raw = [
         'notification_email' => 'github@example.com',
         'login' => 'githubuser',
-        'token' => 'token123',
-        'refresh_token' => 'refresh123',
         'location' => 'Earth',
         'bio' => 'Just a dev',
         'name' => 'githubuser',
@@ -51,8 +49,6 @@ it('returns correct structure from toArray', function () {
         'github_user_name' => 'githubuser',
         'avatar_url' => 'https://avatars.githubusercontent.com/u/123?v=4',
         'github_id' => 123,
-        'github_token' => 'token123',
-        'github_refresh_token' => 'refresh123',
         'email_verified_at' => now()->toDateTimeString(),
         'location' => 'Earth',
         'bio' => 'Just a dev',

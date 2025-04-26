@@ -44,6 +44,12 @@ export interface User {
     updated_at: string;
     location?: string;
     skills?: Option[];
+    website_url?: string;
+    github_url?: string;
+    twitter_url?: string;
+    linkedin_url?: string;
+    bluesky_url?: string;
+    youtube_url?: string;
 
     [key: string]: unknown; // This allows for additional properties...
 }

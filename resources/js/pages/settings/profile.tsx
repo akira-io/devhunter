@@ -4,22 +4,20 @@ import { ProfileCard } from '@/components/profile-card';
 import { About } from '@/components/profile/about';
 import { HighlightSkills } from '@/components/profile/highlight-skills';
 import { Highlights } from '@/components/profile/highlights';
+import { ProfileLinks } from '@/components/profile/links';
 import { Skills } from '@/components/profile/skills';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Option } from '@/components/ui/multiselect';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { RiGithubFill } from '@remixicon/react';
 import { Award, GraduationCap, PlusIcon } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import { GoLocation } from 'react-icons/go';
-import { PiNotePencilBold } from 'react-icons/pi';
 import AvatarGenerator, { genConfig } from 'react-nice-avatar';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -59,8 +57,6 @@ export default function Profile({ mustVerifyEmail, status, skills, authSkills }:
     };
     const config = genConfig({ sex: 'man', hairStyle: 'thick' });
 
-    const avatar_url = null;
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Definições Perfil" />
@@ -71,7 +67,7 @@ export default function Profile({ mustVerifyEmail, status, skills, authSkills }:
                         <CardContent className="flex flex-col items-center text-center">
                             {/*<img src={auth.user.avatar_url} alt="Avatar" />*/}
                             <Avatar className="h-32 w-auto">
-                                {avatar_url ? (
+                                {auth.user.avatar_url ? (
                                     <AvatarImage
                                         src={auth.user.avatar_url}
                                         alt={auth.user.name}
@@ -98,34 +94,7 @@ export default function Profile({ mustVerifyEmail, status, skills, authSkills }:
                         </div>
                         <p className="mt-0 border-t-1 py-2 text-xs text-gray-500">Embarcou na Dev Hunter em {auth.user.created_at}</p>
                     </Card>
-                    <Card className="mt-4 w-full p-4 md:w-80">
-                        <CardDescription className="flex items-center justify-between text-sm">
-                            Links
-                            <Button variant="ghost">
-                                <PiNotePencilBold />
-                            </Button>
-                        </CardDescription>
-                        <CardContent className="-mt-4 flex items-center justify-center gap-2 p-2">
-                            <Badge className="h-10 w-10 p-0" variant="outline">
-                                <RiGithubFill />
-                            </Badge>
-                            <Badge className="h-10 w-10 p-0" variant="outline">
-                                <PlusIcon />
-                            </Badge>
-                            <Badge className="h-10 w-10 p-0" variant="outline">
-                                <PlusIcon />
-                            </Badge>
-                            <Badge className="h-10 w-10 p-0" variant="outline">
-                                <PlusIcon />
-                            </Badge>
-                            <Badge className="h-10 w-10 p-0" variant="outline">
-                                <PlusIcon />
-                            </Badge>{' '}
-                            <Badge className="h-10 w-10 p-0" variant="outline">
-                                <PlusIcon />
-                            </Badge>
-                        </CardContent>
-                    </Card>
+                    <ProfileLinks user={auth.user} />
                 </aside>
                 {/* Main content */}
                 <main className="flex-1 space-y-6 overflow-y-auto p-6">
