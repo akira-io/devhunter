@@ -31,7 +31,6 @@ export function HighlightSkills({ skills, authSkills, ...props }: HighlightSkill
             onFinish: () => {
                 setOpen(false);
                 toast({
-                    title: 'Tecnologias destacadas com sucesso',
                     description: 'As tecnologias foram destacadas com sucesso.',
                 });
             },
