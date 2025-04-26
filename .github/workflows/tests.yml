@@ -60,7 +60,7 @@ jobs:
 
       - name: Wait for Meilisearch to be available
         run: |
-          until curl --silent http://10.116.16.2:7700/health; do
+          until curl --silent http://localhost:7700/health; do
             echo "Waiting for Meilisearch to be available..."
             sleep 5
           done
@@ -68,7 +68,7 @@ jobs:
 
       - name: Set Meilisearch Environment Variables
         run: |
-          echo "MEILISEARCH_HOST=http://10.116.16.2:7700" >> .env
+          echo "MEILISEARCH_HOST=http://localhost:7700" >> .env
           echo "MEILISEARCH_API_KEY=your_meilisearch_api_key" >> .env
 
       - name: Run Tests
