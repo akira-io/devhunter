@@ -41,7 +41,7 @@ jobs:
       - name: Build Assets
         run: npm run build
 
-      - name: Install Dependencies
+      - name: Install PHP Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Copy Environment File
@@ -52,14 +52,13 @@ jobs:
 
       - name: Setup Meilisearch
         run: |
-          curl -L https://github.com/meilisearch/Meilisearch/releases/download/v1.14.0/meilisearch-linux-amd64.tar.gz | tar xz
-          mv meilisearch /usr/local/bin
+          curl -L https://install.meilisearch.com | sh
           nohup meilisearch --env production --http-addr '0.0.0.0:7700' &
           sleep 10 # Aguarda o Meilisearch inicializar
 
       - name: Wait for Meilisearch to be available
         run: |
-          until curl --silent http://localhost:7700/health; do
+          until curl --silent http://10.116.16.2:7700/health; do
             echo "Waiting for Meilisearch to be available..."
             sleep 5
           done
@@ -67,10 +66,10 @@ jobs:
 
       - name: Set Meilisearch Environment Variables
         run: |
-          echo "MEILISEARCH_HOST=http://localhost:7700" >> .env
+          echo "MEILISEARCH_HOST=http://10.116.16.2:7700" >> .env
           echo "MEILISEARCH_API_KEY=your_meilisearch_api_key" >> .env
 
-      - name: Tests
+      - name: Run Tests
         run: composer test
 
       - name: Format Frontend
