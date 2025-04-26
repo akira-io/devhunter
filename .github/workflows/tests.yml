@@ -13,16 +13,6 @@ jobs:
   code_base_test:
     runs-on: ubuntu-latest
 
-    services:
-      meilisearch:
-        image: meilisearch/meilisearch:v1.14.0
-        ports:
-          - 7700:7700
-        options: >-
-          --health-cmd="curl --silent --fail http://localhost:7700/health || exit 1"
-          --health-interval=5s
-          --health-retries=3
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,7 +41,7 @@ jobs:
       - name: Build Assets
         run: npm run build
 
-      - name: Install PHP Dependencies
+      - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Copy Environment File
@@ -60,13 +50,26 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
+      - name: Setup Meilisearch
+        run: |
+          /usr/bin/docker pull getmeili/meilisearch:v1.14
+          /usr/bin/docker run -d -p 7700:7700 getmeili/meilisearch:v1.14
+          sleep 10 # Aguarda o Meilisearch inicializar
+
+      - name: Wait for Meilisearch to be available
+        run: |
+          until curl --silent http://localhost:7700/health; do
+            echo "Waiting for Meilisearch to be available..."
+            sleep 5
+          done
+          echo "Meilisearch is available."
+
       - name: Set Meilisearch Environment Variables
         run: |
-          # Configura Meilisearch no .env
           echo "MEILISEARCH_HOST=http://localhost:7700" >> .env
-          echo "MEILISEARCH_API_KEY=masterKey" >> .env
+          echo "MEILISEARCH_API_KEY=your_meilisearch_api_key" >> .env
 
-      - name: Run Tests
+      - name: Tests
         run: composer test
 
       - name: Format Frontend
