@@ -54,6 +54,26 @@ enum SkillsEnum: string
     case MongoDB = 'MongoDB';
     case Redis = 'Redis';
 
+    // Cybersecurity
+    case PenTesting = 'PenTesting';
+    case EthicalHacking = 'EthicalHacking';
+    case NetworkSecurity = 'NetworkSecurity';
+    case WebSecurity = 'WebSecurity';
+    case MalwareAnalysis = 'MalwareAnalysis';
+    case IncidentResponse = 'IncidentResponse';
+    case ThreatHunting = 'ThreatHunting';
+    case VulnerabilityAssessment = 'VulnerabilityAssessment';
+    case SecurityAuditing = 'SecurityAuditing';
+    case RiskManagement = 'RiskManagement';
+    case Compliance = 'Compliance';
+    case IncidentManagement = 'IncidentManagement';
+    case DigitalForensics = 'DigitalForensics';
+    case SecurityAwareness = 'SecurityAwareness';
+    case CloudSecurity = 'CloudSecurity';
+    case ApplicationSecurity = 'ApplicationSecurity';
+    case DataProtection = 'DataProtection';
+    case SIEM = 'SIEM';
+
     /**
      * Get all enum cases as an array of associative arrays.
      *
