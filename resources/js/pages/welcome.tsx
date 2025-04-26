@@ -28,7 +28,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                     only: ['users'],
                 },
             );
-        }, 300);
+        }, 500);
 
         return () => clearTimeout(timeout);
     }, [query]);
@@ -72,26 +72,28 @@ export default function Welcome({ users }: { users: DataProps }) {
                     </nav>
                 </header>
                 <div className="flex w-full flex-col items-center justify-start opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-                    <div className="mt-20 flex w-full flex-col items-center justify-center gap-2 md:max-w-4xl lg:max-w-6xl">
-                        <h1 className={'text-4xl font-bold dark:text-white'}>Dev Hunter 🇨🇻</h1>
-                        <p className={'mb-10 max-w-2xl text-center text-lg font-normal text-[#1b1b18] dark:text-[#EDEDEC]'}>
-                            O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
-                            e talento local encontra visibilidade global.
-                        </p>
-                        <DevCount users={users} />
-                        <div className="my-10 w-full max-w-xl dark:text-white">
-                            <div className="relative mb-10 md:mb-20">
-                                <Input
-                                    id="search"
-                                    className="peer h-12 border ps-9 pe-9"
-                                    placeholder="procurar por (nome, email ou skills)"
-                                    type="search"
-                                    value={query}
-                                    onChange={(e) => setQuery(e.target.value)}
-                                />
-                                <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
-                                    <SearchIcon size={16} />
-                                </div>
+                    {!query && (
+                        <div className="mt-20 flex w-full flex-col items-center justify-center gap-2 md:max-w-4xl lg:max-w-6xl">
+                            <h1 className={'text-4xl font-bold dark:text-white'}>Dev Hunter 🇨🇻</h1>
+                            <p className={'mb-10 max-w-2xl text-center text-lg font-normal text-[#1b1b18] dark:text-[#EDEDEC]'}>
+                                O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham
+                                vida e talento local encontra visibilidade global.
+                            </p>
+                            <DevCount users={users} />
+                        </div>
+                    )}
+                    <div className="my-10 w-full max-w-xl dark:text-white">
+                        <div className="relative mb-10 md:mb-20">
+                            <Input
+                                id="search"
+                                className="peer h-12 border ps-9 pe-9"
+                                placeholder="procurar por (nome, email ou skills)"
+                                type="search"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                            />
+                            <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
+                                <SearchIcon size={16} />
                             </div>
                         </div>
                     </div>
