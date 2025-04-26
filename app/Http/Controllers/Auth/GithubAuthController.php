@@ -9,12 +9,16 @@ use App\ValueObjects\GithubUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Spatie\RouteAttributes\Attributes\Get;
 
 final class GithubAuthController
 {
+    // Route::get('/auth/github', 'redirect')->name('github.login');
+    // Route::get('/auth/github/callback', 'callback')->name('github.callback');
     /**
      * Redirect the user to the GitHub authentication page.
      */
+    #[Get('/auth/github', name: 'github.login')]
     public function redirect(): RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
     {
 
@@ -25,6 +29,7 @@ final class GithubAuthController
     /**
      * Obtain the user information from GitHub.
      */
+    #[Get('/auth/github/callback', name: 'github.callback')]
     public function callback(): RedirectResponse
     {
         /** @var \Laravel\Socialite\Two\User $githubUser */
@@ -32,7 +37,7 @@ final class GithubAuthController
             ->user();
 
         $user = User::query()
-            ->updateOrCreate(
+            ->firstOrCreate(
                 ['github_id' => $githubUser->getId()],
                 GithubUser::from(user: $githubUser)->toArray(),
             );

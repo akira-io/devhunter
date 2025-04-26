@@ -4,8 +4,9 @@ import Onboarding from '@/components/onboarding';
 import { ScrollDown } from '@/components/scroll-down';
 import { Input } from '@/components/ui/input';
 import { type SharedData, User } from '@/types';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export interface DataProps {
     total: number;
@@ -14,13 +15,31 @@ export interface DataProps {
 
 export default function Welcome({ users }: { users: DataProps }) {
     const { auth } = usePage<SharedData>().props;
+    const [query, setQuery] = useState('');
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            router.get(
+                route('home'),
+                { q: query },
+                {
+                    preserveState: true,
+                    replace: true,
+                    only: ['users'],
+                },
+            );
+        }, 300);
+
+        return () => clearTimeout(timeout);
+    }, [query]);
+
     return (
         <>
-            <Head title="Welcome">
+            <Head title="Dev Hunter">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-            <div className="flex min-h-screen flex-col items-center justify-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
+            <div className="flex min-h-screen flex-col items-center justify-start bg-[#FDFDFC] p-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
                 <header className="mb-6 w-full text-sm not-has-[nav]:hidden md:max-w-[335px] lg:max-w-4xl">
                     <nav className="flex items-center justify-end gap-4">
                         <AppLogo />
@@ -62,7 +81,14 @@ export default function Welcome({ users }: { users: DataProps }) {
                         <DevCount users={users} />
                         <div className="my-10 w-full max-w-xl dark:text-white">
                             <div className="relative mb-10 md:mb-20">
-                                <Input id="search" className="peer h-12 border ps-9 pe-9" placeholder="procurar..." type="search" />
+                                <Input
+                                    id="search"
+                                    className="peer h-12 border ps-9 pe-9"
+                                    placeholder="procurar por (nome, email ou skills)"
+                                    type="search"
+                                    value={query}
+                                    onChange={(e) => setQuery(e.target.value)}
+                                />
                                 <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
                                     <SearchIcon size={16} />
                                 </div>

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 /**
  * @property-read int $id
@@ -36,7 +37,10 @@ use Illuminate\Support\Str;
 final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
+
+    use Notifiable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -82,6 +86,23 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
         }
 
         return true;
+    }
+
+    /**
+     * The attributes that should be searchable.
+     *
+     * @return array<string, list<mixed>|string>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => (string) $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'location' => $this->location,
+            'github_user_name' => $this->github_user_name,
+            'skills' => $this->skills,
+        ];
     }
 
     /**
