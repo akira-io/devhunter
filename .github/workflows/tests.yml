@@ -1,4 +1,5 @@
 name: tests
+
 on:
   push:
     branches:
@@ -48,6 +49,19 @@ jobs:
 
       - name: Generate Application Key
         run: php artisan key:generate
+
+      - name: Setup Meilisearch
+        run: |
+          # Install Meilisearch
+          curl -L https://github.com/meilisearch/Meilisearch/releases/download/v1.14.0/meilisearch-linux-amd64.tar.gz | tar xz
+          mv meilisearch /usr/local/bin
+          # Start Meilisearch in the background
+          nohup meilisearch --env production --http-addr '0.0.0.0:7700' &
+
+      - name: Set Meilisearch Environment Variables
+        run: |
+          echo "MEILISEARCH_HOST=http://localhost:7700" >> .env
+          echo "MEILISEARCH_API_KEY=your_meilisearch_api_key" >> .env
 
       - name: Tests
         run: composer test
