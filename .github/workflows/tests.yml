@@ -72,8 +72,11 @@ jobs:
       - name: Tests
         run: composer test
 
-      - name: Format Frontend
-        run: npm run format
+      - name: Ensure Frontend is Well Formatted
+        run: npm run format:check
+
+      - name: Ensure Typescript Types
+        run: npm run types
 
       - name: Lint Frontend
         run: npm run lint
