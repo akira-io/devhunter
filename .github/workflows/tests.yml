@@ -52,11 +52,18 @@ jobs:
 
       - name: Setup Meilisearch
         run: |
-          # Install Meilisearch
           curl -L https://github.com/meilisearch/Meilisearch/releases/download/v1.14.0/meilisearch-linux-amd64.tar.gz | tar xz
           mv meilisearch /usr/local/bin
-          # Start Meilisearch in the background
           nohup meilisearch --env production --http-addr '0.0.0.0:7700' &
+          sleep 10 # Aguarda o Meilisearch inicializar
+
+      - name: Wait for Meilisearch to be available
+        run: |
+          until curl --silent http://localhost:7700/health; do
+            echo "Waiting for Meilisearch to be available..."
+            sleep 5
+          done
+          echo "Meilisearch is available."
 
       - name: Set Meilisearch Environment Variables
         run: |
