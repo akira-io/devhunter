@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Storage;
 use Throwable;
 
 final readonly class WelcomeController
@@ -19,6 +20,8 @@ final readonly class WelcomeController
      */
     public function index(Request $request): Response
     {
+
+        dd(Storage::get('LensHood.pdf'));
         $query = $request->string('q');
 
         $users = $query->isNotEmpty()
