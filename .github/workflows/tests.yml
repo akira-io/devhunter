@@ -53,6 +53,8 @@ jobs:
       - name: Setup Meilisearch
         run: |
           curl -L https://install.meilisearch.com | sh
+          sudo mv meilisearch /usr/local/bin/meilisearch
+          sudo chmod +x /usr/local/bin/meilisearch
           nohup meilisearch --env production --http-addr '0.0.0.0:7700' &
           sleep 10 # Aguarda o Meilisearch inicializar
 
