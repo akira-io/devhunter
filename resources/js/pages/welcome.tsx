@@ -5,7 +5,7 @@ import { ScrollDown } from '@/components/scroll-down';
 import { Input } from '@/components/ui/input';
 import { type SharedData, User } from '@/types';
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import { LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
+import { Loader, LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export interface DataProps {
@@ -16,8 +16,10 @@ export interface DataProps {
 export default function Welcome({ users }: { users: DataProps }) {
     const { auth } = usePage<SharedData>().props;
     const [query, setQuery] = useState('');
+    const [isSearchLoading, setIsSearchLoading] = useState(true);
 
     useEffect(() => {
+        setIsSearchLoading(true);
         const timeout = setTimeout(() => {
             router.get(
                 route('home'),
@@ -28,6 +30,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                     only: ['users'],
                 },
             );
+            setIsSearchLoading(false);
         }, 500);
 
         return () => clearTimeout(timeout);
@@ -93,15 +96,17 @@ export default function Welcome({ users }: { users: DataProps }) {
                                 onChange={(e) => setQuery(e.target.value)}
                             />
                             <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
-                                <SearchIcon size={16} />
+                                {!isSearchLoading ? <SearchIcon size={16} /> : <Loader className="animate-spin" size={16} />}
                             </div>
                         </div>
                     </div>
-                    <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 md:grid-cols-2 md:px-10 xl:grid-cols-3">
-                        {users.data.map((user) => (
-                            <Onboarding user={user} key={user.email} />
-                        ))}
-                    </div>
+                    {!isSearchLoading && (
+                        <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 md:grid-cols-2 md:px-10 xl:grid-cols-3">
+                            {users.data.map((user) => (
+                                <Onboarding user={user} key={user.email} />
+                            ))}
+                        </div>
+                    )}
                     <ScrollDown className="bg-foreground fixed bottom-0 h-8 w-8 rounded-md text-white dark:text-zinc-900" />
                 </div>
             </div>
