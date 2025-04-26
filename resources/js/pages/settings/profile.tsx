@@ -5,6 +5,7 @@ import { About } from '@/components/profile/about';
 import { HighlightSkills } from '@/components/profile/highlight-skills';
 import { Highlights } from '@/components/profile/highlights';
 import { Skills } from '@/components/profile/skills';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
@@ -19,6 +20,7 @@ import { Award, GraduationCap, PlusIcon } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import { GoLocation } from 'react-icons/go';
 import { PiNotePencilBold } from 'react-icons/pi';
+import AvatarGenerator, { genConfig } from 'react-nice-avatar';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -55,6 +57,9 @@ export default function Profile({ mustVerifyEmail, status, skills, authSkills }:
             preserveScroll: true,
         });
     };
+    const config = genConfig({ sex: 'man', hairStyle: 'thick' });
+
+    const avatar_url = null;
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -64,8 +69,19 @@ export default function Profile({ mustVerifyEmail, status, skills, authSkills }:
                     {/* Avatar + Actions */}
                     <Card className="w-full items-center justify-center p-6 md:w-80">
                         <CardContent className="flex flex-col items-center text-center">
-                            <img src={auth.user.avatar_url} alt="Avatar" className="mb-4 h-32 w-32 rounded-full object-cover" />
-                            <h2 className="text-xl font-semibold">{auth.user.name}</h2>
+                            {/*<img src={auth.user.avatar_url} alt="Avatar" />*/}
+                            <Avatar className="h-32 w-auto">
+                                {avatar_url ? (
+                                    <AvatarImage
+                                        src={auth.user.avatar_url}
+                                        alt={auth.user.name}
+                                        className="mb-4 h-32 w-32 rounded-full object-cover"
+                                    />
+                                ) : (
+                                    <AvatarGenerator className="mb-4 h-32 w-32 rounded-full object-cover" {...config} />
+                                )}
+                            </Avatar>
+                            <h2 className="mt-4 text-xl font-semibold">{auth.user.name}</h2>
                             <div className="space-y-2 text-center text-xs text-gray-400">
                                 <p>{auth.user.email}</p>
                                 <p>

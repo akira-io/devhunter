@@ -15,9 +15,12 @@
     "inertiajs/inertia-laravel": "^2.0.2",
     "laravel/framework": "^12.9.2",
     "laravel/pulse": "^1.4",
+    "laravel/scout": "^10.14",
     "laravel/socialite": "^5.19",
     "laravel/tinker": "^2.10.1",
+    "meilisearch/meilisearch-php": "^1.14",
     "pinkary-project/type-guard": "^0.1.0",
+    "spatie/laravel-route-attributes": "^1.25",
     "tightenco/ziggy": "^2.5.2"
   },
   "require-dev": {
@@ -80,7 +83,7 @@
     "test:types": "phpstan",
     "test:arch": "pest --filter=arch",
     "test:type-coverage": "pest --type-coverage --min=100",
-    "test:coverage": "pest --parallel --coverage --compact --exactly=61.7",
+    "test:coverage": "pest --parallel --coverage --compact --exactly=62.6",
     "test:typos": "peck",
     "test": [
       "@php artisan config:clear --ansi",
