@@ -61,7 +61,12 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
         'github_refresh_token',
         'github_user_name',
         'skills',
-
+        'github_url',
+        'twitter_url',
+        'linkedin_url',
+        'bluesky_url',
+        'website_url',
+        'youtube_url',
     ];
 
     /**
@@ -81,11 +86,7 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        if ($panel->getId() === 'admin') {
-            return Str::contains($this->email, ['@akira-io.com', 'kidiatoliny']);
-        }
-
-        return true;
+        return Str::contains($this->email, ['@akira-io.com', 'kidiatoliny']);
     }
 
     /**

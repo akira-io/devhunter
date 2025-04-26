@@ -23,5 +23,35 @@ test('to array', function () {
             'github_token',
             'github_refresh_token',
             'skills',
+            'github_url',
+            'twitter_url',
+            'linkedin_url',
+            'bluesky_url',
+            'website_url',
+            'youtube_url',
         ]);
 });
+
+it('should access the admin panel', function ($email) {
+
+    $user = User::factory()
+        ->withEmail($email)
+        ->create();
+    expect($user->canAccessPanel(filament()->getPanel('admin')))
+        ->toBeTrue();
+})->with([
+    'kidiatoliny@gmail.com',
+    'kid@akira-io.com',
+]);
+
+it('should dennie access to the admin panel', function ($email) {
+
+    $user = User::factory()
+        ->withEmail($email)
+        ->create();
+    expect($user->canAccessPanel(filament()->getPanel('admin')))
+        ->not->toBeTrue();
+})->with([
+    'user@gmail.com',
+    'user2@akiraa-io.com',
+]);

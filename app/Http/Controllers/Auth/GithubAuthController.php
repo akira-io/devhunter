@@ -33,16 +33,25 @@ final class GithubAuthController
     public function callback(): RedirectResponse
     {
         /** @var \Laravel\Socialite\Two\User $githubUser */
-        $githubUser = Socialite::driver('github')
-            ->user();
+        $githubUser = Socialite::driver('github')->user();
+
+        $githubUserData = new GithubUser($githubUser)->toArray();
 
         $user = User::query()
-            ->firstOrCreate(
-                ['github_id' => $githubUser->getId()],
-                GithubUser::from(user: $githubUser)->toArray(),
-            );
+            ->firstWhere('github_id', $githubUser->getId());
 
-        Auth::login($user, true);
+        if (! $user) {
+            $user = User::query()->create($githubUserData);
+        } else {
+            $githubUserData['bio'] = $user->bio ?? $githubUserData['bio'];
+            $githubUserData['location'] = $user->location ?? $githubUserData['location'];
+            $githubUserData['avatar_url'] = $user->avatar_url ?? $githubUserData['avatar_url'];
+            $githubUserData['email'] = $user->email ?? $githubUserData['email'];
+
+            $user->update($githubUserData);
+        }
+
+        Auth::login($user, remember: true);
 
         return to_route('feed');
     }

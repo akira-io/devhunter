@@ -42,12 +42,13 @@ final readonly class GithubUser
             'github_user_name' => $raw['login'] ?? null,
             'avatar_url' => $this->user->getAvatar(),
             'github_id' => $this->user->getId(),
-            'github_token' => $raw['token'] ?? null,
-            'github_refresh_token' => $raw['refresh_token'] ?? null,
+            'github_token' => $this->user->token,
+            'github_refresh_token' => $this->user->refreshToken,
             'email_verified_at' => now(),
             'location' => $raw['location'] ?? null,
             'bio' => $raw['bio'] ?? null,
             'password' => Hash::make(Str::random(32)),
+            'github_url' => $raw['html_url'] ?? null,
         ];
     }
 
