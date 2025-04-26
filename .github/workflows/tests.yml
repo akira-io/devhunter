@@ -13,6 +13,16 @@ jobs:
   code_base_test:
     runs-on: ubuntu-latest
 
+    services:
+      meilisearch:
+        image: meilisearch/meilisearch:v1.14.0
+        ports:
+          - 7700:7700
+        options: >-
+          --health-cmd="curl --silent --fail http://localhost:7700/health || exit 1"
+          --health-interval=5s
+          --health-retries=3
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,26 +60,11 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
-      - name: Setup Meilisearch
-        run: |
-          curl -L https://install.meilisearch.com | sh
-          sudo mv meilisearch /usr/local/bin/meilisearch
-          sudo chmod +x /usr/local/bin/meilisearch
-          nohup meilisearch --env production --http-addr '0.0.0.0:7700' &
-          sleep 10 # Aguarda o Meilisearch inicializar
-
-      - name: Wait for Meilisearch to be available
-        run: |
-          until curl --silent http://localhost:7700/health; do
-            echo "Waiting for Meilisearch to be available..."
-            sleep 5
-          done
-          echo "Meilisearch is available."
-
       - name: Set Meilisearch Environment Variables
         run: |
+          # Configura Meilisearch no .env
           echo "MEILISEARCH_HOST=http://localhost:7700" >> .env
-          echo "MEILISEARCH_API_KEY=your_meilisearch_api_key" >> .env
+          echo "MEILISEARCH_API_KEY=masterKey" >> .env
 
       - name: Run Tests
         run: composer test
