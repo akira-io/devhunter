@@ -43,7 +43,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
             <div className="flex min-h-screen flex-col items-center justify-start bg-[#FDFDFC] p-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
-                <header className="fixed top-0 z-50 w-full bg-[#FDFDFC]/90 bg-red-500 p-4 text-sm backdrop-blur md:px-40 dark:bg-[#0a0a0a]/90">
+                <header className="fixed top-0 z-50 w-full bg-[#FDFDFC]/90 p-4 text-sm backdrop-blur md:px-40 dark:bg-[#0a0a0a]/90">
                     <nav className="flex items-center justify-end gap-4">
                         <AppLogo />
                         <div className="flex-1" />
