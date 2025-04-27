@@ -1,6 +1,6 @@
 import AppLogo from '@/components/app-logo';
 import DevCount from '@/components/dev-count';
-import Onboarding from '@/components/onboarding';
+import Onboarding from '@/components/Onboarding';
 import { ScrollDown } from '@/components/scroll-down';
 import { Input } from '@/components/ui/input';
 import { type SharedData, User } from '@/types';

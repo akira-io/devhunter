@@ -138,7 +138,7 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                 </CardContent>
             </Card>
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="w-ful overflow-auto [&>button:last-child]:text-white">
+                <DialogContent className="w-ful overflow-auto">
                     <DialogHeader className="bg-background sticky mb-0 w-full items-center justify-between pb-2">
                         <div className="flex w-full items-center justify-start pt-4">
                             <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
