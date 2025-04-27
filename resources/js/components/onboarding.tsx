@@ -140,7 +140,7 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="overflow-x h-150 w-full gap-4 pt-4 [&>button:last-child]:text-white">
                     <div className="space-y-6 overflow-y-auto p-0 pt-0 pb-6 md:px-6">
-                        <DialogHeader className="bg-background sticky -top-5 w-full shrink-0 items-center justify-between pt-4 pb-10">
+                        <DialogHeader className="bg-background sticky -top-8 w-full shrink-0 items-center justify-between pt-4 pb-10">
                             <div className="flex w-full items-center justify-start pt-4">
                                 <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                                 <div className="ml-2 flex flex-col gap-2 text-left">
