@@ -2,7 +2,7 @@ import { HighlightedSkills } from '@/components/profile/HighlightedSkills';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useTruncate } from '@/hooks/use-truncate-text';
 import { cn } from '@/lib/utils';
 import { User } from '@/types';
@@ -138,17 +138,17 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                 </CardContent>
             </Card>
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="overflow-x h-150 w-full gap-4 pt-4 [&>button:last-child]:text-white">
-                    <div className="bg-background space-y-6 overflow-y-auto pb-6 md:px-6">
-                        <DialogDescription className="bg-background sticky -top-0 mb-15 w-full shrink-0 items-center justify-between pb-2">
-                            <div className="flex w-full items-center justify-start pt-4">
-                                <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
-                                <div className="ml-2 flex flex-col gap-2 text-left">
-                                    <DialogTitle className="text-2xl">{user.name}</DialogTitle>
-                                    <OnboardingLinks links={links} />
-                                </div>
+                <DialogContent className="w-ful overflow-auto [&>button:last-child]:text-white">
+                    <DialogHeader className="bg-background sticky mb-0 w-full items-center justify-between pb-2">
+                        <div className="flex w-full items-center justify-start pt-4">
+                            <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
+                            <div className="ml-2 flex flex-col gap-2 text-left">
+                                <DialogTitle className="text-2xl">{user.name}</DialogTitle>
+                                <OnboardingLinks links={links} />
                             </div>
-                        </DialogDescription>
+                        </div>
+                    </DialogHeader>
+                    <div className="bg-background h-100 space-y-6 overflow-y-auto md:px-6">
                         {step === 1 && (
                             <div className="flex shrink-0 flex-col items-start gap-8">
                                 <OnboardingSkills skills={user.skills} />
@@ -156,9 +156,9 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                             </div>
                         )}
                         {step === 2 && (
-                            <>
-                                <DialogTitle>Formação Academica</DialogTitle>
-                                <DialogDescription className="space-y-2">
+                            <div className="flex w-full shrink-0 flex-col items-start gap-8">
+                                <span className="mt-4">Formação Academica</span>
+                                <DialogDescription className="w-full space-y-2">
                                     {user.professional_educations?.map((education) => (
                                         <Card className="w-full items-start p-4" key={education.id}>
                                             <CardTitle className="flex w-full items-center gap-1 text-sm font-semibold">
@@ -187,7 +187,7 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                                         </Card>
                                     ))}
                                 </DialogDescription>
-                            </>
+                            </div>
                         )}
                         {step === 3 && (
                             <>
