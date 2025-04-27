@@ -11,7 +11,7 @@ use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Patch;
 
 #[Middleware('auth')]
-final readonly class ProfileLinksController
+final readonly class LinksController
 {
     /**
      * Display the user's profile links.

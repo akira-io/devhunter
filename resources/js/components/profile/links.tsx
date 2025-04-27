@@ -88,22 +88,24 @@ export function ProfileLinks({ user }: { user: User }) {
                         .map((link) => (
                             <Badge
                                 key={link.name}
-                                className="flex aspect-square h-10 w-10 items-center justify-center p-0"
+                                className="flex aspect-square h-10 w-10 cursor-pointer items-center justify-center p-0"
                                 variant="outline"
-                                onClick={handleOpenLinkDialog}
+                                asChild
                             >
-                                {!link.url ? (
-                                    <PlusIcon className="cursor-pointer" />
-                                ) : (
+                                {link.url ? (
                                     <a href={link.url} target="_blank" rel="noopener noreferrer">
-                                        {link.icon}
+                                        <span> {link.icon}</span>
                                     </a>
+                                ) : (
+                                    <button type="button" onClick={handleOpenLinkDialog}>
+                                        <PlusIcon />
+                                    </button>
                                 )}
                             </Badge>
                         ))}
                 </CardContent>
                 <Dialog open={openLinkDialog} onOpenChange={setOpenLinkDialog}>
-                    <DialogContent>
+                    <DialogContent className="max-h-[80vh] overflow-y-auto">
                         <DialogHeader>
                             <DialogTitle>Links</DialogTitle>
                             <DialogDescription>
@@ -118,14 +120,16 @@ export function ProfileLinks({ user }: { user: User }) {
                                         <Badge className="flex aspect-square h-10 w-10 items-center justify-center p-0" variant="outline">
                                             <span> {link.icon}</span>
                                         </Badge>
-                                        <input
-                                            type="text"
-                                            placeholder={link.placeholer}
-                                            value={data[Link[link.name]]}
-                                            onChange={(e) => setData(Link[link.name], e.target.value)}
-                                            className="placeholder:text-muted w-full rounded-md border p-2"
-                                        />
-                                        <InputError className="mt-2" message={errors[Link[link.name]]} />
+                                        <div className="grid w-full gap-2">
+                                            <input
+                                                type="text"
+                                                placeholder={link.placeholer}
+                                                value={data[Link[link.name]]}
+                                                onChange={(e) => setData(Link[link.name], e.target.value)}
+                                                className="placeholder:text-muted w-full rounded-md border p-2"
+                                            />
+                                            <InputError className="mt-2" message={errors[Link[link.name]]} />
+                                        </div>
                                     </div>
                                 ))}
                             </div>

@@ -1,4 +1,5 @@
 import InputError from '@/components/input-error';
+import { Skills } from '@/components/profile/skills';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -17,11 +18,11 @@ interface HighlightSkillsProps extends ComponentProps<'div'> {
     authSkills: Option[];
 }
 
-export function HighlightSkills({ skills, authSkills, ...props }: HighlightSkillsProps) {
+export function HighlightSkills({ skills, authSkills: highlightedSkills, ...props }: HighlightSkillsProps) {
     const { toast } = useToast();
     const [open, setOpen] = useState(false);
     const { data, setData, post, errors, processing } = useForm<Required<HighlightSkillsForm>>({
-        skills: authSkills,
+        skills: highlightedSkills,
     });
 
     function submitForm(e: FormEvent) {
@@ -38,43 +39,50 @@ export function HighlightSkills({ skills, authSkills, ...props }: HighlightSkill
     }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen} {...props}>
-            <DialogTrigger asChild>
-                <Button variant="default">
-                    <Code />
-                    Destacar tecnologias
-                </Button>
-            </DialogTrigger>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>Destacar Tecnologias</DialogTitle>
-                    <DialogDescription>
-                        Destaque as tecnologias que você mais gosta de usar ou que são mais relevantes para o seu trabalho. Isso ajudará os visitantes
-                        a entenderem melhor suas habilidades e interesses.
-                    </DialogDescription>
-                </DialogHeader>
-                <form onSubmit={submitForm}>
-                    <div className="*:not-first:mt-2">
-                        <Label>Selecionar Tecnolodia</Label>
-                        <MultipleSelector
-                            commandProps={{
-                                label: 'Selecionar tecnologias',
-                            }}
-                            defaultOptions={skills}
-                            placeholder="Selecione as tecnologias"
-                            emptyIndicator={<p className="text-center text-sm"> Nenhum resultado encontrado</p>}
-                            value={authSkills}
-                            onChange={(skills) => setData('skills', skills)}
-                        />
-                        <InputError message={errors.skills} />
-                    </div>
-                    <DialogFooter className="mt-8">
-                        <Button type="submit" disabled={processing} variant="default">
-                            <Code /> Destacar
-                        </Button>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
+        <>
+            <Dialog open={open} onOpenChange={setOpen} {...props}>
+                <DialogTrigger asChild>
+                    <Button variant="default">
+                        <Code />
+                        Destacar tecnologias
+                    </Button>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Destacar Tecnologias</DialogTitle>
+                        <DialogDescription>
+                            Destaque as tecnologias que você mais gosta de usar ou que são mais relevantes para o seu trabalho. Isso ajudará os
+                            visitantes a entenderem melhor suas habilidades e interesses.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <form onSubmit={submitForm}>
+                        <div className="*:not-first:mt-2">
+                            <Label>Selecionar Tecnolodia</Label>
+                            <MultipleSelector
+                                commandProps={{
+                                    label: 'Selecionar tecnologias',
+                                }}
+                                defaultOptions={skills}
+                                placeholder="Selecione as tecnologias"
+                                emptyIndicator={<p className="text-center text-sm"> Nenhum resultado encontrado</p>}
+                                value={highlightedSkills}
+                                onChange={(skills) => setData('skills', skills)}
+                            />
+                            <InputError message={errors.skills} />
+                        </div>
+                        <DialogFooter className="mt-8">
+                            <Button type="submit" disabled={processing} variant="default">
+                                <Code /> Destacar
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
+            {highlightedSkills.length > 0 && (
+                <div className="mt-2 flex flex-wrap items-center justify-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                    <Skills techs={highlightedSkills} />
+                </div>
+            )}
+        </>
     );
 }

@@ -52,8 +52,8 @@ function OnboardingLinks({ links }: { links: { name: string; url: string | undef
 function OnboardingSkills({ skills }: { skills: User['skills'] }) {
     return (
         <>
-            <small className="text-muted-foreground">Skills</small>
-            {!skills && <small className="text-muted -mt-6 text-xs">nenhuma skill definida</small>}
+            <small>Skills</small>
+            {skills?.length == 0 && <small className="dark:text-muted -mt-6 text-xs text-gray-300">nenhuma skill definida</small>}
             <div className="-mt-4 flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {skills && <Skills techs={skills} />}
             </div>
@@ -64,8 +64,8 @@ function OnboardingSkills({ skills }: { skills: User['skills'] }) {
 function OnboardingAbout({ about }: { about: string | undefined }) {
     return (
         <>
-            <small className="text-muted-foreground">Sobre</small>
-            {!about && <small className="text-muted -mt-6 text-xs">nenhuma informação disponivel</small>}
+            <small>Sobre</small>
+            {!about && <small className="dark:text-muted -mt-6 text-xs text-gray-300">nenhuma informação disponivel</small>}
             {about && <div className="-mt-4">{about}</div>}
         </>
     );

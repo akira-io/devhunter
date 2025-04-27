@@ -11,6 +11,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -104,6 +105,12 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
             'github_user_name' => $this->github_user_name,
             'skills' => $this->skills,
         ];
+    }
+
+    public function professionalEducations(): HasMany
+    {
+
+        return $this->hasMany(ProfessionalEducation::class, 'user_id');
     }
 
     /**

@@ -21,12 +21,14 @@ final readonly class ProfileController
      */
     public function edit(Request $request): Response
     {
+        $user = type($request->user())->as(User::class);
 
         return Inertia::render('settings/profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => $request->session()->get('status'),
             'skills' => SkillsEnum::get(),
-            'authSkills' => type($request->user())->as(User::class)->skills,
+            'highlightedSkills' => $user->skills,
+            'professionalEducations' => $user->professionalEducations,
         ]);
     }
 

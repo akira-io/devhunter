@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\ProfessionalEducation;
 use App\Models\User;
 
 test('to array', function () {
@@ -55,3 +56,18 @@ it('should dennie access to the admin panel', function ($email) {
     'user@gmail.com',
     'user2@akiraa-io.com',
 ]);
+
+it('should has many professional educations', function () {
+    $user = User::factory()->create();
+    $user->professionalEducations()->createMany(
+        ProfessionalEducation::factory()->count(3)->make()->toArray()
+    );
+
+    expect($user->professionalEducations)
+        ->toHaveCount(3)
+        ->each(function ($professionalEducation) {
+            expect($professionalEducation)
+                ->toBeInstanceOf(ProfessionalEducation::class);
+        });
+
+});

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { ReactNode } from 'react';
 
@@ -13,14 +13,14 @@ interface ProfileCard {
 
 export function ProfileCard({ title, className, icon, onClick, children }: ProfileCard) {
     return (
-        <Card className={cn('mt-4 w-full p-4', className)}>
-            <CardDescription className="flex items-center justify-between text-sm">
+        <Card className={cn('mt-4 max-h-100 w-full overflow-y-auto', className)}>
+            <CardTitle className="bg-background sticky -top-6 flex items-center justify-between p-1 px-6 text-sm">
                 {title}
                 <Button variant="ghost" onClick={onClick}>
                     {icon}
                 </Button>
-            </CardDescription>
-            <CardContent className="flex flex-col items-center space-y-6 px-1 text-center text-gray-500">{children}</CardContent>
+            </CardTitle>
+            <CardContent className="flex flex-col items-center space-y-6 px-1 px-4 text-center text-gray-500">{children}</CardContent>
         </Card>
     );
 }

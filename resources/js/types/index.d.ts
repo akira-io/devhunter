@@ -53,3 +53,13 @@ export interface User {
 
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface ProfessionalEducation {
+    id: number;
+    user_id: number;
+    institution: string;
+    degree: string;
+    start_date: string;
+    end_date?: string;
+    field_of_study: string;
+}

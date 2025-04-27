@@ -26,6 +26,7 @@ export function About() {
         e.preventDefault();
         patch(route('profile.about'), {
             preserveScroll: true,
+            only: ['bio'],
             onFinish: () => {
                 setOpenBioDialog(false);
                 toast({
@@ -39,9 +40,7 @@ export function About() {
             {!auth.user.bio && (
                 <>
                     <UserIcon />
-                    <p className="max-w-100 text-center">
-                        Compartilhe um pouco sobre você e suas experiências. Isso ajudará os recrutadores a conhecerem melhor o seu perfil.
-                    </p>
+                    Compartilhe um pouco sobre você e suas experiências. Isso ajudará os recrutadores a conhecerem melhor o seu perfil.
                 </>
             )}
             <p className="block w-full break-all whitespace-normal">{auth.user.bio}</p>
