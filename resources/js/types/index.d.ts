@@ -50,6 +50,7 @@ export interface User {
     linkedin_url?: string;
     bluesky_url?: string;
     youtube_url?: string;
+    professional_educations?: ProfessionalEducation[];
 
     [key: string]: unknown; // This allows for additional properties...
 }
@@ -62,4 +63,11 @@ export interface ProfessionalEducation {
     start_date: string;
     end_date?: string;
     field_of_study: string;
+}
+
+export interface ProfileStoreTypes {
+    isOpen: boolean;
+    open: () => void;
+    close: () => void;
+    set: (isOpen: boolean) => void;
 }

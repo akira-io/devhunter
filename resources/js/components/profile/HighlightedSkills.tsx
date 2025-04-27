@@ -40,7 +40,7 @@ import {
     SiTypescript,
 } from 'react-icons/si';
 
-export function Skills({ techs }: { techs: Option[] }) {
+export function HighlightedSkills({ techs }: { techs: Option[] }) {
     const skillIcons: Record<string, JSX.Element> = {
         JavaScript: <FaJsSquare className="text-yellow-400" />,
         TypeScript: <SiTypescript className="text-blue-500" />,

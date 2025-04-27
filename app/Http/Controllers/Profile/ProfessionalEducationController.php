@@ -13,7 +13,7 @@ use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Post;
 
 #[Middleware('auth')]
-final class ProfessionalEducationController
+final readonly class ProfessionalEducationController
 {
     /**
      * Store the user's professional education.
@@ -22,9 +22,9 @@ final class ProfessionalEducationController
     public function store(ProfessionalEducationRequest $request): RedirectResponse
     {
 
-        $user = type(auth()->user())->as(User::class);
+        $user = type($request->user())->as(User::class);
 
-        $user->professionalEducations()->create($request->validated());
+        $user->professionalEducations()->create((array) $request->validated());
 
         return to_route('profile.edit');
     }

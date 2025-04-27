@@ -34,6 +34,7 @@ use Laravel\Scout\Searchable;
  * @property-read  CarbonImmutable $created_at
  * @property-read  CarbonImmutable $updated_at
  * @property-read  list<mixed> $skills
+ * @property-read  HasMany<ProfessionalEducation,$this> $professionalEducations
  */
 final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
@@ -107,6 +108,11 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
         ];
     }
 
+    /**
+     * Professional education relationship
+     *
+     * @return HasMany<ProfessionalEducation, $this>
+     */
     public function professionalEducations(): HasMany
     {
 

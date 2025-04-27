@@ -1,4 +1,4 @@
-import { Skills } from '@/components/profile/skills';
+import { HighlightedSkills } from '@/components/profile/HighlightedSkills';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
@@ -7,7 +7,8 @@ import { useTruncate } from '@/hooks/use-truncate-text';
 import { cn } from '@/lib/utils';
 import { User } from '@/types';
 import { RiBlueskyFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe } from 'lucide-react';
+import { format } from 'date-fns';
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap } from 'lucide-react';
 import * as React from 'react';
 import { useState } from 'react';
 import AvatarGenerator, { AvatarFullConfig, genConfig } from 'react-nice-avatar';
@@ -55,7 +56,7 @@ function OnboardingSkills({ skills }: { skills: User['skills'] }) {
             <small>Skills</small>
             {skills?.length == 0 && <small className="dark:text-muted -mt-6 text-xs text-gray-300">nenhuma skill definida</small>}
             <div className="-mt-4 flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {skills && <Skills techs={skills} />}
+                {skills && <HighlightedSkills techs={skills} />}
             </div>
         </>
     );
@@ -102,6 +103,19 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
         setOpen(true);
     };
 
+    function nextStepLabel(step: number) {
+        switch (step) {
+            case 1:
+                return 'Formação Acadêmica';
+            case 2:
+                return 'Exp.Profissional';
+            case 3:
+                return 'Projetos';
+            default:
+                return '';
+        }
+    }
+
     return (
         <div {...props}>
             <Card className="relative h-40 w-full cursor-pointer overflow-hidden" onClick={handleCardClick}>
@@ -125,9 +139,9 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
             </Card>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="overflow-x h-150 w-full gap-4 pt-4 [&>button:last-child]:text-white">
-                    <div className="space-y-6 overflow-y-auto px-6 pt-6 pb-6">
-                        <DialogHeader className="bg-background 0 sticky top-0 w-full shrink-0 items-center justify-between pb-10">
-                            <div className="flex w-full items-center justify-start">
+                    <div className="space-y-6 overflow-y-auto p-0 pt-0 pb-6 md:px-6">
+                        <DialogHeader className="bg-background sticky -top-0 w-full shrink-0 items-center justify-between pb-10">
+                            <div className="flex w-full items-center justify-start pt-4">
                                 <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                                 <div className="ml-2 flex flex-col gap-2 text-left">
                                     <DialogTitle className="text-2xl">{user.name}</DialogTitle>
@@ -143,21 +157,47 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                         )}
                         {step === 2 && (
                             <>
-                                <DialogTitle>Customizable Components</DialogTitle>
-                                <DialogDescription>
-                                    Each component is fully customizable and built with modern web standards in mind.
+                                <DialogTitle>Formação Academica</DialogTitle>
+                                <DialogDescription className="space-y-2">
+                                    {user.professional_educations?.map((education) => (
+                                        <Card className="w-full items-start p-4" key={education.id}>
+                                            <CardTitle className="flex w-full items-center gap-1 text-sm font-semibold">
+                                                <GraduationCap /> {education.degree}
+                                            </CardTitle>
+                                            <CardContent className="-mt-2 grid w-full grid-cols-1 items-center gap-4 border-t-1 pt-4 md:grid-cols-2">
+                                                <div className="flex flex-col items-start justify-start">
+                                                    <small className="text-xs text-gray-500">Instituíção</small>
+                                                    <span className="bold text-sm">{education.institution}</span>
+                                                </div>
+                                                <div className="flex flex-col items-start justify-start">
+                                                    <small className="text-xs text-gray-500">Area de Estudo</small>
+                                                    <span className="bold text-sm">{education.field_of_study}</span>
+                                                </div>
+                                                <div className="flex flex-col items-start justify-start">
+                                                    <small className="text-xs text-gray-500">Inicio</small>
+                                                    <span className="bold text-sm">{format(new Date(education.start_date), 'dd-MM-yyyy')}</span>
+                                                </div>
+                                                {education.end_date && (
+                                                    <div className="flex flex-col items-start justify-start">
+                                                        <small className="text-xs text-gray-500">Fim</small>
+                                                        <span className="bold text-sm">{format(new Date(education.end_date), 'dd-MM-yyyy')}</span>
+                                                    </div>
+                                                )}
+                                            </CardContent>
+                                        </Card>
+                                    ))}
                                 </DialogDescription>
                             </>
                         )}
                         {step === 3 && (
                             <>
-                                <DialogTitle>Ready to Start?</DialogTitle>
+                                <DialogTitle>Experiência Profissional</DialogTitle>
                                 <DialogDescription>Begin building amazing interfaces with our comprehensive component library.</DialogDescription>
                             </>
                         )}
                         {step === 4 && (
                             <>
-                                <DialogTitle>Get Support</DialogTitle>
+                                <DialogTitle>Projetos</DialogTitle>
                                 <DialogDescription>
                                     Access our extensive documentation and community resources to make the most of Origin UI.
                                 </DialogDescription>
@@ -178,7 +218,7 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                                 )}
                                 {step < totalSteps ? (
                                     <Button className="group" type="button" onClick={handleContinue}>
-                                        Próximo
+                                        {nextStepLabel(step)}
                                         <ArrowRightIcon size={16} />
                                     </Button>
                                 ) : (

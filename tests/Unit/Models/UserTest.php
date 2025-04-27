@@ -64,10 +64,8 @@ it('should has many professional educations', function () {
     );
 
     expect($user->professionalEducations)
-        ->toHaveCount(3)
-        ->each(function ($professionalEducation) {
-            expect($professionalEducation)
-                ->toBeInstanceOf(ProfessionalEducation::class);
-        });
-
+        ->each
+        ->toBeInstanceOf(ProfessionalEducation::class)
+        ->and($user->professionalEducations)
+        ->toHaveCount(3);
 });

@@ -1,13 +1,14 @@
 import InputError from '@/components/input-error';
-import { Skills } from '@/components/profile/skills';
+import { HighlightedSkills } from '@/components/profile/highlightedSkills';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import MultipleSelector, { Option } from '@/components/ui/multiselect';
 import { useToast } from '@/hooks/use-toast';
+import { useHighlightedSkills } from '@/stores/highlightedSkills';
 import { useForm } from '@inertiajs/react';
 import { Code } from 'lucide-react';
-import { ComponentProps, FormEvent, useState } from 'react';
+import { ComponentProps, FormEvent } from 'react';
 
 interface HighlightSkillsForm {
     skills: Option[];
@@ -20,7 +21,7 @@ interface HighlightSkillsProps extends ComponentProps<'div'> {
 
 export function HighlightSkills({ skills, authSkills: highlightedSkills, ...props }: HighlightSkillsProps) {
     const { toast } = useToast();
-    const [open, setOpen] = useState(false);
+    const { close, set, isOpen } = useHighlightedSkills();
     const { data, setData, post, errors, processing } = useForm<Required<HighlightSkillsForm>>({
         skills: highlightedSkills,
     });
@@ -30,7 +31,7 @@ export function HighlightSkills({ skills, authSkills: highlightedSkills, ...prop
         setData('skills', data.skills);
         post(route('profile.highlight-skills'), {
             onFinish: () => {
-                setOpen(false);
+                close();
                 toast({
                     description: 'As tecnologias foram destacadas com sucesso.',
                 });
@@ -40,7 +41,7 @@ export function HighlightSkills({ skills, authSkills: highlightedSkills, ...prop
 
     return (
         <>
-            <Dialog open={open} onOpenChange={setOpen} {...props}>
+            <Dialog open={isOpen} onOpenChange={set} {...props}>
                 <DialogTrigger asChild>
                     <Button variant="default">
                         <Code />
@@ -78,9 +79,9 @@ export function HighlightSkills({ skills, authSkills: highlightedSkills, ...prop
                     </form>
                 </DialogContent>
             </Dialog>
-            {highlightedSkills.length > 0 && (
+            {highlightedSkills && highlightedSkills.length > 0 && (
                 <div className="mt-2 flex flex-wrap items-center justify-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                    <Skills techs={highlightedSkills} />
+                    <HighlightedSkills techs={highlightedSkills} />
                 </div>
             )}
         </>

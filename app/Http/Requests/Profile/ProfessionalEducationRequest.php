@@ -8,6 +8,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 final class ProfessionalEducationRequest extends FormRequest
 {
+    /**
+     * Validation rules for the request.
+     *
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
 
@@ -20,13 +25,21 @@ final class ProfessionalEducationRequest extends FormRequest
         ];
     }
 
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
 
         return true;
     }
 
-    public function messages()
+    /**
+     * Custom messages for validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
     {
 
         return [

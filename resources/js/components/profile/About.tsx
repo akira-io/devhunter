@@ -4,10 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { useAboutStore } from '@/stores/about';
 import type { SharedData } from '@/types';
 import { useForm, usePage } from '@inertiajs/react';
 import { EditIcon, PlusIcon, UserIcon } from 'lucide-react';
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler } from 'react';
 
 interface AboutForm {
     bio?: string;
@@ -16,19 +17,19 @@ interface AboutForm {
 export function About() {
     const { auth } = usePage<SharedData>().props;
     const { toast } = useToast();
+    const { isOpen, open, close, set } = useAboutStore();
 
     const { data, setData, patch, errors, processing } = useForm<Required<AboutForm>>({
         bio: auth.user.bio ?? '',
     });
 
-    const [openBioDialog, setOpenBioDialog] = useState(false);
+    // const [openBioDialog, setOpenBioDialog] = useState(false);
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         patch(route('profile.about'), {
             preserveScroll: true,
-            only: ['bio'],
             onFinish: () => {
-                setOpenBioDialog(false);
+                close();
                 toast({
                     description: 'A sua apresentação foi atualizada com sucesso.',
                 });
@@ -36,7 +37,7 @@ export function About() {
         });
     };
     return (
-        <ProfileCard title="Apresentação" icon={auth?.user.bio ? <EditIcon /> : <PlusIcon />} onClick={() => setOpenBioDialog(true)}>
+        <ProfileCard title="Apresentação" icon={auth?.user.bio ? <EditIcon /> : <PlusIcon />} onClick={open}>
             {!auth.user.bio && (
                 <>
                     <UserIcon />
@@ -44,7 +45,7 @@ export function About() {
                 </>
             )}
             <p className="block w-full break-all whitespace-normal">{auth.user.bio}</p>
-            <Dialog open={openBioDialog} onOpenChange={setOpenBioDialog}>
+            <Dialog open={isOpen} onOpenChange={set}>
                 <DialogTrigger asChild>
                     <Button>
                         <UserIcon />

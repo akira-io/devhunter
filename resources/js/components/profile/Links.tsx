@@ -4,15 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { LinkName, useLinkStore } from '@/stores/link';
 import { User } from '@/types';
 import { useForm } from '@inertiajs/react';
 import { RiBlueskyFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
 import { Globe, PlusIcon, UserIcon } from 'lucide-react';
-import { FormEvent, useState } from 'react';
+import { FormEvent, JSX } from 'react';
 import { PiNotePencilBold } from 'react-icons/pi';
 
 export function ProfileLinks({ user }: { user: User }) {
     const { toast } = useToast();
+
+    const { isOpen, open, close, set, Link } = useLinkStore();
 
     const { data, setData, patch, errors, processing } = useForm({
         github_url: user.github_url,
@@ -23,16 +26,7 @@ export function ProfileLinks({ user }: { user: User }) {
         website_url: user.website_url,
     });
 
-    const Link: Record<string, keyof typeof data> = {
-        GitHub: 'github_url',
-        Twitter: 'twitter_url',
-        YouTube: 'youtube_url',
-        LinkedIn: 'linkedin_url',
-        Bluesky: 'bluesky_url',
-        Website: 'website_url',
-    };
-    const [openLinkDialog, setOpenLinkDialog] = useState(false);
-    const links = [
+    const links: { name: LinkName; url: string | undefined; icon: JSX.Element; placeholer: string }[] = [
         { name: 'GitHub', url: user.github_url, icon: <RiGithubFill />, placeholer: 'https://github.com/username' },
         { name: 'Twitter', url: user.twitter_url, icon: <RiTwitterXFill />, placeholer: 'https://x.com/username' },
         {
@@ -56,19 +50,15 @@ export function ProfileLinks({ user }: { user: User }) {
         { name: 'Website', url: user.website_url, icon: <Globe />, placeholer: 'https://www.seu-site.com' },
     ];
 
-    function handleOpenLinkDialog() {
-        setOpenLinkDialog(true);
-    }
-
     function submit(e: FormEvent) {
         e.preventDefault();
         patch(route('profile.links'), {
             preserveScroll: true,
-            onFinish: () => {
-                setOpenLinkDialog(false);
+            onSuccess: () => {
                 toast({
                     description: 'Os links foram atualizados com sucesso.',
                 });
+                close();
             },
         });
     }
@@ -78,7 +68,7 @@ export function ProfileLinks({ user }: { user: User }) {
             <Card className="mt-4 w-full p-4 md:w-80">
                 <CardDescription className="flex items-center justify-between text-sm">
                     Links
-                    <Button variant="ghost" onClick={handleOpenLinkDialog}>
+                    <Button variant="ghost" onClick={open}>
                         <PiNotePencilBold />
                     </Button>
                 </CardDescription>
@@ -97,14 +87,14 @@ export function ProfileLinks({ user }: { user: User }) {
                                         <span> {link.icon}</span>
                                     </a>
                                 ) : (
-                                    <button type="button" onClick={handleOpenLinkDialog}>
+                                    <button type="button" onClick={open}>
                                         <PlusIcon />
                                     </button>
                                 )}
                             </Badge>
                         ))}
                 </CardContent>
-                <Dialog open={openLinkDialog} onOpenChange={setOpenLinkDialog}>
+                <Dialog open={isOpen} onOpenChange={set}>
                     <DialogContent className="max-h-[80vh] overflow-y-auto">
                         <DialogHeader>
                             <DialogTitle>Links</DialogTitle>

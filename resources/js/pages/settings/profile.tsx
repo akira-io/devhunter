@@ -1,12 +1,12 @@
 import DeleteUser from '@/components/delete-user';
 import InputError from '@/components/input-error';
 import { ProfileCard } from '@/components/profile-card';
-import { About } from '@/components/profile/about';
-import { HighlightSkills } from '@/components/profile/highlight-skills';
-import { Highlights } from '@/components/profile/highlights';
-import { ProfileLinks } from '@/components/profile/links';
-import { ProfessionalEducation } from '@/components/profile/professional-education';
-import { ProfileCompletion } from '@/components/profile/profile-completion';
+import { About } from '@/components/profile/About';
+import { HighlightedProjects } from '@/components/profile/HighlightedProjects';
+import { HighlightSkills } from '@/components/profile/HighlightSkills';
+import { ProfileLinks } from '@/components/profile/Links';
+import { ProfessionalEducation } from '@/components/profile/ProfessionalEducation';
+import { ProfileCompletion } from '@/components/profile/ProfileCompletion';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -96,7 +96,7 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                     <ProfileCompletion professionalEducations={professionalEducations} skills={highlightedSkills} />
                     <About />
                     <ProfessionalEducation professionalEducations={professionalEducations} />
-                    <Highlights />
+                    <HighlightedProjects />
                     <section className="space-y-6">
                         <ProfileCard title="Habilidades" icon={<PlusIcon />}>
                             <Award />

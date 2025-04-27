@@ -22,8 +22,6 @@ final class ProfessionalEducationFactory extends Factory
             'field_of_study' => $this->faker->word(),
             'start_date' => Carbon::now()->subYears(2),
             'end_date' => Carbon::now(),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
             'user_id' => User::factory(),
         ];
     }
