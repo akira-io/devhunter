@@ -25,11 +25,13 @@ final readonly class WelcomeController
             ? User::search($query->value())
             : User::query()->inRandomOrder();
 
+        $users = $usersQuery->paginate(20)->withQueryString();
+
         // @phpstan-ignore-next-line
-        $usersQuery->with(['professionalEducations']);
+        $users->load(['professionalEducations']);
 
         return Inertia::render('welcome', [
-            'users' => $usersQuery->paginate(20)->withQueryString(),
+            'users' => $users,
         ]);
     }
 }
