@@ -1,5 +1,5 @@
 import InputError from '@/components/input-error';
-import { HighlightedSkills } from '@/components/profile/highlightedSkills';
+import { HighlightedSkills } from '@/components/profile/HighlightedSkills';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
