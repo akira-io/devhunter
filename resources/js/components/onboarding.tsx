@@ -2,7 +2,7 @@ import { HighlightedSkills } from '@/components/profile/HighlightedSkills';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle } from '@/components/ui/dialog';
 import { useTruncate } from '@/hooks/use-truncate-text';
 import { cn } from '@/lib/utils';
 import { User } from '@/types';
@@ -54,7 +54,7 @@ function OnboardingSkills({ skills }: { skills: User['skills'] }) {
     return (
         <>
             <small>Skills</small>
-            {skills?.length == 0 && <small className="dark:text-muted -mt-6 text-xs text-gray-300">nenhuma skill definida</small>}
+            {skills?.length == 0 && <small className="dark:text-muted text-xs text-gray-300">nenhuma skill definida</small>}
             <div className="-mt-4 flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {skills && <HighlightedSkills techs={skills} />}
             </div>
@@ -139,8 +139,8 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
             </Card>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="overflow-x h-150 w-full gap-4 pt-4 [&>button:last-child]:text-white">
-                    <div className="space-y-6 overflow-y-auto p-0 pt-0 pb-6 md:px-6">
-                        <DialogHeader className="bg-background sticky -top-10 w-full shrink-0 items-center justify-between pt-4 pb-10">
+                    <div className="bg-background space-y-6 overflow-y-auto pb-6 md:px-6">
+                        <DialogDescription className="bg-background sticky -top-0 mb-15 w-full shrink-0 items-center justify-between pb-2">
                             <div className="flex w-full items-center justify-start pt-4">
                                 <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                                 <div className="ml-2 flex flex-col gap-2 text-left">
@@ -148,9 +148,9 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                                     <OnboardingLinks links={links} />
                                 </div>
                             </div>
-                        </DialogHeader>
+                        </DialogDescription>
                         {step === 1 && (
-                            <div className="top-0 flex shrink-0 flex-col items-start gap-8">
+                            <div className="flex shrink-0 flex-col items-start gap-8">
                                 <OnboardingSkills skills={user.skills} />
                                 <OnboardingAbout about={user.bio} />
                             </div>
