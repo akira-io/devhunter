@@ -241,12 +241,11 @@ export function ProfessionalEducation({ professionalEducations }: { professional
                                         />
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-auto p-2" align="start">
+                                <PopoverContent className="w-auto p-2" align="start" forceMount>
                                     <Calendar
                                         mode="single"
                                         selected={data.start_date}
                                         onSelect={(date) => setData('start_date', date ? date : new Date())}
-                                        initialFocus
                                     />
                                 </PopoverContent>
                             </Popover>
