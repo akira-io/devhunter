@@ -87,6 +87,14 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                                 </p>
                             </div>
                         </CardContent>
+                        <div className="grid grid-cols-2 items-end justify-end gap-4">
+                            <small className="flex gap-1 text-xs">
+                                <b>445</b> Seguidores
+                            </small>
+                            <small className="flex gap-1 text-xs">
+                                <b>400</b> A seguir
+                            </small>
+                        </div>
                         <HighlightSkills skills={skills} authSkills={highlightedSkills} />
                         <p className="mt-0 border-t-1 py-2 text-xs text-gray-500">Embarcou na Dev Hunter em {auth.user.created_at}</p>
                     </Card>

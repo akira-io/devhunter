@@ -1,14 +1,15 @@
 import { HighlightedSkills } from '@/components/profile/HighlightedSkills';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useTruncate } from '@/hooks/use-truncate-text';
 import { cn } from '@/lib/utils';
-import { User } from '@/types';
+import { SharedData, User } from '@/types';
+import { usePage } from '@inertiajs/react';
 import { RiBlueskyFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
 import { format } from 'date-fns';
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap, UserPlusIcon } from 'lucide-react';
 import * as React from 'react';
 import { useState } from 'react';
 import AvatarGenerator, { AvatarFullConfig, genConfig } from 'react-nice-avatar';
@@ -73,6 +74,7 @@ function OnboardingAbout({ about }: { about: string | undefined }) {
 }
 
 export default function Onboarding({ user, ...props }: OnboardingProps) {
+    const { auth } = usePage<SharedData>().props;
     const [step, setStep] = useState(1);
     const [open, setOpen] = useState(false);
 
@@ -118,24 +120,32 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
 
     return (
         <div {...props}>
-            <Card className="relative h-40 w-full cursor-pointer overflow-hidden" onClick={handleCardClick}>
-                <CardContent className="flex w-full flex-1 items-start justify-center gap-4">
+            <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden" onClick={handleCardClick}>
+                <CardContent className="flex w-full flex-1 items-center justify-center gap-4">
                     <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                     <div className="w-full">
-                        <div className="mb-2 flex items-center justify-between">
+                        <div className="flex items-center justify-between">
                             <CardTitle className="text-xl">{user.name}</CardTitle>
                             <Button
-                                className="text-muted-forground -mt-2 -mr-2 flex h-8 w-8 cursor-pointer border-none shadow-none"
+                                className="text-muted-forground absolute top-4 right-4 flex h-8 w-8 cursor-pointer border-none shadow-none"
                                 variant="secondary"
                             >
                                 <EllipsisVerticalIcon />
                             </Button>
                         </div>
-                        <CardDescription className="mt-2 mb-4 text-sm">
+                        <CardDescription className="text-sm">
                             {user.bio ? truncate(user.bio) : <span className="text-muted">Bio indisponível...</span>}
                         </CardDescription>
                     </div>
                 </CardContent>
+                {auth.user && (
+                    <CardFooter>
+                        <Button className="w-full" size="sm" variant="secondary">
+                            <UserPlusIcon />
+                            Seguir
+                        </Button>
+                    </CardFooter>
+                )}
             </Card>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="w-ful overflow-auto">

@@ -49,7 +49,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                 setIsSearchLoading(true);
                 router.get(
                     route('home'),
-                    { q: data.query },
+                    { q: value },
                     {
                         preserveScroll: true,
                         preserveState: true,
