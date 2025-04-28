@@ -115,7 +115,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                                 id="search"
                                 className="peer placeholder:text-foreground-muted h-12 border ps-9 pe-9"
                                 placeholder="(nome, email ou skills) e pressione ENTER"
-                                type="search"
+                                type="text"
                                 name="query"
                                 onChange={getOnChange()}
                             />
