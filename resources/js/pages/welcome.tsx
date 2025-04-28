@@ -4,9 +4,9 @@ import Onboarding from '@/components/Onboarding';
 import { ScrollDown } from '@/components/scroll-down';
 import { Input } from '@/components/ui/input';
 import { type SharedData, User } from '@/types';
-import { Head, Link, router, usePage } from '@inertiajs/react';
+import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
 import { Loader, LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 export interface DataProps {
     total: number;
@@ -15,26 +15,52 @@ export interface DataProps {
 
 export default function Welcome({ users }: { users: DataProps }) {
     const { auth } = usePage<SharedData>().props;
-    const [query, setQuery] = useState('');
-    const [isSearchLoading, setIsSearchLoading] = useState(true);
 
-    useEffect(() => {
+    const [isSearchLoading, setIsSearchLoading] = useState(false);
+
+    const { data, setData } = useForm({
+        query: '',
+    });
+
+    function search(e: FormEvent) {
+        e.preventDefault();
         setIsSearchLoading(true);
-        const timeout = setTimeout(() => {
-            router.get(
-                route('home'),
-                { q: query },
-                {
-                    preserveState: true,
-                    replace: true,
-                    only: ['users'],
+        router.get(
+            route('home'),
+            { q: data.query },
+            {
+                preserveState: true,
+                preserveScroll: true,
+                replace: true,
+                only: ['users'],
+                onFinish: () => {
+                    setIsSearchLoading(false);
                 },
-            );
-            setIsSearchLoading(false);
-        }, 500);
+            },
+        );
+    }
 
-        return () => clearTimeout(timeout);
-    }, [query]);
+    function getOnChange() {
+        return (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            setData({ query: value });
+
+            if (value.trim() === '') {
+                setIsSearchLoading(true);
+                router.get(
+                    route('home'),
+                    { q: data.query },
+                    {
+                        preserveScroll: true,
+                        preserveState: true,
+                        replace: true,
+                        only: ['users'],
+                        onFinish: () => setIsSearchLoading(false),
+                    },
+                );
+            }
+        };
+    }
 
     return (
         <>
@@ -76,30 +102,30 @@ export default function Welcome({ users }: { users: DataProps }) {
                 </header>
                 <div className="mb-50 flex w-full flex-col items-center justify-start opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <div className="mt-20 flex w-full flex-col items-center justify-center gap-2 md:max-w-4xl lg:max-w-6xl">
-                        <h1 className={'text-4xl font-bold dark:text-white'}>Dev Hunter 🇨🇻</h1>
-                        <p className={'mb-10 max-w-2xl text-center text-lg font-normal text-[#1b1b18] dark:text-[#EDEDEC]'}>
+                        <h1 className="text-4xl font-bold dark:text-white">Dev Hunter 🇨🇻</h1>
+                        <p className="mb-10 max-w-2xl text-center text-lg font-normal text-[#1b1b18] dark:text-[#EDEDEC]">
                             O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
                             e talento local encontra visibilidade global.
                         </p>
-                        {!query && <DevCount users={users} />}
+                        <DevCount users={users} />
                     </div>
                     <div className="my-10 w-full max-w-xl dark:text-white">
-                        <div className="relative mb-10 md:mb-20">
+                        <form className="relative mb-10 md:mb-20" onSubmit={search}>
                             <Input
                                 id="search"
-                                className="peer h-12 border ps-9 pe-9"
-                                placeholder="procurar por (nome, email ou skills)"
+                                className="peer placeholder:text-foreground-muted h-12 border ps-9 pe-9"
+                                placeholder="(nome, email ou skills) e pressione ENTER"
                                 type="search"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
+                                name="query"
+                                onChange={getOnChange()}
                             />
                             <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
                                 {!isSearchLoading ? <SearchIcon size={16} /> : <Loader className="animate-spin" size={16} />}
                             </div>
-                        </div>
+                        </form>
                     </div>
                     {!isSearchLoading && (
-                        <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 md:grid-cols-2 md:px-10 xl:grid-cols-3">
+                        <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 md:grid-cols-2 md:px-10 xl:grid-cols-3">
                             {users.data.map((user) => (
                                 <Onboarding user={user} key={user.email} />
                             ))}
