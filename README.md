@@ -4,10 +4,72 @@
 the tech community. It's a platform built by developers, for developers, focusing on the human side of coding and
 fostering collaboration and growth.
 
-![img.png](public/img.png)
+![img.png](/public/img.png)
+
 ![img_1.png](public/img_1.png)
 
+![img_2.png](public/img_2.png)
+
 ---
+
+## 📜 Table of Contents
+
+- [📖 Installation](#-installation)
+- [🚀 Features](#-features)
+- [💡 Problem](#-problem)
+- [🔧 The Solution](#-the-solution)
+- [🛠️ How It Works](#-how-it-works)
+- [🎯 Why It’s Different](#-why-its-different)
+- [🌍 Market Opportunity](#-market-opportunity)
+- [🚧 Roadmap](#-roadmap)
+- [📝 Contributing](#-contributing)
+- [📬 Contact](#-contact)
+- [⚙️ Technologies](#-technologies)
+- [🤝 License](#-license)
+
+---
+
+## 📖 Installation
+
+To get started with **Dev Hunter**, follow these steps:
+
+1. Clone the repository:
+   ```bash
+    git clone https://github.com/akira-io/devhunter.git
+    cd devhunter
+    ```
+2. Install dependencies:
+   ```bash
+    composer install
+    npm install
+    ```
+3. Set up your environment and run database migrations:
+    ```bash
+     cp .env.example .env
+     php artisan key:generate
+     php artisan migrate
+     ```
+
+If you're not using SQLite, you may need to adjust the database connection settings in your `.env` file.
+
+> **Note:** If you're using a different database, ensure your `.env` file is correctly configured with the appropriate
+> database driver, credentials, and environment settings.
+
+4. Start the development server:
+   ```bash
+    php artisan serve
+    npm run dev
+    ```
+
+### Using Laravel Herd
+
+If you're using [Laravel Herd](https://laravel.com/docs/10.x/herd), follow the official documentation to configure your
+local development environment.
+
+### Using Docker
+
+If you prefer Docker, you can use Laravel Sail to set up the project environment. Refer to
+the [Laravel Sail documentation](https://laravel.com/docs/10.x/sail) for step-by-step instructions.
 
 ## 🚀 Features
 
