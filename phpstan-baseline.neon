@@ -313,6 +313,18 @@ parameters:
 			path: app/Http/Controllers/Settings/ProfileController.php
 
 		-
+			message: '#^Parameter \#1 \$followables of method App\\Models\\User\:\:attachFollowStatus\(\) expects array\|Illuminate\\Database\\Eloquent\\Model\|Illuminate\\Pagination\\LengthAwarePaginator\|Illuminate\\Pagination\\Paginator\|Illuminate\\Support\\Collection\|Illuminate\\Support\\LazyCollection, Illuminate\\Contracts\\Pagination\\LengthAwarePaginator given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Welcome/WelcomeController.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Welcome/WelcomeController.php
+
+		-
 			message: '#^Call to an undefined method object\:\:explode\(\)\.$#'
 			identifier: method.notFound
 			count: 1

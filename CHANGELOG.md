@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2025-04-29
+
+### Added
+
+- Docker setup for DevHunter via Laravel Sail. ([#50](https://github.com/akira-io/devhunter/pull/50))
+
+### Fixed
+
+- Comment formatting in `WelcomeController.php` improved for clarity. (`27a5c65`)
+- Handled empty `users` array in Welcome component and ensured proper use of paginator data. (`ba837e4`)
+
+### Changed
+
+- Updated environment configuration and README to provide clearer setup instructions. (`67708dc`)
+
 ## [0.1.0] - 2025-04-29
 
 ### Added
@@ -53,4 +68,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cleanup of `package.json` and configuration files.
 - Updated changelog tooling and test coverage thresholds.
 - Consistent formatting and typing across frontend using Prettier and TypeScript settings.
-
