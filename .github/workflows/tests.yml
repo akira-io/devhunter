@@ -1,4 +1,5 @@
 name: tests
+
 on:
   push:
     branches:
@@ -35,7 +36,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y aspell aspell-en
 
       - name: Install Node Dependencies
-        run: npm ci
+        run: npm ci --force
 
       - name: Build Assets
         run: npm run build
@@ -49,11 +50,33 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
+      - name: Setup Meilisearch
+        run: |
+          /usr/bin/docker pull getmeili/meilisearch:v1.14
+          /usr/bin/docker run -d -p 7700:7700 getmeili/meilisearch:v1.14
+          sleep 10 # Aguarda o Meilisearch inicializar
+
+      - name: Wait for Meilisearch to be available
+        run: |
+          until curl --silent http://localhost:7700/health; do
+            echo "Waiting for Meilisearch to be available..."
+            sleep 5
+          done
+          echo "Meilisearch is available."
+
+      - name: Set Meilisearch Environment Variables
+        run: |
+          echo "MEILISEARCH_HOST=http://localhost:7700" >> .env
+          echo "MEILISEARCH_API_KEY=your_meilisearch_api_key" >> .env
+
       - name: Tests
         run: composer test
 
-      - name: Format Frontend
-        run: npm run format
+      - name: Ensure Frontend is Well Formatted
+        run: npm run format:check
+
+      - name: Ensure Typescript Types
+        run: npm run types
 
       - name: Lint Frontend
         run: npm run lint

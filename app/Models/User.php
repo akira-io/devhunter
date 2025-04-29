@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Akira\Followable\Concerns\Followable;
+use Akira\Followable\Concerns\Follower;
 use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
 use Exception;
@@ -11,6 +13,8 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -33,9 +37,15 @@ use Laravel\Scout\Searchable;
  * @property-read  CarbonImmutable $created_at
  * @property-read  CarbonImmutable $updated_at
  * @property-read  list<mixed> $skills
+ * @property-read  HasMany<ProfessionalEducation,$this> $professionalEducations
+ * @property-read  MorphMany<User, $this> $followers
+ * @property-read  MorphMany<User, $this> $followings
  */
 final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
+    use Followable;
+    use Follower;
+
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 
@@ -61,7 +71,12 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
         'github_refresh_token',
         'github_user_name',
         'skills',
-
+        'github_url',
+        'twitter_url',
+        'linkedin_url',
+        'bluesky_url',
+        'website_url',
+        'youtube_url',
     ];
 
     /**
@@ -81,11 +96,7 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        if ($panel->getId() === 'admin') {
-            return Str::contains($this->email, ['@akira-io.com', 'kidiatoliny']);
-        }
-
-        return true;
+        return Str::contains($this->email, ['@akira-io.com', 'kidiatoliny']);
     }
 
     /**
@@ -103,6 +114,17 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
             'github_user_name' => $this->github_user_name,
             'skills' => $this->skills,
         ];
+    }
+
+    /**
+     * Professional education relationship
+     *
+     * @return HasMany<ProfessionalEducation, $this>
+     */
+    public function professionalEducations(): HasMany
+    {
+
+        return $this->hasMany(ProfessionalEducation::class, 'user_id');
     }
 
     /**

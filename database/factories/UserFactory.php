@@ -52,4 +52,14 @@ final class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Get the model's email address
+     */
+    public function withEmail(string $email): static
+    {
+        return $this->state(fn (): array => [
+            'email' => $email,
+        ]);
+    }
 }

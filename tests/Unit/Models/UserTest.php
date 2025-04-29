@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\ProfessionalEducation;
 use App\Models\User;
 
 test('to array', function () {
@@ -23,5 +24,48 @@ test('to array', function () {
             'github_token',
             'github_refresh_token',
             'skills',
+            'github_url',
+            'twitter_url',
+            'linkedin_url',
+            'bluesky_url',
+            'website_url',
+            'youtube_url',
         ]);
+});
+
+it('should access the admin panel', function ($email) {
+
+    $user = User::factory()
+        ->withEmail($email)
+        ->create();
+    expect($user->canAccessPanel(filament()->getPanel('admin')))
+        ->toBeTrue();
+})->with([
+    'kidiatoliny@gmail.com',
+    'kid@akira-io.com',
+]);
+
+it('should dennie access to the admin panel', function ($email) {
+
+    $user = User::factory()
+        ->withEmail($email)
+        ->create();
+    expect($user->canAccessPanel(filament()->getPanel('admin')))
+        ->not->toBeTrue();
+})->with([
+    'user@gmail.com',
+    'user2@akiraa-io.com',
+]);
+
+it('should has many professional educations', function () {
+    $user = User::factory()->create();
+    $user->professionalEducations()->createMany(
+        ProfessionalEducation::factory()->count(3)->make()->toArray()
+    );
+
+    expect($user->professionalEducations)
+        ->each
+        ->toBeInstanceOf(ProfessionalEducation::class)
+        ->and($user->professionalEducations)
+        ->toHaveCount(3);
 });

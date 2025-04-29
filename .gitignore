@@ -23,3 +23,5 @@ yarn-error.log
 /.vscode
 /.zed
 /herd.yml
+
+.DS_Store

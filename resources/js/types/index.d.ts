@@ -44,6 +44,31 @@ export interface User {
     updated_at: string;
     location?: string;
     skills?: Option[];
+    website_url?: string;
+    github_url?: string;
+    twitter_url?: string;
+    linkedin_url?: string;
+    bluesky_url?: string;
+    youtube_url?: string;
+    professional_educations?: ProfessionalEducation[];
+    has_followed: boolean;
 
     [key: string]: unknown; // This allows for additional properties...
+}
+
+export interface ProfessionalEducation {
+    id: number;
+    user_id: number;
+    institution: string;
+    degree: string;
+    start_date: string;
+    end_date?: string;
+    field_of_study: string;
+}
+
+export interface ProfileStoreTypes {
+    isOpen: boolean;
+    open: () => void;
+    close: () => void;
+    set: (isOpen: boolean) => void;
 }
