@@ -3,17 +3,20 @@ import DevCount from '@/components/dev-count';
 import Onboarding from '@/components/Onboarding';
 import { ScrollDown } from '@/components/scroll-down';
 import { Input } from '@/components/ui/input';
+import { Toaster } from '@/components/ui/toaster';
 import { type SharedData, User } from '@/types';
 import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
 import { Loader, LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
 import React, { FormEvent, useState } from 'react';
 
-export interface DataProps {
-    total: number;
-    data: User[];
+export interface WelcomeProps {
+    users: User[];
+    paginator: {
+        total: 0;
+    };
 }
 
-export default function Welcome({ users }: { users: DataProps }) {
+export default function Welcome({ users, paginator }: WelcomeProps) {
     const { auth } = usePage<SharedData>().props;
 
     const [isSearchLoading, setIsSearchLoading] = useState(false);
@@ -62,6 +65,8 @@ export default function Welcome({ users }: { users: DataProps }) {
         };
     }
 
+    const filteredUsers = users.filter((user) => user.id !== auth.user.id);
+
     return (
         <>
             <Head title="Dev Hunter">
@@ -107,7 +112,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                             O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
                             e talento local encontra visibilidade global.
                         </p>
-                        <DevCount users={users} />
+                        <DevCount users={filteredUsers} paginator={paginator} />
                     </div>
                     <div className="my-10 w-full max-w-xl dark:text-white">
                         <form className="relative mb-10 md:mb-20" onSubmit={search}>
@@ -126,7 +131,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                     </div>
                     {!isSearchLoading && (
                         <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 md:grid-cols-2 md:px-10 xl:grid-cols-3">
-                            {users.data.map((user) => (
+                            {filteredUsers.map((user) => (
                                 <Onboarding user={user} key={user.email} />
                             ))}
                         </div>
@@ -134,6 +139,7 @@ export default function Welcome({ users }: { users: DataProps }) {
                     <ScrollDown className="bg-foreground fixed bottom-0 h-8 w-8 rounded-md text-white dark:text-zinc-900" />
                 </div>
             </div>
+            <Toaster />
         </>
     );
 }

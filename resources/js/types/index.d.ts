@@ -51,6 +51,7 @@ export interface User {
     bluesky_url?: string;
     youtube_url?: string;
     professional_educations?: ProfessionalEducation[];
+    has_followed: boolean;
 
     [key: string]: unknown; // This allows for additional properties...
 }

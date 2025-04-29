@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cc2fc6411d945b4b6de653c6b70141f",
+    "content-hash": "2328caa8e1f4b1164ca755a83ce53084",
     "packages": [
         {
             "name": "akira/filament-tool-kit",
@@ -87,6 +87,89 @@
                 }
             ],
             "time": "2025-04-25T12:45:42+00:00"
+        },
+        {
+            "name": "akira/laravel-followable",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akira-io/laravel-followable.git",
+                "reference": "6910ef1428b82f0f0ee28254f60db91edda4c570"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akira-io/laravel-followable/zipball/6910ef1428b82f0f0ee28254f60db91edda4c570",
+                "reference": "6910ef1428b82f0f0ee28254f60db91edda4c570",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10||^11.0||^12.0",
+                "php": "^8.3",
+                "pinkary-project/type-guard": "^0.1.0",
+                "spatie/laravel-package-tools": "^1.19"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9 || ^3.0",
+                "laravel/pint": "^1.20",
+                "nunomaduro/collision": "^8.6.1",
+                "orchestra/testbench": "^9.9.0",
+                "peckphp/peck": "^0.1.2",
+                "pestphp/pest": "^3.7.4",
+                "pestphp/pest-plugin-arch": "^3.0",
+                "pestphp/pest-plugin-laravel": "^3.1",
+                "pestphp/pest-plugin-type-coverage": "^3.2.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan-deprecation-rules": "^1.2.1",
+                "phpstan/phpstan-phpunit": "^1.4.2 || ^1.5.0",
+                "rector/rector": "^1.2.10 || ^2.0",
+                "spatie/laravel-ray": "^1.39.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Followable": "Akira\\Followable\\Facades\\Followable"
+                    },
+                    "providers": [
+                        "Akira\\Followable\\FollowableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Akira\\Followable\\": "src/",
+                    "Akira\\Followable\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "kidiatoliny",
+                    "email": "kidiatoliny@akira-io.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": " A lightweight and flexible Laravel package that adds follow/unfollow functionality to Eloquent models. With an intuitive API, it allows users to follow other users, track entities, and manage relationships effortlessly.",
+            "homepage": "https://github.com/akira-io/laravel-followable",
+            "keywords": [
+                "akira",
+                "followable",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/akira-io/laravel-followable/issues",
+                "source": "https://github.com/akira-io/laravel-followable/tree/0.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Akira",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-29T01:21:12+00:00"
         },
         {
             "name": "anourvalar/eloquent-serialize",

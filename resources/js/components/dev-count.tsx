@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { DataProps } from '@/pages/welcome';
+import { WelcomeProps } from '@/pages/welcome';
+import { User } from '@/types';
 import GenAvatar, { genConfig } from 'react-nice-avatar';
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -10,8 +11,8 @@ function shuffleArray<T>(array: T[]): T[] {
         .map(({ item }) => item);
 }
 
-export default function DevCount({ users }: { users: DataProps }) {
-    const shuffledUsers = shuffleArray(users.data);
+export default function DevCount({ users, paginator }: WelcomeProps) {
+    const shuffledUsers = shuffleArray<User>(users);
     return (
         <div className="bg-muted mt-2 flex items-center rounded-full">
             <div className="flex -space-x-4">
@@ -25,12 +26,12 @@ export default function DevCount({ users }: { users: DataProps }) {
                     ),
                 )}
             </div>
-            {users.total > 10 && (
+            {paginator.total > 10 && (
                 <Button
                     variant="outline"
                     className="text-muted-foreground hover:text-foreground flex items-center justify-center rounded-full border-none bg-transparent px-2 text-xs shadow-none hover:bg-transparent"
                 >
-                    +{users.total - 10} devs
+                    +{paginator.total - 10} devs
                 </Button>
             )}
         </div>

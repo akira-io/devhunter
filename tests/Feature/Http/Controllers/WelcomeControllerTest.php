@@ -18,19 +18,21 @@ it('should renders welcome page with users paginated by 20', function () {
         ->assertOk()
         ->assertInertia(fn (AssertableInertia $page) => $page
             ->component('welcome')
-            ->has('users', fn (AssertableInertia $users) => $users
+            ->has('paginator', fn (AssertableInertia $paginator) => $paginator
                 ->where('per_page', 20)
                 ->where('total', 25)
                 ->has('data', 20)
                 ->etc()
             )
+
         );
 
     /** @var Inertia\Response $inertiaResponse */
     $inertiaResponse = $response->getOriginalContent();
 
     $props = $inertiaResponse->getData()['page']['props'];
-    $paginator = $props['users'];
+
+    $paginator = $props['paginator'];
 
     Assert::assertSame(25, $paginator['total']);
     Assert::assertSame(20, $paginator['per_page']);

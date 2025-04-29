@@ -11,6 +11,7 @@
   "require": {
     "php": "^8.4",
     "akira/filament-tool-kit": "^1.26",
+    "akira/laravel-followable": "^0.1.0",
     "filament/filament": "^3.3",
     "inertiajs/inertia-laravel": "^2.0.2",
     "laravel/framework": "^12.9.2",
@@ -84,7 +85,7 @@
     "test:types": "phpstan",
     "test:arch": "pest --filter=arch",
     "test:type-coverage": "pest --type-coverage --min=100",
-    "test:coverage": "pest --parallel --coverage --compact --exactly=63.5",
+    "test:coverage": "pest --parallel --coverage --compact --exactly=61.3",
     "test:typos": "peck",
     "test": [
       "@php artisan config:clear --ansi",

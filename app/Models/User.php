@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Akira\Followable\Concerns\Followable;
+use Akira\Followable\Concerns\Follower;
 use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
 use Exception;
@@ -12,6 +14,7 @@ use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -35,9 +38,14 @@ use Laravel\Scout\Searchable;
  * @property-read  CarbonImmutable $updated_at
  * @property-read  list<mixed> $skills
  * @property-read  HasMany<ProfessionalEducation,$this> $professionalEducations
+ * @property-read  MorphMany<User, $this> $followers
+ * @property-read  MorphMany<User, $this> $followings
  */
 final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
+    use Followable;
+    use Follower;
+
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 

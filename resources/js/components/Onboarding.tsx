@@ -3,19 +3,21 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
 import { useTruncate } from '@/hooks/use-truncate-text';
 import { cn } from '@/lib/utils';
 import { SharedData, User } from '@/types';
-import { usePage } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { RiBlueskyFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
 import { format } from 'date-fns';
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap, UserPlusIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap, UserMinus2, UserPlusIcon } from 'lucide-react';
 import * as React from 'react';
 import { useState } from 'react';
 import AvatarGenerator, { AvatarFullConfig, genConfig } from 'react-nice-avatar';
 
 interface OnboardingProps extends React.ComponentProps<'div'> {
     user: User;
+    hasFollowed?: boolean;
 }
 
 function OnboardingAvatar(props: { avatarUrl: string | undefined; alt: string; config: Required<AvatarFullConfig> }) {
@@ -73,10 +75,46 @@ function OnboardingAbout({ about }: { about: string | undefined }) {
     );
 }
 
-export default function Onboarding({ user, ...props }: OnboardingProps) {
+export default function Onboarding({ user, hasFollowed = false, ...props }: OnboardingProps) {
     const { auth } = usePage<SharedData>().props;
     const [step, setStep] = useState(1);
     const [open, setOpen] = useState(false);
+    const { post, processing } = useForm();
+    const { toast } = useToast();
+
+    function follow(user: User) {
+        post(route('followable.follow', { user_id: user.id }), {
+            preserveScroll: true,
+            onSuccess: () => {
+                toast({
+                    description: `Você começou a seguir  ${user.name}`,
+                });
+            },
+            onError: () => {
+                toast({
+                    variant: 'destructive',
+                    description: `Erro ao seguir ${user.name}`,
+                });
+            },
+        });
+    }
+
+    function unFollow(user: User) {
+        post(route('followable.unfollow', { user_id: user.id }), {
+            preserveScroll: true,
+            onSuccess: () => {
+                toast({
+                    description: `Você deixou de seguir  ${user.name}`,
+                });
+            },
+            onError: () => {
+                toast({
+                    variant: 'destructive',
+                    description: `Erro ao seguir ${user.name}`,
+                });
+            },
+        });
+    }
 
     const links = [
         { name: 'GitHub', url: user.github_url, icon: <RiGithubFill /> },
@@ -118,9 +156,11 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
         }
     }
 
+    const has_followed = user.has_followed ?? hasFollowed;
+
     return (
         <div {...props}>
-            <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden" onClick={handleCardClick}>
+            <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden">
                 <CardContent className="flex w-full flex-1 items-center justify-center gap-4">
                     <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                     <div className="w-full">
@@ -129,6 +169,7 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                             <Button
                                 className="text-muted-forground absolute top-4 right-4 flex h-8 w-8 cursor-pointer border-none shadow-none"
                                 variant="secondary"
+                                onClick={handleCardClick}
                             >
                                 <EllipsisVerticalIcon />
                             </Button>
@@ -139,11 +180,19 @@ export default function Onboarding({ user, ...props }: OnboardingProps) {
                     </div>
                 </CardContent>
                 {auth.user && (
-                    <CardFooter>
-                        <Button className="w-full" size="sm" variant="secondary">
-                            <UserPlusIcon />
-                            Seguir
-                        </Button>
+                    <CardFooter className="flex justify-end">
+                        {!has_followed && (
+                            <Button className="" size="sm" variant="secondary" onClick={() => follow(user)} disabled={processing}>
+                                <UserPlusIcon />
+                                Seguir
+                            </Button>
+                        )}
+                        {has_followed && (
+                            <Button className="" size="sm" variant="outline" onClick={() => unFollow(user)} disabled={processing}>
+                                <UserMinus2 />
+                                Deixar de Seguir
+                            </Button>
+                        )}
                     </CardFooter>
                 )}
             </Card>

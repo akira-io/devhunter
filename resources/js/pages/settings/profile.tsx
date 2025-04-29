@@ -40,9 +40,11 @@ interface ProfileProps {
     skills: Option[];
     highlightedSkills: Option[];
     professionalEducations: ProfessionalEducationType[];
+    followers: number;
+    followings: number;
 }
 
-export default function Profile({ mustVerifyEmail, status, skills, highlightedSkills, professionalEducations }: ProfileProps) {
+export default function Profile({ mustVerifyEmail, status, skills, highlightedSkills, professionalEducations, followings, followers }: ProfileProps) {
     const { auth } = usePage<SharedData>().props;
     const { data, setData, patch, errors } = useForm<Required<ProfileForm>>({
         name: auth.user.name,
@@ -88,12 +90,12 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                             </div>
                         </CardContent>
                         <div className="grid grid-cols-2 items-end justify-end gap-4">
-                            <small className="flex gap-1 text-xs">
-                                <b>445</b> Seguidores
-                            </small>
-                            <small className="flex gap-1 text-xs">
-                                <b>400</b> A seguir
-                            </small>
+                            <Link href={route('followable.followers')} className="flex gap-1 text-xs">
+                                <b>{followers}</b> Seguidores
+                            </Link>
+                            <Link href={route('followable.followings')} className="flex gap-1 text-xs">
+                                <b>{followings}</b> Seguindo
+                            </Link>
                         </div>
                         <HighlightSkills skills={skills} authSkills={highlightedSkills} />
                         <p className="mt-0 border-t-1 py-2 text-xs text-gray-500">Embarcou na Dev Hunter em {auth.user.created_at}</p>

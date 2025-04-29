@@ -29,6 +29,8 @@ final readonly class ProfileController
             'skills' => SkillsEnum::get(),
             'highlightedSkills' => $user->skills,
             'professionalEducations' => $user->professionalEducations,
+            'followers' => $user->followers()->count(),
+            'followings' => $user->followings()->count(),
         ]);
     }
 

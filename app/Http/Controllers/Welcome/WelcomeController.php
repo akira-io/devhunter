@@ -19,19 +19,24 @@ final readonly class WelcomeController
      */
     public function index(Request $request): Response
     {
+        /** @var User $user */
+        $user = $request->user();
+
         $query = $request->string('q');
 
         $usersQuery = $query->isNotEmpty()
             ? User::search($query->value())
             : User::query()->inRandomOrder();
 
-        $users = $usersQuery->paginate(20)->withQueryString();
+        $paginator = $usersQuery
+            ->paginate(20)->withQueryString();
 
         // @phpstan-ignore-next-line
-        $users->load(['professionalEducations']);
+        $paginator->load(['professionalEducations']);
 
         return Inertia::render('welcome', [
-            'users' => $users,
+            'users' => $user?->attachFollowStatus($paginator) ?? [],  // @phpstan-ignore-line
+            'paginator' => $paginator,
         ]);
     }
 }
