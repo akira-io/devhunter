@@ -1,5 +1,13 @@
 # Changelog
 
+* fix: correct comment formatting in WelcomeController.php for clarity (27a5c65)
+* fix: handle empty users array in welcome component and ensure paginator data is used (ba837e4)
+* Merge pull request #50 from akira-io/49-add-docker-setup-for-devhunter (0c13857)
+* chore: update environment configuration and README for improved setup instructions (67708dc)
+* Merge pull request #45 from akira-io/main (1064137)
+* chore: update CHANGELOG.md for version 0.1.0 release (17caef6)
+* Bump version v0.1.0 #44 (c9254ad)
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
@@ -53,4 +61,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cleanup of `package.json` and configuration files.
 - Updated changelog tooling and test coverage thresholds.
 - Consistent formatting and typing across frontend using Prettier and TypeScript settings.
-
