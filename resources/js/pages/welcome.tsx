@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Toaster } from '@/components/ui/toaster';
 import { type SharedData, User } from '@/types';
 import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
+import { RiDiscordFill, RiGithubFill } from '@remixicon/react';
 import { Loader, LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
 import React, { FormEvent, useState } from 'react';
 
@@ -104,6 +105,24 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                                 </Link>
                             </>
                         )}
+                        <div className="flex items-center gap-2">
+                            <a
+                                className="cursor-pointer dark:text-white"
+                                href="https://github.com/akira-io/devhunter"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <RiGithubFill />
+                            </a>
+                            <a
+                                className="cursor-pointer dark:text-white"
+                                href="https://discord.gg/ghPqZg3RcZ"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <RiDiscordFill />
+                            </a>
+                        </div>
                     </nav>
                 </header>
                 <div className="mb-50 flex w-full flex-col items-center justify-start opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
