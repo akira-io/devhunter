@@ -1,107 +1,56 @@
 # Changelog
 
-## 0.1.0 (2025-04-29)
+All notable changes to this project will be documented in this file.
 
-* chore: add @release-it/keep-a-changelog for changelog management ([c4d9f1f](https://github.com/akira-io/devhunter/commit/c4d9f1f))
-* chore: add Aspell installation step to CI workflow ([3e9e083](https://github.com/akira-io/devhunter/commit/3e9e083))
-* chore: add frontend formatting and linting steps to CI workflow ([cdf1778](https://github.com/akira-io/devhunter/commit/cdf1778))
-* chore: add initial Dependabot configuration for version updates ([20a6772](https://github.com/akira-io/devhunter/commit/20a6772))
-* chore: add Meilisearch service configuration to CI workflow ([95fde69](https://github.com/akira-io/devhunter/commit/95fde69))
-* chore: add Meilisearch setup and environment configuration to CI workflow ([c720d87](https://github.com/akira-io/devhunter/commit/c720d87))
-* chore: add release-it configuration and update devDependencies ([82433ae](https://github.com/akira-io/devhunter/commit/82433ae))
-* chore: add release-it configuration and update devDependencies ([853d23c](https://github.com/akira-io/devhunter/commit/853d23c))
-* chore: add UserSeeder to generate 100 user records using factory ([ca6894c](https://github.com/akira-io/devhunter/commit/ca6894c))
-* chore: add wait logic for Meilisearch availability in CI workflow ([cf51720](https://github.com/akira-io/devhunter/commit/cf51720))
-* chore: adjust package.json formatting for overrides section ([82c293e](https://github.com/akira-io/devhunter/commit/82c293e))
-* chore: change conventional changelog preset to angular ([822eb00](https://github.com/akira-io/devhunter/commit/822eb00))
-* chore: configure release-it for versioning and changelog generation ([d45a435](https://github.com/akira-io/devhunter/commit/d45a435))
-* chore: enhance conventional changelog configuration with types for features and bug fixes ([f8779a8](https://github.com/akira-io/devhunter/commit/f8779a8))
-* chore: force install node dependencies in CI workflow ([947cca2](https://github.com/akira-io/devhunter/commit/947cca2))
-* chore: format frontend ([0f91b6c](https://github.com/akira-io/devhunter/commit/0f91b6c))
-* chore: include storage directory in peck.json configuration ([0e6e257](https://github.com/akira-io/devhunter/commit/0e6e257))
-* chore: move Meilisearch binary to /usr/local/bin and set executable permissions ([c180dce](https://github.com/akira-io/devhunter/commit/c180dce))
-* chore: remove @commitlint/config-conventional and update release-it configuration ([0d06070](https://github.com/akira-io/devhunter/commit/0d06070))
-* chore: remove release-it configuration from package.json ([1bab350](https://github.com/akira-io/devhunter/commit/1bab350))
-* chore: rename configuration file and update release-it settings for changelog types ([3d72ec3](https://github.com/akira-io/devhunter/commit/3d72ec3))
-* chore: simplify release-it conventional changelog configuration ([4de4195](https://github.com/akira-io/devhunter/commit/4de4195))
-* chore: update changelog writer options to group entries by scope ([7b8ed19](https://github.com/akira-io/devhunter/commit/7b8ed19))
-* chore: update CI workflow to install PHP dependencies and configure Meilisearch setup ([d41fdc8](https://github.com/akira-io/devhunter/commit/d41fdc8))
-* chore: update CI workflow to set up Meilisearch and wait for availability ([cd7376d](https://github.com/akira-io/devhunter/commit/cd7376d))
-* chore: update conventional changelog configuration to use custom preset ([77bd283](https://github.com/akira-io/devhunter/commit/77bd283))
-* chore: update conventional changelog preset to include feature and bug fix sections ([424c317](https://github.com/akira-io/devhunter/commit/424c317))
-* chore: update conventional changelog preset to use conventionalcommits ([3d78f03](https://github.com/akira-io/devhunter/commit/3d78f03))
-* chore: update deps ([b7401ab](https://github.com/akira-io/devhunter/commit/b7401ab))
-* chore: update frontend formatting and type checking in CI workflow; refactor avatar image source ([7f696d6](https://github.com/akira-io/devhunter/commit/7f696d6))
-* chore: update GitHub Actions permissions for tests workflow ([4682ecb](https://github.com/akira-io/devhunter/commit/4682ecb))
-* chore: update image paths in README and adjust peck.json configuration ([a8ebec3](https://github.com/akira-io/devhunter/commit/a8ebec3))
-* chore: update Meilisearch host in CI workflow to use localhost ([551862e](https://github.com/akira-io/devhunter/commit/551862e))
-* chore: update package-lock.json; bump versions of @types/node, electron-to-chromium, and type-fest ([2a941c1](https://github.com/akira-io/devhunter/commit/2a941c1))
-* chore: update release-it configuration for versioning and changelog ([ea86fbf](https://github.com/akira-io/devhunter/commit/ea86fbf))
-* chore: update release-it configuration for versioning and changelog ([9343352](https://github.com/akira-io/devhunter/commit/9343352))
-* chore: update repository links in sidebar navigation ([04e5990](https://github.com/akira-io/devhunter/commit/04e5990))
-* chore: update test coverage threshold in composer.json ([b735436](https://github.com/akira-io/devhunter/commit/b735436))
-* chore: update user retrieval in WelcomeController to return users in random order ([43223a5](https://github.com/akira-io/devhunter/commit/43223a5))
-* deps: add laravel-debugbar as a development dependency ([68ea612](https://github.com/akira-io/devhunter/commit/68ea612))
-* feat: add architectural tests and enforce readonly classes in Auth controllers ([73e6307](https://github.com/akira-io/devhunter/commit/73e6307))
-* feat: add Code of Conduct and Security Policy documents ([279595a](https://github.com/akira-io/devhunter/commit/279595a))
-* feat: add community link to sidebar footer and remove NavUser component from sidebar ([4dd4b75](https://github.com/akira-io/devhunter/commit/4dd4b75))
-* feat: add CreateTweet and FloatingCreatePost components for tweet creation functionality ([1d735e6](https://github.com/akira-io/devhunter/commit/1d735e6))
-* feat: add cybersecurity skills to skills component and enum; enhance tech stack representation ([e49bb19](https://github.com/akira-io/devhunter/commit/e49bb19))
-* feat: add DevCount component and update user avatar handling in profile ([95836dd](https://github.com/akira-io/devhunter/commit/95836dd))
-* feat: add follow button in Onboarding component and update user bio truncation length ([587823d](https://github.com/akira-io/devhunter/commit/587823d))
-* feat: add Highlights component to profile and update About section layout ([60c004a](https://github.com/akira-io/devhunter/commit/60c004a))
-* feat: add images to README for enhanced visual appeal ([a91511d](https://github.com/akira-io/devhunter/commit/a91511d))
-* feat: add loading indicator to search input; prevent user list rendering during search ([7becd45](https://github.com/akira-io/devhunter/commit/7becd45))
-* feat: add NavUser component to AppSidebarHeader for user display and enhance mobile responsiveness ([02a59c0](https://github.com/akira-io/devhunter/commit/02a59c0))
-* feat: add professional education management; implement model, controller, and validation for user ed ([923e6c0](https://github.com/akira-io/devhunter/commit/923e6c0))
-* feat: add Pulse user menu item and configure access control ([74342e0](https://github.com/akira-io/devhunter/commit/74342e0))
-* feat: add skills management to user profiles, including highlighting skills and updating bio ([905cba9](https://github.com/akira-io/devhunter/commit/905cba9))
-* feat: add social media links to user profile; update database schema and implement profile links man ([8c72c2b](https://github.com/akira-io/devhunter/commit/8c72c2b))
-* feat: add types section for commit message categorization in package.json ([7dc9e4f](https://github.com/akira-io/devhunter/commit/7dc9e4f))
-* feat: enforce strict types and update route references from dashboard to feed ([25e3325](https://github.com/akira-io/devhunter/commit/25e3325))
-* feat: enhance layout and styling of welcome page and DevMiniCard component ([2d6393a](https://github.com/akira-io/devhunter/commit/2d6393a))
-* feat: enhance profile page layout and add ProfileCard component for better user information display ([fe7bb8f](https://github.com/akira-io/devhunter/commit/fe7bb8f))
-* feat: enhance user model with additional properties and update WelcomeController to return user data ([2c4ff2c](https://github.com/akira-io/devhunter/commit/2c4ff2c))
-* feat: enhance welcome component layout; adjust search input visibility and timeout duration ([efc1b7a](https://github.com/akira-io/devhunter/commit/efc1b7a))
-* feat: implement follow/unfollow functionality with user follower management ([7be7638](https://github.com/akira-io/devhunter/commit/7be7638))
-* feat: implement follow/unfollow functionality with user follower management ([69d91b5](https://github.com/akira-io/devhunter/commit/69d91b5))
-* feat: implement onboarding component and enhance user card with dynamic data ([11b381c](https://github.com/akira-io/devhunter/commit/11b381c))
-* feat: implement useDebounce hook and refactor search functionality in Welcome component ([60634ba](https://github.com/akira-io/devhunter/commit/60634ba))
-* feat: initialize project structure with essential files and configurations ([94d82ee](https://github.com/akira-io/devhunter/commit/94d82ee))
-* feat: integrate GitHub authentication and add user profile fields (#5) ([2181171](https://github.com/akira-io/devhunter/commit/2181171)), closes [#5](https://github.com/akira-io/devhunter/issues/5)
-* feat: integrate Meilisearch and Laravel Scout for enhanced search functionality ([5643534](https://github.com/akira-io/devhunter/commit/5643534))
-* feat: introduce admin panel ([70ece5c](https://github.com/akira-io/devhunter/commit/70ece5c))
-* feat: refactor professional education management; rename files, implement Zustand stores, and enhanc ([2c644d3](https://github.com/akira-io/devhunter/commit/2c644d3))
-* feat: refactor user data handling in DevCount and Welcome components, and enhance UserFactory with a ([c21c4fb](https://github.com/akira-io/devhunter/commit/c21c4fb))
-* feat: translate UI text to Portuguese and update labels across components ([7144023](https://github.com/akira-io/devhunter/commit/7144023))
-* feat: update DevCount component to shuffle user avatars and improve welcome page layout ([1b3b9c1](https://github.com/akira-io/devhunter/commit/1b3b9c1))
-* feat: update environment configuration for AWS S3 integration; add new storage settings ([5b94c29](https://github.com/akira-io/devhunter/commit/5b94c29))
-* feat: update GitHub authentication redirect URI to use environment variable ([d4a3566](https://github.com/akira-io/devhunter/commit/d4a3566))
-* feat: update onboarding layout and enhance ScrollDown component with scroll detection ([9165e2f](https://github.com/akira-io/devhunter/commit/9165e2f))
-* feat: update PHP version requirement to 8.4 and add license file ([35fb424](https://github.com/akira-io/devhunter/commit/35fb424))
-* feat: update sidebar and layout components, rename dashboard to feed, and add DevMiniCard component ([db783f9](https://github.com/akira-io/devhunter/commit/db783f9))
-* feat: update test coverage to 80.6, add UserTest and WelcomeControllerTest, and refactor email handl ([06fa847](https://github.com/akira-io/devhunter/commit/06fa847))
-* feat: update test coverage to 80.6, add UserTest and WelcomeControllerTest, and refactor email handl ([94ab263](https://github.com/akira-io/devhunter/commit/94ab263))
-* feat: update UI text to Portuguese and replace AppLogo with BoxesIcon ([036fa53](https://github.com/akira-io/devhunter/commit/036fa53))
-* feat: update welcome component layout; adjust header positioning and improve content visibility ([f5b7027](https://github.com/akira-io/devhunter/commit/f5b7027))
-* fix: add forceMount to PopoverContent for improved rendering in ProfessionalEducation component ([4fd7b43](https://github.com/akira-io/devhunter/commit/4fd7b43))
-* fix: add forceMount to PopoverContent for improved rendering in ProfessionalEducation component ([eadcdad](https://github.com/akira-io/devhunter/commit/eadcdad))
-* fix: adjust DialogHeader position for improved layout in onboarding component ([e288181](https://github.com/akira-io/devhunter/commit/e288181))
-* fix: adjust DialogHeader position for improved layout in onboarding component ([962b6ee](https://github.com/akira-io/devhunter/commit/962b6ee))
-* fix: adjust DialogHeader position for improved layout in onboarding component ([124bb0b](https://github.com/akira-io/devhunter/commit/124bb0b))
-* fix: adjust DialogHeader position for improved layout in onboarding component ([d517539](https://github.com/akira-io/devhunter/commit/d517539))
-* fix: correct import path for About component in profile.tsx ([9d1d135](https://github.com/akira-io/devhunter/commit/9d1d135))
-* fix: correct import path for HighlightedSkills component ([98c3b94](https://github.com/akira-io/devhunter/commit/98c3b94))
-* fix: frontend linting ([3c15666](https://github.com/akira-io/devhunter/commit/3c15666))
-* fix: optimize user pagination and eager loading in WelcomeController ([7f5a7f7](https://github.com/akira-io/devhunter/commit/7f5a7f7))
-* fix: replace DialogDescription with DialogHeader for improved layout in onboarding component ([e73a1a6](https://github.com/akira-io/devhunter/commit/e73a1a6))
-* fix: update DialogHeader to DialogDescription for improved layout in onboarding component ([fa37a3a](https://github.com/akira-io/devhunter/commit/fa37a3a))
-* fix: update test coverage threshold and adjust DialogHeader position for improved layout in onboardi ([2328dfb](https://github.com/akira-io/devhunter/commit/2328dfb))
-* fix: update test coverage threshold in composer.json to 79.6 ([917d509](https://github.com/akira-io/devhunter/commit/917d509))
-* refactor: change input type from search to text for improved search functionality in Welcome compone ([bc62e15](https://github.com/akira-io/devhunter/commit/bc62e15))
-* refactor: enhance Pulse migration and configuration with strict types and improved type hints ([909fe1f](https://github.com/akira-io/devhunter/commit/909fe1f))
-* refactor: remove ScrollDown component and refactor onboarding logic to simplify scroll handling ([0cc82fe](https://github.com/akira-io/devhunter/commit/0cc82fe))
-* Update issue templates ([ca97b7e](https://github.com/akira-io/devhunter/commit/ca97b7e))
-* chore(deps): bump @babel/helpers ([0d24b27](https://github.com/akira-io/devhunter/commit/0d24b27))
-* chore(deps): bump axios in the npm_and_yarn group across 1 directory ([e290812](https://github.com/akira-io/devhunter/commit/e290812))
-* chore(deps): bump vite in the npm_and_yarn group across 1 directory ([743589f](https://github.com/akira-io/devhunter/commit/743589f))
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.0] - 2025-04-29
+
+### Added
+
+- User follow/unfollow system.
+- GitHub authentication and extended user profiles.
+- `CreateTweet` and `FloatingCreatePost` components.
+- Onboarding flow with follow suggestions.
+- Admin panel for platform management.
+- Meilisearch integration via Laravel Scout.
+- Profile editing for professional education and skills.
+- Redesigned profile page with highlights, bio, social links, and follower count.
+- `DevCount`, `NavUser`, and `Highlights` components.
+- Cybersecurity skills in tech stack.
+- Search debouncing.
+- Images in README.
+- Code of Conduct and Security Policy documents.
+
+### Changed
+
+- Enhanced frontend layout and mobile responsiveness.
+- Improved onboarding suggestions with better randomization and structure.
+- Added loading indicators to search input.
+- Refined route names and search timeouts.
+- Updated README and repository links.
+
+### Fixed
+
+- General UI inconsistencies and layout issues.
+
+### Security
+
+- Set up `laravel-debugbar` as a dev-only tool.
+- Added Security Policy documentation.
+
+### Infrastructure
+
+- GitHub Actions: formatting, linting, Meilisearch setup.
+- CI/CD: steps for PHP, Node.js, and wait-for-Meilisearch logic.
+- `release-it` setup with custom changelog grouping.
+- Dependabot integration for dependency updates.
+
+### Maintenance
+
+- Architectural tests and strict typing in controllers.
+- Cleanup of `package.json` and configuration files.
+- Updated changelog tooling and test coverage thresholds.
+- Consistent formatting and typing across frontend using Prettier and TypeScript settings.
+
