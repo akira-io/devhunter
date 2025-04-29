@@ -95,6 +95,14 @@
         "infile": "CHANGELOG.md",
         "writerOpts": {
           "groupBy": "scope"
+        },
+        "types": {
+          "feat": {
+            "section": "Features"
+          },
+          "fix": {
+            "section": "Bug Fixes"
+          }
         }
       }
     }
