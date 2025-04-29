@@ -12,6 +12,7 @@ import React, { FormEvent, useState } from 'react';
 export interface WelcomeProps {
     users: User[];
     paginator: {
+        data: User[];
         total: 0;
     };
 }
@@ -65,7 +66,7 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
         };
     }
 
-    const filteredUsers = users.filter((user) => user.id !== auth.user.id);
+    const filteredUsers = users.length > 0 ? users.filter((user) => user.id !== auth.user.id) : paginator.data;
 
     return (
         <>
