@@ -17,7 +17,7 @@ export default function followings({ followings }: FollowingsProps) {
     return (
         <Layout breadcrumbs={breadcrumbs}>
             <Head title="Seguidores" />
-            <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 md:grid-cols-2 md:px-10 xl:grid-cols-3">
+            <div className="mx-auto grid w-full max-w-7xl grid-cols-1 justify-center gap-4 p-5 transition-all duration-1 md:grid-cols-2 md:px-10 xl:grid-cols-3">
                 {followings.map((following) => (
                     <Onboarding user={following.followable} key={following.followable.email} hasFollowed />
                 ))}

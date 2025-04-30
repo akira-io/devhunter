@@ -38,7 +38,7 @@ export function FloatingCreatePost() {
                 <DialogTrigger className="bg-primary hover:bg-primary-dark flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg transition-all duration-300">
                     <Plus size={24} />
                 </DialogTrigger>
-                <DialogContent className="w-full max-w-md">
+                <DialogContent className="effect w-full max-w-md">
                     <div className="mt-6 flex w-full flex-col">
                         <Textarea
                             value={tweetContent}

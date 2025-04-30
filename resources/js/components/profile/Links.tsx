@@ -65,7 +65,7 @@ export function ProfileLinks({ user }: { user: User }) {
 
     return (
         <>
-            <Card className="mt-4 w-full p-4 md:w-80">
+            <Card className="effect gradient mt-4 w-full p-4 md:w-80">
                 <CardDescription className="flex items-center justify-between text-sm">
                     Links
                     <Button variant="ghost" onClick={open}>

@@ -13,14 +13,14 @@ interface ProfileCard {
 
 export function ProfileCard({ title, className, icon, onClick, children }: ProfileCard) {
     return (
-        <Card className={cn('mt-4 max-h-100 w-full overflow-y-auto', className)}>
-            <CardTitle className="bg-background sticky -top-6 flex items-center justify-between p-1 px-6 text-sm">
+        <Card className={cn('effect gradient mt-4 max-h-100 w-full overflow-y-auto', className)}>
+            <CardTitle className="sticky -top-6 z-50 flex items-center justify-between px-6 py-2 text-sm shadow-sm backdrop-blur">
                 {title}
                 <Button variant="ghost" onClick={onClick}>
                     {icon}
                 </Button>
             </CardTitle>
-            <CardContent className="flex flex-col items-center space-y-6 px-1 px-4 text-center text-gray-500">{children}</CardContent>
+            <CardContent className="mt-4 flex flex-col items-center space-y-6 px-1 px-4 text-center text-gray-500">{children}</CardContent>
         </Card>
     );
 }

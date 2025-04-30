@@ -30,7 +30,7 @@ export function TweetCard({ avatarUrl, name, userName, time, content, imageUrl, 
     };
     return (
         <>
-            <Card className="mx-auto w-full max-w-xl">
+            <Card className="relative mx-auto w-full max-w-xl">
                 <CardHeader className="flex flex-row items-start gap-4">
                     <Avatar>
                         <AvatarImage src={avatarUrl} />
@@ -67,6 +67,8 @@ export function TweetCard({ avatarUrl, name, userName, time, content, imageUrl, 
                         <TweetComments isOpen={isOpenComments} />
                     </div>
                 )}
+                <div className="effect absolute -top-10 left-5 z-[-1] flex h-10 w-1 items-center justify-center rounded-full bg-white text-xs dark:bg-zinc-900" />
+                <div className="effect bg-card absolute -top-10 right-5 flex h-10 w-1 items-center justify-center rounded-full text-xs dark:bg-zinc-900" />
             </Card>
         </>
     );

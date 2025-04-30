@@ -37,7 +37,7 @@ export function CreateTweet() {
     };
 
     return (
-        <Card className="mx-auto w-full max-w-xl">
+        <Card className="effect gradient mx-auto w-full max-w-xl">
             <CardContent className="flex items-start gap-4">
                 <div className="flex w-full flex-col">
                     <Textarea

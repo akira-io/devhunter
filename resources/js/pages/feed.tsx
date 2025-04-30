@@ -44,6 +44,19 @@ export default function Feed() {
             likes: 15,
             views: 80,
         },
+        {
+            id: 3,
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            user: {
+                name: 'Jane Smith',
+                avatar_url: auth.user.avatar_url,
+            },
+            time: '3h ago',
+            comments: 8,
+            retweets: 3,
+            likes: 15,
+            views: 80,
+        },
     ];
 
     const { isFloatCreateTweetOpen } = useTweetStore();

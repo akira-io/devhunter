@@ -108,56 +108,63 @@ export function ProfessionalEducation({ professionalEducations }: { professional
                     <p className="mb-4 max-w-100 text-center">Destaque sua formação acadêmica e conquiste o reconhecimento que você merece!</p>
                 </>
             )}
-            {professionalEducations.map((education) => (
-                <Card className="w-full items-start p-4" key={education.id}>
-                    <CardTitle className="flex w-full items-center gap-1 text-sm font-semibold">
-                        <GraduationCap /> {education.degree}
-                        <div className="flex-1" />
-                        <AlertDialog>
-                            <AlertDialogTrigger asChild>
-                                <TrashIcon className="text-red-500" size={20} />
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                                <div className="flex flex-col gap-2 max-sm:items-center sm:flex-row sm:gap-4">
-                                    <div className="flex size-9 shrink-0 items-center justify-center rounded-full border" aria-hidden="true">
-                                        <CircleAlertIcon className="cursor-pointer opacity-80" size={16} />
+            <div
+                className={cn(
+                    'grid w-full grid-cols-1 gap-4',
+                    professionalEducations.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1' /* Add your custom styles here */,
+                )}
+            >
+                {professionalEducations.map((education) => (
+                    <Card className="w-full items-start p-4" key={education.id}>
+                        <CardTitle className="flex w-full items-center gap-1 text-sm font-semibold">
+                            <GraduationCap /> {education.degree}
+                            <div className="flex-1" />
+                            <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                    <TrashIcon className="text-red-500" size={20} />
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <div className="flex flex-col gap-2 max-sm:items-center sm:flex-row sm:gap-4">
+                                        <div className="flex size-9 shrink-0 items-center justify-center rounded-full border" aria-hidden="true">
+                                            <CircleAlertIcon className="cursor-pointer opacity-80" size={16} />
+                                        </div>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Eliminar Formação ?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Tem a certeza que deseja eliminar esta formação académica? Esta ação não pode ser desfeita.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
                                     </div>
-                                    <AlertDialogHeader>
-                                        <AlertDialogTitle>Eliminar Formação ?</AlertDialogTitle>
-                                        <AlertDialogDescription>
-                                            Tem a certeza que deseja eliminar esta formação académica? Esta ação não pode ser desfeita.
-                                        </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                </div>
-                                <AlertDialogFooter>
-                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction onClick={() => deleteEducation(education.id)}>Confirm</AlertDialogAction>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
-                    </CardTitle>
-                    <CardContent className="-mt-2 grid w-full grid-cols-1 items-center gap-4 border-t-1 pt-4 md:grid-cols-2">
-                        <div className="flex flex-col items-start justify-start">
-                            <small className="text-xs text-gray-500">Instituíção</small>
-                            <span className="bold text-sm">{education.institution}</span>
-                        </div>
-                        <div className="flex flex-col items-start justify-start">
-                            <small className="text-xs text-gray-500">Area de Estudo</small>
-                            <span className="bold text-sm">{education.field_of_study}</span>
-                        </div>
-                        <div className="flex flex-col items-start justify-start">
-                            <small className="text-xs text-gray-500">Inicio</small>
-                            <span className="bold text-sm">{format(new Date(education.start_date), 'dd-MM-yyyy')}</span>
-                        </div>
-                        {education.end_date && (
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                        <AlertDialogAction onClick={() => deleteEducation(education.id)}>Confirm</AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
+                        </CardTitle>
+                        <CardContent className="-mt-2 grid w-full grid-cols-1 items-center gap-4 border-t-1 pt-4 md:grid-cols-2">
                             <div className="flex flex-col items-start justify-start">
-                                <small className="text-xs text-gray-500">Fim</small>
-                                <span className="bold text-sm">{format(new Date(education.end_date), 'dd-MM-yyyy')}</span>
+                                <small className="text-xs text-gray-500">Instituíção</small>
+                                <span className="bold text-sm">{education.institution}</span>
                             </div>
-                        )}
-                    </CardContent>
-                </Card>
-            ))}
+                            <div className="flex flex-col items-start justify-start">
+                                <small className="text-xs text-gray-500">Area de Estudo</small>
+                                <span className="bold text-sm">{education.field_of_study}</span>
+                            </div>
+                            <div className="flex flex-col items-start justify-start">
+                                <small className="text-xs text-gray-500">Inicio</small>
+                                <span className="bold text-sm">{format(new Date(education.start_date), 'dd-MM-yyyy')}</span>
+                            </div>
+                            {education.end_date && (
+                                <div className="flex flex-col items-start justify-start">
+                                    <small className="text-xs text-gray-500">Fim</small>
+                                    <span className="bold text-sm">{format(new Date(education.end_date), 'dd-MM-yyyy')}</span>
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
             <Dialog open={openBioDialog} onOpenChange={setOpenBioDialog}>
                 <DialogTrigger asChild onClick={() => setOpenBioDialog(true)}>
                     <Button>
