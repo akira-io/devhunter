@@ -54,8 +54,8 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-            <div className="flex min-h-screen flex-col items-center justify-start bg-[#FDFDFC] p-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
-                <header className="fixed top-0 z-50 w-full bg-[#FDFDFC]/90 p-4 text-sm backdrop-blur md:px-40 dark:bg-[#0a0a0a]/90">
+            <div className="bg-background flex min-h-screen flex-col items-center justify-start bg-[#FDFDFC] p-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
+                <header className="bg-card fixed top-0 z-50 w-full bg-[#FDFDFC]/90 p-4 text-sm backdrop-blur md:px-40 dark:bg-[#0a0a0a]/90">
                     <nav className="flex items-center justify-end gap-4">
                         <AppLogo />
                         <div className="flex-1" />
@@ -105,7 +105,7 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                     </nav>
                 </header>
                 <div className="mb-50 flex w-full flex-col items-center justify-start opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-                    <div className="mt-20 flex w-full flex-col items-center justify-center gap-2 md:max-w-4xl lg:max-w-6xl">
+                    <div className="mt-20 flex w-full flex-col items-center justify-center space-x-2 p-4 md:max-w-4xl lg:max-w-6xl">
                         <h1 className="text-4xl font-bold dark:text-white">Dev Hunter 🇨🇻</h1>
                         <p className="mb-10 max-w-2xl text-center text-lg font-normal text-[#1b1b18] dark:text-[#EDEDEC]">
                             O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
@@ -117,8 +117,8 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                         <form className="relative mb-10 md:mb-20">
                             <Input
                                 id="search"
-                                className="peer placeholder:text-foreground-muted h-12 border ps-9 pe-9"
-                                placeholder="procurar por desenvolvedores..."
+                                className="peer dark:placeholder:text-muted dark:border-foreground h-12 border border-black ps-9 pe-9 placeholder:text-gray-500 dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
+                                placeholder="procurar  desenvolvedores por nome, email, skills, etc.."
                                 type="text"
                                 name="query"
                                 onChange={(e) => search(e)}
