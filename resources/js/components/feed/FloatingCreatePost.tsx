@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
-import { Textarea } from '@/components/ui/textarea';
 import { useTweetStore } from '@/stores/tweet';
 import { ImageIcon, Plus } from 'lucide-react';
 import { useState } from 'react';
@@ -8,28 +7,25 @@ import { useState } from 'react';
 export function FloatingCreatePost() {
     const { isFloatCreateTweetOpen, setIsFloatCreateTweetOpen } = useTweetStore();
     const [tweetContent, setTweetContent] = useState('');
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [imagePreview, setImagePreview] = useState<string[]>([]);
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (files) {
+            const fileArray = Array.from(files).map((file) => URL.createObjectURL(file));
+            setImagePreview((prev) => [...prev, ...fileArray]);
+        }
+    };
 
     const handleTweetPost = () => {
         if (!tweetContent.trim()) return;
         setTweetContent('');
-        setImagePreview(null);
+        setImagePreview([]);
         setIsFloatCreateTweetOpen(false);
     };
 
     const handleTweetChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTweetContent(e.target.value);
-    };
-
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagePreview(reader.result as string);
-            };
-            reader.readAsDataURL(file);
-        }
     };
 
     return (
@@ -40,21 +36,28 @@ export function FloatingCreatePost() {
                 </DialogTrigger>
                 <DialogContent className="effect w-full max-w-md">
                     <div className="mt-6 flex w-full flex-col">
-                        <Textarea
+                        <textarea
                             value={tweetContent}
                             onChange={handleTweetChange}
-                            rows={imagePreview ? 6 : 3}
+                            rows={3}
                             placeholder="Escreva algo interessante…"
-                            className="w-full border-none bg-transparent p-3 text-sm focus:ring-0 focus:outline-none"
+                            className="w-full border-none p-3 text-sm ring-0 outline-none focus:border-none focus:ring-0 focus:outline-none focus-visible:outline-none"
                         />
-                        {isFloatCreateTweetOpen && imagePreview && (
-                            <div className="mt-2">
-                                <img src={imagePreview} alt="Preview" className="max-h-60 w-full rounded-xl border-0 object-cover" />
+                        {imagePreview && (
+                            <div className="mt-2 flex grid grid-cols-2 gap-2 md:grid-cols-4">
+                                {imagePreview.map((src, index) => (
+                                    <img
+                                        key={index}
+                                        src={src}
+                                        alt={`Preview ${index}`}
+                                        className="effect max-h-60 w-full rounded-xl border-2 object-cover shadow-lg transition-all duration-300 hover:scale-105"
+                                    />
+                                ))}
                             </div>
                         )}
                         <div className="mt-4 flex items-center justify-between">
                             <div className="flex items-center gap-3 text-gray-500">
-                                <input type="file" accept="image/*" id="image-upload" className="hidden" onChange={handleImageChange} />
+                                <input type="file" accept="image/*" multiple id="image-upload" className="hidden" onChange={handleImageChange} />
                                 <label htmlFor="image-upload" className="cursor-pointer text-xl">
                                     <ImageIcon className="h-5 w-5" />
                                 </label>

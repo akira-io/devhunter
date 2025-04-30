@@ -23,11 +23,11 @@ interface OnboardingProps extends React.ComponentProps<'div'> {
 
 function OnboardingAvatar(props: { avatarUrl: string | undefined; alt: string; config: Required<AvatarFullConfig> }) {
     return (
-        <Avatar className="h-20 w-auto">
+        <Avatar className="h-16 w-auto shadow">
             {props.avatarUrl ? (
-                <AvatarImage src={props.avatarUrl} alt={props.alt} className="h-20 w-20" />
+                <AvatarImage src={props.avatarUrl} alt={props.alt} className="h-16 w-16" />
             ) : (
-                <AvatarGenerator className="h-20 w-20" {...props.config} />
+                <AvatarGenerator className="h-16 w-16" {...props.config} />
             )}
         </Avatar>
     );
@@ -56,23 +56,23 @@ function OnboardingLinks({ links }: { links: { name: string; url: string | undef
 
 function OnboardingSkills({ skills }: { skills: User['skills'] }) {
     return (
-        <>
+        <div className="effect gradient bg-card mt-8 flex w-full flex-col items-start gap-2 space-y-6 rounded-lg p-4">
             <small>Skills</small>
             {skills?.length == 0 && <small className="dark:text-muted text-xs text-gray-300">nenhuma skill definida</small>}
             <div className="-mt-4 flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {skills && <HighlightedSkills techs={skills} />}
             </div>
-        </>
+        </div>
     );
 }
 
 function OnboardingAbout({ about }: { about: string | undefined }) {
     return (
-        <>
+        <div className="effect gradient bg-card flex w-full flex-col items-start gap-2 space-y-6 rounded-lg p-4">
             <small>Sobre</small>
             {!about && <small className="dark:text-muted -mt-6 text-xs text-gray-300">nenhuma informação disponivel</small>}
             {about && <div className="-mt-4">{about}</div>}
-        </>
+        </div>
     );
 }
 
@@ -144,7 +144,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
 
     return (
         <div {...props} className="effect">
-            <Card className="gradient relative min-h-40 w-full cursor-pointer overflow-hidden">
+            <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden">
                 <CardContent className="flex w-full flex-1 items-center justify-center gap-2">
                     <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                     <div className="w-full">
@@ -177,7 +177,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
             </Card>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="w-ful overflow-auto">
-                    <DialogHeader className="bg-background sticky mb-0 w-full items-center justify-between pb-2">
+                    <DialogHeader className="effect gradient sticky mb-0 w-full items-center justify-between rounded-lg px-4 pb-2 shadow-lg">
                         <div className="flex w-full items-center justify-start pt-4">
                             <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                             <div className="ml-2 flex flex-col gap-2 text-left">
@@ -186,7 +186,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                             </div>
                         </div>
                     </DialogHeader>
-                    <div className="bg-background h-100 space-y-6 overflow-y-auto md:px-6">
+                    <div className="h-100 space-y-6 overflow-y-auto md:px-6">
                         {step === 1 && (
                             <div className="flex shrink-0 flex-col items-start gap-8">
                                 <OnboardingSkills skills={user.skills} />
@@ -196,7 +196,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                         {step === 2 && (
                             <div className="flex w-full shrink-0 flex-col items-start gap-8">
                                 <span className="mt-4">Formação Academica</span>
-                                <DialogDescription className="w-full space-y-2">
+                                <DialogDescription className="w-full space-y-4">
                                     {user.professional_educations?.map((education) => (
                                         <Card className="w-full items-start p-4" key={education.id}>
                                             <CardTitle className="flex w-full items-center gap-1 text-sm font-semibold">
@@ -241,7 +241,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                                 </DialogDescription>
                             </>
                         )}
-                        <DialogFooter className="bg-background fixed right-0 bottom-0 left-0 z-10 flex w-full items-center justify-between border-t p-3">
+                        <DialogFooter className="fixed right-0 bottom-0 left-0 z-10 flex w-full items-center justify-between border-t p-3">
                             <div className="max:order-1 flex justify-center space-x-1.5">
                                 {[1, 2, 3, 4].map((s) => (
                                     <div key={s} className={cn('bg-primary size-1.5 rounded-full', step === s ? 'bg-primary' : 'opacity-20')} />

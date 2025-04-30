@@ -5,10 +5,10 @@ import { ScrollDown } from '@/components/scroll-down';
 import { Input } from '@/components/ui/input';
 import { Toaster } from '@/components/ui/toaster';
 import { type SharedData, User } from '@/types';
-import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { RiDiscordFill, RiGithubFill } from '@remixicon/react';
 import { Loader, LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
-import React, { FormEvent, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 export interface WelcomeProps {
     users: User[];
@@ -23,48 +23,27 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
 
     const [isSearchLoading, setIsSearchLoading] = useState(false);
 
-    const { data, setData } = useForm({
-        query: '',
-    });
+    const initialUsersRef = useRef<User[]>(users);
+    const initialTotalRef = useRef(paginator.total);
 
-    function search(e: FormEvent) {
+    const _users = initialUsersRef.current;
+    const _total = initialTotalRef.current;
+
+    function search(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
         setIsSearchLoading(true);
         router.get(
             route('home'),
-            { q: data.query },
+            { q: e.target.value },
             {
-                preserveState: true,
                 preserveScroll: true,
+                preserveState: true,
                 replace: true,
-                only: ['users'],
                 onFinish: () => {
                     setIsSearchLoading(false);
                 },
             },
         );
-    }
-
-    function getOnChange() {
-        return (e: React.ChangeEvent<HTMLInputElement>) => {
-            const value = e.target.value;
-            setData({ query: value });
-
-            if (value.trim() === '') {
-                setIsSearchLoading(true);
-                router.get(
-                    route('home'),
-                    { q: value },
-                    {
-                        preserveScroll: true,
-                        preserveState: true,
-                        replace: true,
-                        only: ['users'],
-                        onFinish: () => setIsSearchLoading(false),
-                    },
-                );
-            }
-        };
     }
 
     const filteredUsers = users.length > 0 ? users.filter((user) => user.id !== auth.user.id) : paginator.data;
@@ -132,30 +111,28 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                             O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
                             e talento local encontra visibilidade global.
                         </p>
-                        <DevCount users={filteredUsers} paginator={paginator} />
+                        <DevCount users={_users} total={_total} />
                     </div>
                     <div className="my-10 w-full max-w-xl dark:text-white">
-                        <form className="relative mb-10 md:mb-20" onSubmit={search}>
+                        <form className="relative mb-10 md:mb-20">
                             <Input
                                 id="search"
                                 className="peer placeholder:text-foreground-muted h-12 border ps-9 pe-9"
-                                placeholder="(nome, email ou skills) e pressione ENTER"
+                                placeholder="procurar por desenvolvedores..."
                                 type="text"
                                 name="query"
-                                onChange={getOnChange()}
+                                onChange={(e) => search(e)}
                             />
                             <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
                                 {!isSearchLoading ? <SearchIcon size={16} /> : <Loader className="animate-spin" size={16} />}
                             </div>
                         </form>
                     </div>
-                    {!isSearchLoading && (
-                        <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 md:grid-cols-2 md:px-10 xl:grid-cols-3">
-                            {filteredUsers.map((user) => (
-                                <Onboarding user={user} key={user.email} />
-                            ))}
-                        </div>
-                    )}
+                    <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 md:grid-cols-2 md:px-10 xl:grid-cols-3">
+                        {filteredUsers.map((user) => (
+                            <Onboarding user={user} key={user.email} />
+                        ))}
+                    </div>
                     <ScrollDown className="bg-foreground fixed bottom-0 h-8 w-8 rounded-md text-white dark:text-zinc-900" />
                 </div>
             </div>

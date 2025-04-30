@@ -115,7 +115,7 @@ export function ProfessionalEducation({ professionalEducations }: { professional
                 )}
             >
                 {professionalEducations.map((education) => (
-                    <Card className="w-full items-start p-4" key={education.id}>
+                    <Card className="bg-card w-full items-start p-4" key={education.id}>
                         <CardTitle className="flex w-full items-center gap-1 text-sm font-semibold">
                             <GraduationCap /> {education.degree}
                             <div className="flex-1" />

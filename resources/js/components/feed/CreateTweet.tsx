@@ -1,12 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
 import { ImageIcon, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 
 export function CreateTweet() {
     const [tweetContent, setTweetContent] = useState('');
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [imagePreview, setImagePreview] = useState<string[]>([]);
     const [isPosting, setIsPosting] = useState(false);
 
     const handleTweetChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -14,13 +13,10 @@ export function CreateTweet() {
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagePreview(reader.result as string);
-            };
-            reader.readAsDataURL(file);
+        const files = e.target.files;
+        if (files) {
+            const fileArray = Array.from(files).map((file) => URL.createObjectURL(file));
+            setImagePreview((prev) => [...prev, ...fileArray]);
         }
     };
 
@@ -31,7 +27,7 @@ export function CreateTweet() {
         setTimeout(() => {
             console.log('Tweet posted:', tweetContent);
             setTweetContent('');
-            setImagePreview(null);
+            setImagePreview([]);
             setIsPosting(false);
         }, 1500);
     };
@@ -39,22 +35,29 @@ export function CreateTweet() {
     return (
         <Card className="effect gradient mx-auto w-full max-w-xl">
             <CardContent className="flex items-start gap-4">
-                <div className="flex w-full flex-col">
-                    <Textarea
+                <div className="relative flex w-full flex-col">
+                    <textarea
                         value={tweetContent}
                         onChange={handleTweetChange}
                         rows={3}
                         placeholder="Escreva algo interessante…"
-                        className="w-full rounded-lg border border-gray-300 p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        className="w-full border-none p-3 text-sm ring-0 outline-none focus:border-none focus:ring-0 focus:outline-none focus-visible:outline-none"
                     />
                     {imagePreview && (
-                        <div className="mt-2">
-                            <img src={imagePreview} alt="Preview" className="max-h-60 w-full rounded-lg object-cover" />
+                        <div className="mt-2 flex grid grid-cols-2 gap-2 md:grid-cols-4">
+                            {imagePreview.map((src, index) => (
+                                <img
+                                    key={index}
+                                    src={src}
+                                    alt={`Preview ${index}`}
+                                    className="effect max-h-60 w-full rounded-xl border-2 object-cover shadow-lg transition-all duration-300 hover:scale-105"
+                                />
+                            ))}
                         </div>
                     )}
                     <div className="mt-4 flex items-center justify-between">
                         <div className="flex items-center gap-3 text-gray-500">
-                            <input type="file" accept="image/*" id="image-upload" className="hidden" onChange={handleImageChange} />
+                            <input type="file" accept="image/*" multiple id="image-upload" className="hidden" onChange={handleImageChange} />
                             <label htmlFor="image-upload" className="cursor-pointer text-xl">
                                 <ImageIcon className="h-5 w-5" />
                             </label>
