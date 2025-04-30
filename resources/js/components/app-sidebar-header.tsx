@@ -1,5 +1,5 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { SearchTweet } from '@/components/feed/SearchTweet';
+import SearchTweet from '@/components/feed/SearchTweet';
 import { NavUser } from '@/components/nav-user';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
