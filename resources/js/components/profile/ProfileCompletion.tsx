@@ -76,9 +76,11 @@ export function ProfileCompletion({ skills, professionalEducations }: ProfileCom
                     </h3>
                     <p className="text-sm text-gray-500">Perfis completos atraem mais oportunidades!</p>
                 </div>
-                <span className="text-sm text-gray-400">
-                    {Math.round((profileCompletion.filter((item) => item.done).length / profileCompletion.length) * 100)}% completo
-                </span>
+                {profileCompletionPercentage < 100 && (
+                    <span className="text-sm text-gray-400">
+                        {Math.round((profileCompletion.filter((item) => item.done).length / profileCompletion.length) * 100)}% completo
+                    </span>
+                )}
             </div>
             <div className="mb-6 h-2 overflow-hidden rounded-full bg-gray-700">
                 <div className="h-full bg-green-500 transition-all" style={{ width: `${profileCompletionPercentage}%` }} />
