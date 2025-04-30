@@ -65,6 +65,9 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
             <Head title="Definições Perfil" />
             <div className="bg-background flex flex-col gap-4 text-gray-200 md:flex-row md:p-8">
                 <aside className="bg-background flex w-full flex-shrink-0 flex-col items-center p-6 md:w-80">
+                    <div className="mb-4 md:hidden">
+                        <ProfileCompletion professionalEducations={professionalEducations} skills={highlightedSkills} />
+                    </div>
                     <Card className="gradient effect w-full items-center justify-center p-6 md:w-80">
                         <CardContent className="effect flex flex-col items-center text-center">
                             <Avatar className="h-32 w-auto">
@@ -103,7 +106,9 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                     <ProfileLinks user={auth.user} />
                 </aside>
                 <main className="flex-1 space-y-6 overflow-y-auto p-6">
-                    <ProfileCompletion professionalEducations={professionalEducations} skills={highlightedSkills} />
+                    <div className="hidden md:block">
+                        <ProfileCompletion professionalEducations={professionalEducations} skills={highlightedSkills} />
+                    </div>
                     <About />
                     <ProfessionalEducation professionalEducations={professionalEducations} />
                     <HighlightedProjects />
