@@ -15,7 +15,7 @@ export function ProfileCard({ title, className, icon, onClick, children }: Profi
     return (
         <Card className={cn('effect gradient mt-4 max-h-100 w-full overflow-y-auto', className)}>
             <CardTitle className="sticky -top-6 z-50 flex items-center justify-between px-6 py-2 text-sm shadow-sm backdrop-blur">
-                {title}
+                <h3 className="text-foreground text-lg font-semibold">{title}</h3>
                 <Button variant="ghost" onClick={onClick}>
                     {icon}
                 </Button>

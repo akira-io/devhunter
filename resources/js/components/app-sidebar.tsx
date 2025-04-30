@@ -4,7 +4,7 @@ import { NavMain } from '@/components/nav-main';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, MessageCircleMore, UsersIcon } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, MessageCircleMore, UserMinus } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
@@ -13,9 +13,9 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Seguidores',
+        title: 'Seguindo',
         href: route('followable.followings'),
-        icon: UsersIcon,
+        icon: UserMinus,
     },
 ];
 

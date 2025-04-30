@@ -68,11 +68,13 @@ export function ProfileCompletion({ skills, professionalEducations }: ProfileCom
     const profileCompletionPercentage = calculateProfileCompletion(profileCompletion);
 
     return (
-        <section className="gradient effect rounded-lg border p-6">
+        <section className="bg-card gradient effect rounded-lg border p-6">
             <div className="mb-4 flex items-center justify-between">
                 <div>
-                    <h3 className="text-lg font-semibold">{profileCompletionPercentage < 100 ? 'Complete seu perfil' : 'Perfil Completo'}</h3>
-                    <p className="text-sm text-gray-400">Perfis completos atraem mais oportunidades!</p>
+                    <h3 className="text-foreground text-lg font-semibold">
+                        {profileCompletionPercentage < 100 ? 'Complete seu perfil' : 'Perfil Completo'}
+                    </h3>
+                    <p className="text-sm text-gray-500">Perfis completos atraem mais oportunidades!</p>
                 </div>
                 <span className="text-sm text-gray-400">
                     {Math.round((profileCompletion.filter((item) => item.done).length / profileCompletion.length) * 100)}% completo

@@ -177,7 +177,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
             </Card>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="w-ful overflow-auto">
-                    <DialogHeader className="effect gradient sticky mb-0 w-full items-center justify-between rounded-lg px-4 pb-2 shadow-lg">
+                    <DialogHeader className="effect bg-card gradient sticky mb-0 w-full items-center justify-between rounded-lg px-4 pb-2 shadow-lg">
                         <div className="flex w-full items-center justify-start pt-4">
                             <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
                             <div className="ml-2 flex flex-col gap-2 text-left">
