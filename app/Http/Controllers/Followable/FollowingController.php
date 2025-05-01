@@ -24,10 +24,11 @@ final readonly class FollowingController
     public function __invoke(Request $request): Response|ResponseFactory
     {
         /*** @var User $user */
-        $user = $request->user();
+        $user = type($request->user())->as(User::class);
+        $followings = $user->followings()->with(['followable'])->paginate(20);
 
-        return inertia('followable/followings', [
-            'followings' => type($user)->as(User::class)->followings()->with(['followable'])->get(),
+        return inertia('followable/trackers', [
+            'followings' => $user->attachFollowStatus($followings),
         ]);
     }
 }

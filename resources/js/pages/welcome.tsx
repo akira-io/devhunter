@@ -1,8 +1,10 @@
 import AppLogo from '@/components/app-logo';
 import DevCount from '@/components/dev-count';
+import { NavUser } from '@/components/nav-user';
 import Onboarding from '@/components/Onboarding';
 import { ScrollDown } from '@/components/scroll-down';
 import { Input } from '@/components/ui/input';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/toaster';
 import { type SharedData, User } from '@/types';
 import { Head, Link, router, usePage } from '@inertiajs/react';
@@ -54,18 +56,15 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-            <div className="bg-background flex min-h-screen flex-col items-center justify-start bg-[#FDFDFC] p-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
+            <SidebarProvider className="bg-background flex min-h-screen flex-col items-center justify-start bg-[#FDFDFC] p-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
                 <header className="bg-card fixed top-0 z-50 w-full bg-[#FDFDFC]/90 p-4 text-sm backdrop-blur md:px-40 dark:bg-[#0a0a0a]/90">
                     <nav className="flex items-center justify-end gap-4">
                         <AppLogo />
                         <div className="flex-1" />
                         {auth.user ? (
-                            <Link
-                                href={route('hunt-line')}
-                                className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                            >
-                                Hunt Line
-                            </Link>
+                            <div>
+                                <NavUser />
+                            </div>
                         ) : (
                             <>
                                 <Link
@@ -82,26 +81,26 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                                     <UserPlus size={16} />
                                     Criar conta
                                 </Link>
+                                <div className="flex items-center gap-2">
+                                    <a
+                                        className="cursor-pointer dark:text-white"
+                                        href="https://github.com/akira-io/devhunter"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <RiGithubFill />
+                                    </a>
+                                    <a
+                                        className="cursor-pointer dark:text-white"
+                                        href="https://discord.gg/ghPqZg3RcZ"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <RiDiscordFill />
+                                    </a>
+                                </div>
                             </>
                         )}
-                        <div className="flex items-center gap-2">
-                            <a
-                                className="cursor-pointer dark:text-white"
-                                href="https://github.com/akira-io/devhunter"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <RiGithubFill />
-                            </a>
-                            <a
-                                className="cursor-pointer dark:text-white"
-                                href="https://discord.gg/ghPqZg3RcZ"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <RiDiscordFill />
-                            </a>
-                        </div>
                     </nav>
                 </header>
                 <div className="mb-50 flex w-full flex-col items-center justify-start opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
@@ -135,7 +134,7 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                     </div>
                     <ScrollDown className="bg-foreground fixed bottom-0 h-8 w-8 rounded-md text-white dark:text-zinc-900" />
                 </div>
-            </div>
+            </SidebarProvider>
             <Toaster />
         </>
     );

@@ -3,7 +3,7 @@ import { UserInfo } from '@/components/user-info';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { type User } from '@/types';
 import { Link } from '@inertiajs/react';
-import { LayoutDashboard, LogOut, Settings, UserIcon } from 'lucide-react';
+import { LogOut, RssIcon, Settings, UserIcon } from 'lucide-react';
 
 interface UserMenuContentProps {
     user: User;
@@ -23,7 +23,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
                     <Link className="block w-full" href={route('hunt-line')} as="button" prefetch onClick={cleanup}>
-                        <LayoutDashboard className="mr-2" />
+                        <RssIcon className="mr-2" />
                         Hunt Line
                     </Link>
                 </DropdownMenuItem>
@@ -34,7 +34,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                    <Link className="block w-full" href="/settings/password" as="button" prefetch onClick={cleanup}>
+                    <Link className="block w-full" href={route('password.edit')} as="button" prefetch onClick={cleanup}>
                         <Settings className="mr-2" />
                         Minha Conta
                     </Link>

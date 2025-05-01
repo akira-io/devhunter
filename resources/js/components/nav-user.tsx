@@ -2,15 +2,17 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/compon
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { UserInfo } from '@/components/user-info';
 import { UserMenuContent } from '@/components/user-menu-content';
+import { cn } from '@/lib/utils';
 import { type SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
 import { ChevronsUpDown } from 'lucide-react';
+import { ComponentProps } from 'react';
 
-export function NavUser() {
+export function NavUser({ className }: ComponentProps<'ul'>) {
     const { auth } = usePage<SharedData>().props;
 
     return (
-        <SidebarMenu className="p-4">
+        <SidebarMenu className={cn(className)}>
             <SidebarMenuItem>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>

@@ -22,10 +22,12 @@ final readonly class FollowerController
     {
 
         /*** @var User $user */
-        $user = $request->user();
+        $user = type($request->user())->as(User::class);
 
-        return inertia('followable/followers', [
-            'followers' => type($user)->as(User::class)->followers()->with(['followables'])->get(),
+        $followers = $user->followers()->paginate(20);
+
+        return inertia('followable/hunters', [
+            'followers' => $user->attachFollowStatus($followers),
         ]);
     }
 }

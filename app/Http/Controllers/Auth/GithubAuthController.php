@@ -41,7 +41,7 @@ final class GithubAuthController
             ->firstWhere('github_id', $githubUser->getId());
 
         if (! $user) {
-            $user = User::query()->create((array) $githubUserData);
+            $user = User::query()->create($githubUserData);
         } else {
             $githubUserData['bio'] = $user->bio ?? $githubUserData['bio'];
             $githubUserData['location'] = $user->location ?? $githubUserData['location'];

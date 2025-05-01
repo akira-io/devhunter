@@ -4,18 +4,24 @@ import { NavMain } from '@/components/nav-main';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutDashboard, MessageCircleMore, UserMinus } from 'lucide-react';
+import { BookOpen, EyeIcon, Folder, MessageCircleMore, NetworkIcon, RssIcon } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Hunt Line',
         href: '/hunt-line',
-        icon: LayoutDashboard,
+        icon: RssIcon,
     },
     {
-        title: 'Seguindo',
+        title: 'Hunters',
+        href: route('followable.followers'),
+        icon: EyeIcon,
+    },
+
+    {
+        title: 'Trackers',
         href: route('followable.followings'),
-        icon: UserMinus,
+        icon: NetworkIcon,
     },
 ];
 
