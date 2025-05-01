@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/command';
 import { Link } from '@inertiajs/react';
 
-export default function SearchTweet() {
+export default function SearchHunt() {
     const [open, setOpen] = React.useState(false);
 
     React.useEffect(() => {
@@ -71,7 +71,7 @@ export default function SearchTweet() {
                         </CommandItem>
                         <CommandItem>
                             <ArrowUpRightIcon size={16} className="opacity-60" aria-hidden="true" />
-                            <Link href={route('feed')}>Feed</Link>
+                            <Link href={route('hunt-line')}>Feed</Link>
                         </CommandItem>
                     </CommandGroup>
                 </CommandList>

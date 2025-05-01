@@ -16,7 +16,7 @@ interface TweetCommentsProps {
     isOpen: boolean;
 }
 
-export function TweetComments({ isOpen }: TweetCommentsProps) {
+export function HuntComments({ isOpen }: TweetCommentsProps) {
     const [comments, setComments] = useState<Comment[]>([]);
     const [newComment, setNewComment] = useState('');
     const [isAnimating, setIsAnimating] = useState(false);

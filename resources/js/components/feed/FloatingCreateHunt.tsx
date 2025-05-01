@@ -4,7 +4,7 @@ import { useTweetStore } from '@/stores/tweet';
 import { ImageIcon, Plus } from 'lucide-react';
 import { useState } from 'react';
 
-export function FloatingCreatePost() {
+export function FloatingCreateHunt() {
     const { isFloatCreateTweetOpen, setIsFloatCreateTweetOpen } = useTweetStore();
     const [tweetContent, setTweetContent] = useState('');
     const [imagePreview, setImagePreview] = useState<string[]>([]);

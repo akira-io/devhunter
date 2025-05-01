@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ImageIcon, Loader2 } from 'lucide-react';
+import { ImageIcon, Loader2, PlusCircleIcon } from 'lucide-react';
 import { useState } from 'react';
 
-export function CreateTweet() {
+export function CreateHunt() {
     const [tweetContent, setTweetContent] = useState('');
     const [imagePreview, setImagePreview] = useState<string[]>([]);
     const [isPosting, setIsPosting] = useState(false);
@@ -65,10 +65,11 @@ export function CreateTweet() {
                         <Button
                             onClick={handleTweetPost}
                             disabled={isPosting || !tweetContent.trim()}
-                            className="transition-all duration-300 disabled:bg-gray-400"
+                            className="disabled:bg-foreground-muted transition-all duration-300"
                         >
                             {isPosting && <Loader2 className="animate-spin" size={16} />}
-                            Criar Post
+                            <PlusCircleIcon />
+                            Partilhar Hunt
                         </Button>
                     </div>
                 </div>

@@ -35,24 +35,24 @@ final class GithubAuthController
         /** @var \Laravel\Socialite\Two\User $githubUser */
         $githubUser = Socialite::driver('github')->user();
 
-        $githubUserData = new GithubUser($githubUser)->toArray();
+        $githubUserData = GithubUser::from($githubUser)->toArray();
 
         $user = User::query()
             ->firstWhere('github_id', $githubUser->getId());
 
         if (! $user) {
-            $user = User::query()->create($githubUserData);
+            $user = User::query()->create((array) $githubUserData);
         } else {
             $githubUserData['bio'] = $user->bio ?? $githubUserData['bio'];
             $githubUserData['location'] = $user->location ?? $githubUserData['location'];
             $githubUserData['avatar_url'] = $user->avatar_url ?? $githubUserData['avatar_url'];
             $githubUserData['email'] = $user->email ?? $githubUserData['email'];
 
-            $user->update($githubUserData);
+            $user->update((array) $githubUserData);
         }
 
         Auth::login($user, remember: true);
 
-        return to_route('feed');
+        return to_route('hunt-line');
     }
 }

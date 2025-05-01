@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - User follow/unfollow system.
 - GitHub authentication and extended user profiles.
-- `CreateTweet` and `FloatingCreatePost` components.
+- `CreateHunt` and `FloatingCreateHunt` components.
 - Onboarding flow with follow suggestions.
 - Admin panel for platform management.
 - Meilisearch integration via Laravel Scout.

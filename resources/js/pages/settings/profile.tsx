@@ -94,14 +94,16 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                         </CardContent>
                         <div className="effect grid grid-cols-2 items-end justify-end gap-4">
                             <Link href={route('followable.followers')} className="flex gap-1 text-xs">
-                                <b>{followers}</b> Seguidores
+                                <b>{followers}</b> Hunters
                             </Link>
                             <Link href={route('followable.followings')} className="flex gap-1 text-xs">
-                                <b>{followings}</b> Seguindo
+                                <b>{followings}</b> Trackers
                             </Link>
                         </div>
                         <HighlightSkills skills={skills} authSkills={highlightedSkills} />
-                        <p className="mt-0 border-t-1 py-2 text-xs text-gray-500">Embarcou na Dev Hunter em {auth.user.created_at}</p>
+                        <p className="mt-0 border-t-1 py-2 text-xs text-gray-500">
+                            Hunter desde de: <b>{auth.user.created_at}</b>
+                        </p>
                     </Card>
                     <ProfileLinks user={auth.user} />
                 </aside>

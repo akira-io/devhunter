@@ -1,5 +1,5 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import SearchTweet from '@/components/feed/SearchTweet';
+import SearchHunt from '@/components/feed/SearchHunt';
 import { NavUser } from '@/components/nav-user';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
@@ -13,7 +13,7 @@ export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: Breadcrum
                 <div className="flex-1" />
                 <div className="flex-1" />
                 <div className="fixed right-4 flex items-center justify-center">
-                    <SearchTweet />
+                    <SearchHunt />
                     <NavUser />
                 </div>
             </div>

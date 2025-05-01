@@ -9,7 +9,7 @@ import { BookOpen, Folder, LayoutDashboard, MessageCircleMore, UserMinus } from 
 const mainNavItems: NavItem[] = [
     {
         title: 'Hunt Line',
-        href: '/feed',
+        href: '/hunt-line',
         icon: LayoutDashboard,
     },
     {

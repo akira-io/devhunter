@@ -1,6 +1,6 @@
-import { CreateTweet } from '@/components/feed/CreateTweet';
-import { FloatingCreatePost } from '@/components/feed/FloatingCreatePost';
-import { TweetCard } from '@/components/feed/TweetCard';
+import { CreateHunt } from '@/components/feed/CreateHunt';
+import { FloatingCreateHunt } from '@/components/feed/FloatingCreateHunt';
+import { HuntCard } from '@/components/feed/HuntCard';
 import AppLayout from '@/layouts/app-layout';
 import { useTweetStore } from '@/stores/tweet';
 import { type BreadcrumbItem, SharedData } from '@/types';
@@ -13,7 +13,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Feed() {
+export default function HuntLine() {
     const { auth } = usePage<SharedData>().props;
     const tweets = [
         {
@@ -166,11 +166,11 @@ export default function Feed() {
     const { isFloatCreateTweetOpen } = useTweetStore();
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Feed" />
+            <Head title="HuntLine" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                {!isFloatCreateTweetOpen && <CreateTweet />}
+                {!isFloatCreateTweetOpen && <CreateHunt />}
                 {tweets.map((tweet) => (
-                    <TweetCard
+                    <HuntCard
                         key={tweet.id}
                         avatarUrl={tweet.user.avatar_url}
                         name={tweet.user.name}
@@ -185,7 +185,7 @@ export default function Feed() {
                     />
                 ))}
             </div>
-            <FloatingCreatePost />
+            <FloatingCreateHunt />
         </AppLayout>
     );
 }

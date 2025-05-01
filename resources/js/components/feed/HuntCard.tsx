@@ -1,4 +1,4 @@
-import { TweetComments } from '@/components/feed/TweetComments';
+import { HuntComments } from '@/components/feed/HuntComments';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,7 +19,16 @@ interface TweetCardProps {
     views: number;
 }
 
-export function TweetCard({ avatarUrl, name, userName, time, content, imageUrl, comments, retweets, likes, views }: TweetCardProps) {
+export function HuntCardConnector() {
+    return (
+        <>
+            <div className="effect absolute -top-10 left-5 z-[-1] flex h-10 w-1 items-center justify-center rounded-full bg-white text-xs dark:bg-zinc-900" />
+            <div className="effect bg-card absolute -top-10 right-5 flex h-10 w-1 items-center justify-center rounded-full text-xs dark:bg-zinc-900" />
+        </>
+    );
+}
+
+export function HuntCard({ avatarUrl, name, userName, time, content, imageUrl, comments, retweets, likes, views }: TweetCardProps) {
     const [isOpenComments, setOpenComments] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
     // /const [likes, setLikes] = useState(0);
@@ -64,11 +73,10 @@ export function TweetCard({ avatarUrl, name, userName, time, content, imageUrl, 
                 </CardFooter>
                 {isOpenComments && (
                     <div className="mt-0">
-                        <TweetComments isOpen={isOpenComments} />
+                        <HuntComments isOpen={isOpenComments} />
                     </div>
                 )}
-                <div className="effect absolute -top-10 left-5 z-[-1] flex h-10 w-1 items-center justify-center rounded-full bg-white text-xs dark:bg-zinc-900" />
-                <div className="effect bg-card absolute -top-10 right-5 flex h-10 w-1 items-center justify-center rounded-full text-xs dark:bg-zinc-900" />
+                <HuntCardConnector />
             </Card>
         </>
     );

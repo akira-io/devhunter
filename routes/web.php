@@ -9,9 +9,9 @@ use Inertia\Inertia;
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('feed', function () {
-        return Inertia::render('feed');
-    })->name('feed');
+    Route::get('hunt-line', function () {
+        return Inertia::render('hunt-line');
+    })->name('hunt-line');
 });
 
 require __DIR__.'/settings.php';
