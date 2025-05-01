@@ -64,7 +64,7 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                                 href={route('feed')}
                                 className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
                             >
-                                Feed
+                                Hunt Line
                             </Link>
                         ) : (
                             <>
@@ -128,7 +128,7 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                             </div>
                         </form>
                     </div>
-                    <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 md:grid-cols-2 md:px-10 xl:grid-cols-3">
+                    <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 sm:grid-cols-2 md:px-10 xl:grid-cols-3">
                         {filteredUsers.map((user) => (
                             <Onboarding user={user} key={user.email} />
                         ))}

@@ -8,7 +8,7 @@ import { Head, usePage } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Feed',
+        title: 'Hunt Line',
         href: '/feed',
     },
 ];

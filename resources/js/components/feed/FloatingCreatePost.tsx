@@ -34,12 +34,12 @@ export function FloatingCreatePost() {
                 <DialogTrigger className="bg-primary hover:bg-primary-dark flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg transition-all duration-300">
                     <Plus size={24} />
                 </DialogTrigger>
-                <DialogContent className="effect w-full max-w-md">
+                <DialogContent className="w-full max-w-md">
                     <div className="mt-6 flex w-full flex-col">
                         <textarea
                             value={tweetContent}
                             onChange={handleTweetChange}
-                            rows={3}
+                            rows={10}
                             placeholder="Escreva algo interessante…"
                             className="w-full border-none p-3 text-sm ring-0 outline-none focus:border-none focus:ring-0 focus:outline-none focus-visible:outline-none"
                         />

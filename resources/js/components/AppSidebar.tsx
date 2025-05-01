@@ -4,13 +4,13 @@ import { NavMain } from '@/components/nav-main';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, MessageCircleMore, UserMinus } from 'lucide-react';
+import { BookOpen, Folder, LayoutDashboard, MessageCircleMore, UserMinus } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Feed',
+        title: 'Hunt Line',
         href: '/feed',
-        icon: LayoutGrid,
+        icon: LayoutDashboard,
     },
     {
         title: 'Seguindo',

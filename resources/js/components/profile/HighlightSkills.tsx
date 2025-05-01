@@ -67,7 +67,7 @@ export function HighlightSkills({ skills, authSkills: highlightedSkills, ...prop
                                 placeholder="Selecione as tecnologias"
                                 emptyIndicator={<p className="text-center text-sm"> Nenhum resultado encontrado</p>}
                                 value={highlightedSkills}
-                                onChange={(skills) => setData('skills', skills)}
+                                onChange={(skills: Option[]) => setData('skills', skills)}
                             />
                             <InputError message={errors.skills} />
                         </div>

@@ -145,20 +145,24 @@ function isOptionsExist(groupOption: GroupOption, targetOption: Option[]) {
 }
 
 const CommandEmpty = ({
-                          className
-
+                          className,
+                          ...props
                       }: React.ComponentProps<typeof CommandPrimitive.Empty>) => {
     const render = useCommandState((state) => state.filtered.count === 0);
 
     if (!render) return null;
 
-    return (
-        <div
-            className={cn('px-2 py-4 text-center text-sm', className)}
-            cmdk-empty=''
-            role='presentation'
-        />
-    );
+    return <CommandPrimitive.Empty {...props} className={cn('px-2 py-4 text-center text-sm', className)}
+                                   role='presentation'
+                                   cmdk-empty='' />;
+    // return (
+    //     <div
+    //         className={cn('px-2 py-4 text-center text-sm', className)}
+    //         cmdk-empty=''
+    //         role='presentation'
+    //         {...props}
+    //     />
+    // );
 };
 
 CommandEmpty.displayName = 'CommandEmpty';
@@ -372,18 +376,21 @@ const MultipleSelector = ({
     };
 
     const EmptyItem = React.useCallback(() => {
-        if (!emptyIndicator) return undefined;
+
+        if (!emptyIndicator) return;
 
         // For async search that showing emptyIndicator
         if (onSearch && !creatable && Object.keys(options).length === 0) {
             return (
                 <CommandItem value='-' disabled>
-                    "emptyIndicator"
+                    <span> {emptyIndicator}</span>
                 </CommandItem>
             );
         }
 
-        return <CommandEmpty>"empty entry"</CommandEmpty>;
+        return <CommandEmpty>
+            <span>{emptyIndicator}</span>
+        </CommandEmpty>;
     }, [creatable, emptyIndicator, onSearch, options]);
 
     const selectables = React.useMemo<GroupOption>(
