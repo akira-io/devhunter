@@ -15,7 +15,7 @@ final readonly class EmailVerificationNotificationController
     public function store(Request $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('feed', absolute: false));
+            return redirect()->intended(route('hunt-line', absolute: false));
         }
 
         $request->user()->sendEmailVerificationNotification();

@@ -8,16 +8,12 @@ use Akira\Followable\Concerns\Followable;
 use Akira\Followable\Concerns\Follower;
 use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
-use Exception;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
 /**
@@ -41,7 +37,7 @@ use Laravel\Scout\Searchable;
  * @property-read  MorphMany<User, $this> $followers
  * @property-read  MorphMany<User, $this> $followings
  */
-final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+final class User extends Authenticatable implements MustVerifyEmail
 {
     use Followable;
     use Follower;
@@ -88,16 +84,6 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
         'password',
         'remember_token',
     ];
-
-    /**
-     *Validate if the user can access the panel
-     *
-     * @throws Exception
-     */
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return Str::contains($this->email, ['@akira-io.com', 'kidiatoliny']);
-    }
 
     /**
      * The attributes that should be searchable.

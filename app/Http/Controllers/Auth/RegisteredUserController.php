@@ -48,6 +48,6 @@ final readonly class RegisteredUserController
 
         Auth::login($user);
 
-        return to_route('feed');
+        return to_route('hunt-line');
     }
 }
