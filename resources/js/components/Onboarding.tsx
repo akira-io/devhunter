@@ -151,6 +151,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                         <div className="flex items-center justify-between">
                             <CardTitle className="text-xl">{user.name}</CardTitle>
                             <Button
+                                data-pan="onbording-profile"
                                 className="text-muted-forground absolute top-4 right-4 flex h-8 w-8 cursor-pointer border-none shadow-none"
                                 variant="secondary"
                                 onClick={handleCardClick}

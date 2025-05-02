@@ -1,4 +1,19 @@
-# Dev Hunter
+<h1 align='center'> Dev Hunter</h1>
+
+<p align="center">
+  <a href="https://github.com/akira-io/devhunter/actions">
+    <img alt="Testes" src="https://github.com/akira-io/devhunter/actions/workflows/tests.yml/badge.svg">
+  </a>
+  <a href="https://github.com/akira-io/devhunter/releases">
+    <img alt="Última versão" src="https://img.shields.io/github/v/release/akira-io/devhunter?style=flat-square">
+  </a>
+  <a href="https://github.com/akira-io/devhunter/issues">
+    <img alt="Issues abertas" src="https://img.shields.io/github/issues/akira-io/devhunter?style=flat-square">
+  </a>
+  <a href="https://github.com/akira-io/devhunter/blob/main/LICENSE.md">
+    <img alt="Licença" src="https://img.shields.io/github/license/akira-io/devhunter?style=flat-square">
+  </a>
+</p>
 
 **Dev Hunter** is a social network for developers to showcase their projects, share ideas, and connect with others in
 the tech community. It's a platform built by developers, for developers, focusing on the human side of coding and
