@@ -67,8 +67,7 @@ export function CreateHunt() {
                             disabled={isPosting || !tweetContent.trim()}
                             className="disabled:bg-foreground-muted transition-all duration-300"
                         >
-                            {isPosting && <Loader2 className="animate-spin" size={16} />}
-                            <PlusCircleIcon />
+                            {isPosting ? <Loader2 className="animate-spin" size={16} /> : <PlusCircleIcon size={16} />}
                             Partilhar Hunt
                         </Button>
                     </div>
