@@ -63,12 +63,12 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Definições Perfil" />
-            <div className="bg-background flex flex-col gap-4 text-gray-200 md:flex-row md:p-8">
-                <aside className="bg-background flex w-full flex-shrink-0 flex-col items-center p-6 md:w-80">
+            <div className="bg-background flex flex-col gap-4 text-gray-200 sm:flex-row sm:p-8">
+                <aside className="bg-background flex w-full flex-shrink-0 flex-col items-center p-6 sm:w-80">
                     <div className="mb-4 w-full md:hidden">
                         <ProfileCompletion professionalEducations={professionalEducations} skills={highlightedSkills} />
                     </div>
-                    <Card className="gradient effect w-full items-center justify-center p-6 md:w-80">
+                    <Card className="gradient effect w-full items-center justify-center p-6 sm:w-80">
                         <CardContent className="effect flex flex-col items-center text-center">
                             <Avatar className="h-32 w-auto">
                                 {auth.user.avatar_url ? (
