@@ -28,6 +28,7 @@ arch('avoid mutation')
         'App\Http\Requests',
         'App\Http\Resources',
         'App\Filament',
+        'App\Foundation\Inspiring',
 
     ]);
 
@@ -45,6 +46,7 @@ arch('avoid inheritance')
         'App\Http\Requests',
         'App\Http\Resources',
         'App\Filament',
+        'App\Foundation\Inspiring',
     ]);
 
 arch('annotations')

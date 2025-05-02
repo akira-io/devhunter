@@ -39,13 +39,14 @@ final readonly class ProfileController
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = type($request->user())->as(User::class);
+        $user->fill((array) $request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
         return to_route('profile.edit');
     }
@@ -59,7 +60,7 @@ final readonly class ProfileController
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $user = type($request->user())->as(User::class);
 
         Auth::logout();
 

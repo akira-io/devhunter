@@ -13,7 +13,7 @@ function shuffleArray<T>(array: T[]): T[] {
 export default function DevCount({ users, total }: { users: User[]; total: number }) {
     const shuffledUsers = shuffleArray<User>(users);
     return (
-        <div className="bg-muted mt-2 flex items-center rounded-full">
+        <div className="bg-card mt-2 flex items-center rounded-full">
             <div className="flex -space-x-4">
                 {shuffledUsers.slice(0, 10).map((user) =>
                     user.avatar_url ? (

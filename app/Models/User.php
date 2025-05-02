@@ -29,7 +29,7 @@ use Laravel\Scout\Searchable;
  * @property-read  string $github_token
  * @property-read  string $github_refresh_token
  * @property-read  string $github_user_name
- * @property string $email_verified_at
+ * @property string|null $email_verified_at
  * @property-read  CarbonImmutable $created_at
  * @property-read  CarbonImmutable $updated_at
  * @property-read  list<mixed> $skills

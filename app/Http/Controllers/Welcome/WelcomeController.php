@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Welcome;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Inertia\Inertia;
 use Inertia\Response;
 use Throwable;
@@ -19,8 +20,8 @@ final readonly class WelcomeController
      */
     public function index(Request $request): Response
     {
-        /** @var User $user */
-        $user = $request->user();
+        /** @var User|null $user */
+        $user = $request->user() ?: null;
 
         $query = $request->string('q');
 
@@ -28,6 +29,9 @@ final readonly class WelcomeController
             ? User::search($query->value())
             : User::query()->inRandomOrder();
 
+        /**
+         * @var LengthAwarePaginator<int, string> $paginator
+         */
         $paginator = $usersQuery
             ->paginate(20)->withQueryString();
 

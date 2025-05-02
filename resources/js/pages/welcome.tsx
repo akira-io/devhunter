@@ -21,7 +21,7 @@ export interface WelcomeProps {
 }
 
 export default function Welcome({ users, paginator }: WelcomeProps) {
-    const { auth } = usePage<SharedData>().props;
+    const { auth, quote } = usePage<SharedData>().props;
 
     const [isSearchLoading, setIsSearchLoading] = useState(false);
 
@@ -109,6 +109,9 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                         <p className="mb-10 max-w-2xl text-center text-lg font-normal text-[#1b1b18] dark:text-[#EDEDEC]">
                             O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
                             e talento local encontra visibilidade global.
+                            <p className="text-muted-foreground mt-4 text-xs">
+                                {quote.message} - <b>{quote.author}</b>
+                            </p>
                         </p>
                         <DevCount users={_users} total={_total} />
                     </div>
