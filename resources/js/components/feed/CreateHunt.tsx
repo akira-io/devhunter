@@ -41,7 +41,7 @@ export function CreateHunt() {
                         onChange={handleTweetChange}
                         rows={3}
                         placeholder="Escreva algo interessante…"
-                        className="w-full border-none p-3 text-sm ring-0 outline-none focus:border-none focus:ring-0 focus:outline-none focus-visible:outline-none"
+                        className="w-full border-none p-3 ring-0 outline-none focus:border-none focus:ring-0 focus:outline-none focus-visible:outline-none"
                     />
                     {imagePreview && (
                         <div className="mt-2 flex grid grid-cols-2 gap-2 md:grid-cols-4">

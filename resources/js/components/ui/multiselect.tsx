@@ -152,7 +152,7 @@ const CommandEmpty = ({
 
     if (!render) return null;
 
-    return <CommandPrimitive.Empty {...props} className={cn('px-2 py-4 text-center text-sm', className)}
+    return <CommandPrimitive.Empty {...props} className={cn('px-2 py-4 text-center text-base', className)}
                                    role='presentation'
                                    cmdk-empty='' />;
     // return (
@@ -434,7 +434,7 @@ const MultipleSelector = ({
         >
             <div
                 className={cn(
-                    'border-input focus-within:border-ring focus-within:ring-ring/50 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative min-h-[38px] rounded-md border text-sm transition-[color,box-shadow] outline-none focus-within:ring-[3px] has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50',
+                    'border-input focus-within:border-ring focus-within:ring-ring/50 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative min-h-[38px] rounded-md border text-base transition-[color,box-shadow] outline-none focus-within:ring-[3px] has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50',
                     {
                         'p-1': selected.length !== 0,
                         'cursor-text': !disabled && selected.length !== 0
