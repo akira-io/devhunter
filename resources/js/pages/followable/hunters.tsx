@@ -15,7 +15,7 @@ export default function Hunters({ followers }: FollowersProps) {
         <Layout>
             <Head title="Seguidores" />
             <div className="mb-4 flex items-start justify-between px-5">
-                <SectionHeader title="Hunters" description="Hunters que acompanham o teu trabalho e encontram inspiração em ti." />
+                <SectionHeader title="Hunters" description="São pessoas que acompanham o teu trabalho e encontram inspiração em ti." />
                 <Button className="text-muted-forground flex h-8 w-8 cursor-pointer border-none shadow-none" variant="secondary">
                     <ListFilterPlusIcon />
                 </Button>

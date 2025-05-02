@@ -21,7 +21,7 @@ export default function Trackers({ followings }: FollowingsProps) {
         <Layout breadcrumbs={breadcrumbs}>
             <Head title="Seguindo" />
             <div className="mb-4 flex items-start justify-between px-5">
-                <SectionHeader title="Trackers" description="Estes são os hunters que estas a acompanhar  de perto." />
+                <SectionHeader title="Trackers" description="São hunters que admiras, que te inspiram e te fazem querer evoluir" />
                 <Button className="text-muted-forground flex h-8 w-8 cursor-pointer border-none shadow-none" variant="secondary">
                     <ListFilterPlusIcon />
                 </Button>
