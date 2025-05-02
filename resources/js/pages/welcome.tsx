@@ -110,7 +110,7 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                             O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
                             e talento local encontra visibilidade global.
                             <p className="text-muted-foreground mt-4 text-xs">
-                                {quote.message} - <b>{quote.author}</b>
+                                "{quote.message} - <b>{quote.author}</b>"
                             </p>
                         </p>
                         <DevCount users={_users} total={_total} />
