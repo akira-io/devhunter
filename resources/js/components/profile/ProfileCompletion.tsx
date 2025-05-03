@@ -1,6 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Option } from '@/components/ui/multiselect';
 import { useAboutStore } from '@/stores/about';
+import { useAcademicBackground } from '@/stores/academicBackground';
 import { useHighlightedSkills } from '@/stores/highlightedSkills';
 import { useLinkStore } from '@/stores/link';
 import { ProfessionalEducation, SharedData } from '@/types';
@@ -17,6 +18,7 @@ export function ProfileCompletion({ skills, professionalEducations }: ProfileCom
     const { open: openAbout } = useAboutStore();
     const { open: openLink } = useLinkStore();
     const { open: openHighLightSkills } = useHighlightedSkills();
+    const { open: openAcademicBackground } = useAcademicBackground();
 
     const profileCompletion = [
         {
@@ -47,6 +49,7 @@ export function ProfileCompletion({ skills, professionalEducations }: ProfileCom
         {
             label: 'Formação Acadêmica',
             done: professionalEducations.length > 0,
+            onclick: () => openAcademicBackground(),
         },
         // {
         //     label: 'Destaques Profissionais',

@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useForm } from '@inertiajs/react';
 import { format } from 'date-fns';
 import { CalendarIcon, CircleAlertIcon, GraduationCap, PlusIcon, TrashIcon } from 'lucide-react';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 
 import {
     AlertDialog,
@@ -27,6 +27,7 @@ import {
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import { useAcademicBackground } from '@/stores/academicBackground';
 import { ProfessionalEducation as ProfessionalEducationType } from '@/types';
 
 interface ProfessionalEducationForm {
@@ -51,7 +52,8 @@ const degrees: Option[] = [
 
 export function ProfessionalEducation({ professionalEducations }: { professionalEducations: ProfessionalEducationType[] }) {
     const { toast } = useToast();
-    const [openBioDialog, setOpenBioDialog] = useState(false);
+
+    const { isOpen, set } = useAcademicBackground();
 
     const {
         data,
@@ -81,7 +83,7 @@ export function ProfessionalEducation({ professionalEducations }: { professional
                     description: 'Formação académica adicionada com sucesso.',
                 });
                 reset();
-                setOpenBioDialog(false);
+                set(false);
             },
         });
     }
@@ -101,7 +103,7 @@ export function ProfessionalEducation({ professionalEducations }: { professional
     }
 
     return (
-        <ProfileCard title="Formação Académica" icon={<PlusIcon />} onClick={() => setOpenBioDialog(true)}>
+        <ProfileCard title="Formação Académica" icon={<PlusIcon />} onClick={() => set(true)}>
             {professionalEducations.length === 0 && (
                 <>
                     <GraduationCap />
@@ -165,8 +167,8 @@ export function ProfessionalEducation({ professionalEducations }: { professional
                     </Card>
                 ))}
             </div>
-            <Dialog open={openBioDialog} onOpenChange={setOpenBioDialog}>
-                <DialogTrigger asChild onClick={() => setOpenBioDialog(true)}>
+            <Dialog open={isOpen} onOpenChange={set}>
+                <DialogTrigger asChild onClick={() => set(true)}>
                     <Button>
                         <GraduationCap />
                         Adicionar Formação Académica
