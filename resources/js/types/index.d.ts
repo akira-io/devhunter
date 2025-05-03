@@ -50,13 +50,14 @@ export interface User {
     linkedin_url?: string;
     bluesky_url?: string;
     youtube_url?: string;
-    professional_educations?: ProfessionalEducation[];
+    professional_educations?: AcademicBackground[];
     has_followed: boolean;
+    github_user_name?: string;
 
     [key: string]: unknown; // This allows for additional properties...
 }
 
-export interface ProfessionalEducation {
+export interface AcademicBackground {
     id: number;
     user_id: number;
     institution: string;
@@ -71,4 +72,17 @@ export interface ProfileStoreTypes {
     open: () => void;
     close: () => void;
     set: (isOpen: boolean) => void;
+}
+
+export interface Hunt {
+    id: number;
+    content: string;
+    created_at: string;
+    updated_at: string;
+    owner: User;
+    image_url?: string;
+    comments?: [];
+    shares: number;
+    likes: number;
+    views: number;
 }

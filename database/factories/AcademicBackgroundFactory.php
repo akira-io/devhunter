@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\ProfessionalEducation;
+use App\Models\AcademicBackground;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-final class ProfessionalEducationFactory extends Factory
+final class AcademicBackgroundFactory extends Factory
 {
-    protected $model = ProfessionalEducation::class;
+    protected $model = AcademicBackground::class;
 
     public function definition(): array
     {

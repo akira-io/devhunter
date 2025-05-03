@@ -6,7 +6,7 @@ namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-final class ProfessionalEducationRequest extends FormRequest
+final class AcademicBackgroundRequest extends FormRequest
 {
     /**
      * Validation rules for the request.

@@ -17,7 +17,7 @@ final readonly class EmailVerificationNotificationController
     {
         $user = type($request->user())->as(User::class);
         if ($user->hasVerifiedEmail()) {
-            return redirect()->intended(route('hunt-line', absolute: false));
+            return redirect()->intended(route('hunts.index', absolute: false));
         }
 
         $user->sendEmailVerificationNotification();

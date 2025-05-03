@@ -20,7 +20,7 @@ final readonly class EmailVerificationPromptController
         $user = type($request->user())->as(User::class);
 
         return $user->hasVerifiedEmail()
-                    ? redirect()->intended(route('hunt-line', absolute: false))
+                    ? redirect()->intended(route('hunts.index', absolute: false))
                     : Inertia::render('auth/verify-email', ['status' => $request->session()->get('status')]);
     }
 }

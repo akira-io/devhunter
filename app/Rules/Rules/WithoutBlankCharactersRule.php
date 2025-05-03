@@ -7,8 +7,11 @@ namespace App\Rules\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-final class WithoutBlankCharactersRule implements ValidationRule
+final readonly class WithoutBlankCharactersRule implements ValidationRule
 {
+    /**
+     * Determine if the validation rule passes.
+     */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
 

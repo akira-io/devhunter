@@ -39,6 +39,6 @@ final readonly class ConfirmablePasswordController
 
         $request->session()->put('auth.password_confirmed_at', time());
 
-        return redirect()->intended(route('hunt-line', absolute: false));
+        return redirect()->intended(route('hunts.index', absolute: false));
     }
 }

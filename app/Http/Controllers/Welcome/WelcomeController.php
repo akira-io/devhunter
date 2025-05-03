@@ -36,7 +36,7 @@ final readonly class WelcomeController
             ->paginate(20)->withQueryString();
 
         // @phpstan-ignore-next-line
-        $paginator->load(['professionalEducations']);
+        $paginator->load(['academicBackgrounds']);
 
         return Inertia::render('welcome', [
             'users' => $user?->attachFollowStatus($paginator) ?? [], // phpstan-ignore-line

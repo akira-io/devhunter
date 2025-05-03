@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Models\ProfessionalEducation;
+use App\Models\AcademicBackground;
 
 test('to array', function () {
-    $user = ProfessionalEducation::factory()->create()->refresh();
+    $user = AcademicBackground::factory()->create()->refresh();
 
     expect(array_keys($user->toArray()))
         ->toBe([
@@ -22,7 +22,7 @@ test('to array', function () {
 });
 
 it('should belongs to user', function () {
-    $professionalEducation = ProfessionalEducation::factory()->create();
+    $professionalEducation = AcademicBackground::factory()->create();
 
     expect($professionalEducation->user)
         ->toBeInstanceOf(App\Models\User::class);

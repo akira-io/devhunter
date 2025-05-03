@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Database\Factories\HuntFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,12 +35,22 @@ final class Hunt extends Model
     /**
      * The hunt's owner.
      *
-     * @return BelongsTo<User, Hunt>
+     * @return BelongsTo<User, $this>
      */
     public function owner(): BelongsTo
     {
 
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    /**
+     * Format the created_at date to a human-readable format.
+     */
+    public function toHumanDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value): string => $this->created_at->diffForHumans(),
+        );
     }
 
     /**
@@ -54,6 +65,7 @@ final class Hunt extends Model
             'is_reported' => 'boolean',
             'is_pinned' => 'boolean',
             'is_ignored' => 'boolean',
+            'created_at' => 'datetime',
         ];
     }
 }

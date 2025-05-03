@@ -9,7 +9,8 @@
     "format:check": "prettier --check resources/",
     "lint": "eslint . --fix",
     "types": "tsc --noEmit",
-    "release": "release-it"
+    "release": "release-it",
+    "test": "npm run format && npm run types && npm run lint"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",

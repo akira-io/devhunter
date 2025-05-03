@@ -27,8 +27,8 @@ arch('avoid mutation')
         'App\Http\Middleware\HandleInertiaRequests',
         'App\Http\Requests',
         'App\Http\Resources',
-        'App\Filament',
         'App\Foundation\Inspiring',
+        'App\Policies',
 
     ]);
 
@@ -45,7 +45,6 @@ arch('avoid inheritance')
         'App\Http\Middleware\HandleInertiaRequests',
         'App\Http\Requests',
         'App\Http\Resources',
-        'App\Filament',
         'App\Foundation\Inspiring',
     ]);
 
@@ -86,7 +85,7 @@ arch('models')
         'App\Services',
         'Database\Factories',
         'Database\Seeders',
-        'App\Filament',
+        'App\Policies',
     ]);
 
 arch('actions')

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\ProfessionalEducation;
+use App\Models\AcademicBackground;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\from;
@@ -12,7 +12,7 @@ beforeEach(function () {
     actingAs($this->user);
 });
 
-it('should create professional education', function () {
+it('should create academic backgrounds', function () {
 
     $response = from(route('profile.edit'))
         ->post(route('profile.education'), [
@@ -25,27 +25,27 @@ it('should create professional education', function () {
 
     $response->assertRedirect(route('profile.edit'));
 
-    expect($this->user->professionalEducations->first())
-        ->toBeInstanceOf(ProfessionalEducation::class)
-        ->and($this->user->professionalEducations->first()->count())
+    expect($this->user->academicBackgrounds()->first())
+        ->toBeInstanceOf(AcademicBackground::class)
+        ->and($this->user->academicBackgrounds()->first()->count())
         ->toBe(1);
 
 });
 
-it('should delete professional education', function () {
+it('should delete academic backgrounds', function () {
 
-    $this->professionalEducation = ProfessionalEducation::factory()->create([
+    $this->academicBackground = AcademicBackground::factory()->create([
         'user_id' => $this->user->id,
     ]);
 
     $response = from(route('profile.edit'))
         ->delete(route('profile.education.delete', [
-            'professionalEducation' => $this->professionalEducation,
+            'academicBackground' => $this->academicBackground,
         ]));
 
     $response->assertRedirect(route('profile.edit'));
 
-    expect($this->user->professionalEducations->count())
+    expect($this->user->academicBackgrounds()->count())
         ->toBe(0);
 
 });

@@ -28,9 +28,9 @@ import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { useAcademicBackground } from '@/stores/academicBackground';
-import { ProfessionalEducation as ProfessionalEducationType } from '@/types';
+import { AcademicBackground as AcademicBackgroundType } from '@/types';
 
-interface ProfessionalEducationForm {
+interface AcademicBackgroundForm {
     institution: string;
     degree: string;
     start_date: Date;
@@ -50,7 +50,7 @@ const degrees: Option[] = [
     { value: 'Outro', label: 'Outro' },
 ];
 
-export function ProfessionalEducation({ professionalEducations }: { professionalEducations: ProfessionalEducationType[] }) {
+export function AcademicBackground({ academicBackgrounds }: { academicBackgrounds: AcademicBackgroundType[] }) {
     const { toast } = useToast();
 
     const { isOpen, set } = useAcademicBackground();
@@ -63,7 +63,7 @@ export function ProfessionalEducation({ professionalEducations }: { professional
         errors,
         processing,
         reset,
-    } = useForm<Required<ProfessionalEducationForm>>({
+    } = useForm<Required<AcademicBackgroundForm>>({
         id: '',
         institution: '',
         degree: '',
@@ -76,7 +76,7 @@ export function ProfessionalEducation({ professionalEducations }: { professional
         e.preventDefault();
         post(route('profile.education'), {
             preserveScroll: true,
-            only: ['professionalEducations'],
+            only: ['academicBackgrounds'],
             onSuccess: () => {
                 toast({
                     title: 'Sucesso!',
@@ -92,7 +92,7 @@ export function ProfessionalEducation({ professionalEducations }: { professional
         destroy(route('profile.education.delete', id), {
             preserveScroll: true,
             replace: true,
-            only: ['professionalEducations'],
+            only: ['academicBackgrounds'],
             onSuccess: () => {
                 toast({
                     title: 'Sucesso!',
@@ -104,7 +104,7 @@ export function ProfessionalEducation({ professionalEducations }: { professional
 
     return (
         <ProfileCard title="Formação Académica" icon={<PlusIcon />} onClick={() => set(true)}>
-            {professionalEducations.length === 0 && (
+            {academicBackgrounds.length === 0 && (
                 <>
                     <GraduationCap />
                     <p className="mb-4 max-w-100 text-center">Destaque sua formação acadêmica e conquiste o reconhecimento que você merece!</p>
@@ -113,10 +113,10 @@ export function ProfessionalEducation({ professionalEducations }: { professional
             <div
                 className={cn(
                     'grid w-full grid-cols-1 gap-4',
-                    professionalEducations.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1' /* Add your custom styles here */,
+                    academicBackgrounds.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1' /* Add your custom styles here */,
                 )}
             >
-                {professionalEducations.map((education) => (
+                {academicBackgrounds.map((education) => (
                     <Card className="bg-card w-full items-start p-4" key={education.id}>
                         <CardTitle className="flex w-full items-center gap-1 text-sm font-semibold">
                             <GraduationCap /> {education.degree}

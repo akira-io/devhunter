@@ -53,6 +53,6 @@ final class GithubAuthController
 
         Auth::login($user, remember: true);
 
-        return to_route('hunt-line');
+        return to_route('hunts.index');
     }
 }

@@ -2,10 +2,10 @@ import DeleteUser from '@/components/delete-user';
 import InputError from '@/components/input-error';
 import { ProfileCard } from '@/components/profile-card';
 import { About } from '@/components/profile/About';
+import { AcademicBackground } from '@/components/profile/AcademicBackground';
 import { HighlightedProjects } from '@/components/profile/HighlightedProjects';
 import { HighlightSkills } from '@/components/profile/HighlightSkills';
 import { ProfileLinks } from '@/components/profile/Links';
-import { ProfessionalEducation } from '@/components/profile/ProfessionalEducation';
 import { ProfileCompletion } from '@/components/profile/ProfileCompletion';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -14,7 +14,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, Di
 import { Option } from '@/components/ui/multiselect';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem, type ProfessionalEducation as ProfessionalEducationType, type SharedData } from '@/types';
+import { type BreadcrumbItem, type AcademicBackground as ProfessionalEducationType, type SharedData } from '@/types';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { Award, PlusIcon } from 'lucide-react';
 import { FormEventHandler } from 'react';
@@ -39,12 +39,12 @@ interface ProfileProps {
     status?: string;
     skills: Option[];
     highlightedSkills: Option[];
-    professionalEducations: ProfessionalEducationType[];
+    academicBackgrounds: ProfessionalEducationType[];
     followers: number;
     followings: number;
 }
 
-export default function Profile({ mustVerifyEmail, status, skills, highlightedSkills, professionalEducations, followings, followers }: ProfileProps) {
+export default function Profile({ mustVerifyEmail, status, skills, highlightedSkills, academicBackgrounds, followings, followers }: ProfileProps) {
     const { auth } = usePage<SharedData>().props;
     const { data, setData, patch, errors } = useForm<Required<ProfileForm>>({
         name: auth.user.name,
@@ -66,7 +66,7 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
             <div className="bg-background flex flex-col gap-4 text-gray-200 sm:flex-row sm:p-8">
                 <aside className="bg-background flex w-full flex-shrink-0 flex-col items-center p-6 sm:w-80">
                     <div className="mb-4 w-full md:hidden">
-                        <ProfileCompletion professionalEducations={professionalEducations} skills={highlightedSkills} />
+                        <ProfileCompletion academicBackgrounds={academicBackgrounds} skills={highlightedSkills} />
                     </div>
                     <Card className="gradient effect w-full items-center justify-center p-6 sm:w-80">
                         <CardContent className="effect flex flex-col items-center text-center">
@@ -109,10 +109,10 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                 </aside>
                 <main className="flex-1 space-y-6 overflow-y-auto p-6">
                     <div className="hidden md:block">
-                        <ProfileCompletion professionalEducations={professionalEducations} skills={highlightedSkills} />
+                        <ProfileCompletion academicBackgrounds={academicBackgrounds} skills={highlightedSkills} />
                     </div>
                     <About />
-                    <ProfessionalEducation professionalEducations={professionalEducations} />
+                    <AcademicBackground academicBackgrounds={academicBackgrounds} />
                     <HighlightedProjects />
                     <section className="space-y-6">
                         <ProfileCard title="Habilidades" icon={<PlusIcon />}>

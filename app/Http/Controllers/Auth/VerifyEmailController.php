@@ -20,7 +20,7 @@ final readonly class VerifyEmailController
         $user = $request->user();
 
         if ($user->hasVerifiedEmail()) {
-            return redirect()->intended(route('hunt-line', absolute: false).'?verified=1');
+            return redirect()->intended(route('hunts.index', absolute: false).'?verified=1');
         }
 
         if ($user->markEmailAsVerified()) {
@@ -28,6 +28,6 @@ final readonly class VerifyEmailController
             event(new Verified($user));
         }
 
-        return redirect()->intended(route('hunt-line', absolute: false).'?verified=1');
+        return redirect()->intended(route('hunts.index', absolute: false).'?verified=1');
     }
 }

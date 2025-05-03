@@ -34,7 +34,7 @@ final readonly class AuthenticatedSessionController
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('hunt-line', absolute: false));
+        return redirect()->intended(route('hunts.index', absolute: false));
     }
 
     /**

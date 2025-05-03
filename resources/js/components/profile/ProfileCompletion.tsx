@@ -4,15 +4,15 @@ import { useAboutStore } from '@/stores/about';
 import { useAcademicBackground } from '@/stores/academicBackground';
 import { useHighlightedSkills } from '@/stores/highlightedSkills';
 import { useLinkStore } from '@/stores/link';
-import { ProfessionalEducation, SharedData } from '@/types';
+import { AcademicBackground, SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
 
 interface ProfileCompletionProps {
-    professionalEducations: ProfessionalEducation[];
+    academicBackgrounds: AcademicBackground[];
     skills: Option[];
 }
 
-export function ProfileCompletion({ skills, professionalEducations }: ProfileCompletionProps) {
+export function ProfileCompletion({ skills, academicBackgrounds }: ProfileCompletionProps) {
     const { auth } = usePage<SharedData>().props;
 
     const { open: openAbout } = useAboutStore();
@@ -48,12 +48,12 @@ export function ProfileCompletion({ skills, professionalEducations }: ProfileCom
         },
         {
             label: 'Formação Acadêmica',
-            done: professionalEducations.length > 0,
+            done: academicBackgrounds.length > 0,
             onclick: () => openAcademicBackground(),
         },
         // {
         //     label: 'Destaques Profissionais',
-        //     done: professionalEducations.length > 0, // ou outro campo de destaque
+        //     done: academicBackgrounds.length > 0, // ou outro campo de destaque
         // },
         {
             label: 'Destacar Tecnolodias',

@@ -33,7 +33,7 @@ use Laravel\Scout\Searchable;
  * @property-read  CarbonImmutable $created_at
  * @property-read  CarbonImmutable $updated_at
  * @property-read  list<mixed> $skills
- * @property-read  HasMany<ProfessionalEducation,$this> $professionalEducations
+ * @property-read  HasMany<AcademicBackground,$this> $academicBackgrounds
  * @property-read  MorphMany<User, $this> $followers
  * @property-read  MorphMany<User, $this> $followings
  */
@@ -105,18 +105,18 @@ final class User extends Authenticatable implements MustVerifyEmail
     /**
      * Professional education relationship
      *
-     * @return HasMany<ProfessionalEducation, $this>
+     * @return HasMany<AcademicBackground, $this>
      */
-    public function professionalEducations(): HasMany
+    public function academicBackgrounds(): HasMany
     {
 
-        return $this->hasMany(ProfessionalEducation::class, 'user_id');
+        return $this->hasMany(AcademicBackground::class, 'user_id');
     }
 
     /**
      * The user's hunts
      *
-     * @return HasMany<User, $this>
+     * @return HasMany<Hunt, $this>
      */
     public function hunts(): HasMany
     {
