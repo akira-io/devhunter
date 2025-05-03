@@ -105,7 +105,7 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                 </header>
                 <div className="mb-50 flex w-full flex-col items-center justify-start opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <div className="mt-20 flex w-full flex-col items-center justify-center py-2 md:max-w-4xl lg:max-w-6xl">
-                        <h1 className="mb-4 text-4xl font-bold dark:text-white">Dev Hunter 🇨🇻</h1>
+                        <h1 className="mb-4 text-4xl font-bold dark:text-white">Hunter 🇨🇻</h1>
                         <p className="text-md mb-10 max-w-2xl text-center font-normal text-[#1b1b18] sm:text-lg dark:text-[#EDEDEC]">
                             O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
                             e talento local encontra visibilidade global.

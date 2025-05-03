@@ -1,4 +1,5 @@
-<h1 align='center'> Dev Hunter</h1>
+<h1 align='center'> Hunter</h1>
+The Cape Verdean Network for Creators, Thinkers, and Builders
 
 <p align="center">
   <a href="https://github.com/akira-io/devhunter/actions">
@@ -15,9 +16,17 @@
   </a>
 </p>
 
-**Dev Hunter** is a social network for developers to showcase their projects, share ideas, and connect with others in
-the tech community. It's a platform built by developers, for developers, focusing on the human side of coding and
-fostering collaboration and growth.
+**Hunter** is more than a platform — it’s a movement.  
+Built by Cape Verdeans for Cape Verdeans, **Hunter** is where ideas take shape, projects find visibility, and people
+connect with purpose.
+
+Whether you're:
+
+- Showcasing your latest creation
+- Sharing a bold vision
+- Discovering others on the same journey
+
+**Hunter is your space to grow, collaborate, and be seen.**
 
 ![img.png](/public/img.png)
 

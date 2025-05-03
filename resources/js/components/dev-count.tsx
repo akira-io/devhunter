@@ -30,7 +30,7 @@ export default function DevCount({ users, total }: { users: User[]; total: numbe
                     variant="outline"
                     className="text-muted-foreground hover:text-foreground flex items-center justify-center rounded-full border-none bg-transparent px-2 text-xs shadow-none hover:bg-transparent"
                 >
-                    +{total - 10} devs
+                    +{total - 10} hunters
                 </Button>
             )}
         </div>
