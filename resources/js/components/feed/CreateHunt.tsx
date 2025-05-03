@@ -31,7 +31,7 @@ export function CreateHunt() {
                 toast({
                     description: 'Hunt partilhada com sucesso.',
                 });
-                reset();
+                setData('content', '');
                 setImagePreview([]);
             },
         });

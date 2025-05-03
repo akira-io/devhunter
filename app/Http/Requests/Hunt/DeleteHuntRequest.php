@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Hunt;
 
 use App\Models\Hunt;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 final class DeleteHuntRequest extends FormRequest
@@ -28,7 +29,9 @@ final class DeleteHuntRequest extends FormRequest
     public function authorize(): bool
     {
 
-        return $this->user()->can('delete', $this->route('hunt'));
+        $user = type($this->user())->as(User::class);
+
+        return (bool) $user->can('delete', $this->route('hunt'));
     }
 
     /**

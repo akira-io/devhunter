@@ -10,7 +10,21 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
+/**
+ * The Hunt model.
+ *
+ * @property-read  string $id
+ * @property-read  int $owner_id
+ * @property-read  string $content
+ * @property-read  bool $is_reported
+ * @property-read  bool $is_pinned
+ * @property-read  bool $is_ignored
+ * @property-read  Carbon $created_at
+ * @property-read  Carbon $updated_at
+ * @property-read  User $owner
+ */
 final class Hunt extends Model
 {
     /** @use HasFactory<HuntFactory> */
