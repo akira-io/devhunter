@@ -114,6 +114,17 @@ final class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * The user's hunts
+     *
+     * @return HasMany<User, $this>
+     */
+    public function hunts(): HasMany
+    {
+
+        return $this->hasMany(Hunt::class, 'owner_id');
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

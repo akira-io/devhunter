@@ -71,7 +71,7 @@ export default function SearchHunt() {
                         </CommandItem>
                         <CommandItem>
                             <ArrowUpRightIcon size={16} className="opacity-60" aria-hidden="true" />
-                            <Link href={route('hunt-line')}>Feed</Link>
+                            <Link href={route('hunts.index')}>Feed</Link>
                         </CommandItem>
                     </CommandGroup>
                 </CommandList>

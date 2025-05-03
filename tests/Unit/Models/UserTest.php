@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Hunt;
 use App\Models\ProfessionalEducation;
 use App\Models\User;
 
@@ -43,5 +44,19 @@ it('should has many professional educations', function () {
         ->each
         ->toBeInstanceOf(ProfessionalEducation::class)
         ->and($user->professionalEducations)
+        ->toHaveCount(3);
+});
+
+it('should has many hunts', function () {
+    $user = User::factory()->create();
+
+    $user->hunts()->createMany(
+        Hunt::factory()->count(3)->make()->toArray()
+    );
+
+    expect($user->hunts)
+        ->each
+        ->toBeInstanceOf(Hunt::class)
+        ->and($user->hunts)
         ->toHaveCount(3);
 });

@@ -12,7 +12,7 @@ use Inertia\ResponseFactory;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Middleware;
 
-#[Middleware('auth')]
+#[Middleware(['auth', 'verified'])]
 final readonly class FollowingController
 {
     /**

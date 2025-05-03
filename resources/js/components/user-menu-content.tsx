@@ -22,7 +22,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
-                    <Link className="block w-full" href={route('hunt-line')} as="button" prefetch onClick={cleanup}>
+                    <Link className="block w-full" href={route('hunts.index')} as="button" prefetch onClick={cleanup}>
                         <RssIcon className="mr-2" />
                         Hunt Line
                     </Link>
