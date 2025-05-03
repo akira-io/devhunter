@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Hunt;
 
 use App\Models\Hunt;
+use App\Models\User;
 use App\Rules\Rules\WithoutBlankCharactersRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +14,7 @@ final class CreateHuntRequest extends FormRequest
     /**
      * The validation rules that apply to the request.
      *
-     * @return array<string, array<int, string>>
+     * @return array<string,list<WithoutBlankCharactersRule|string>>
      */
     public function rules(): array
     {
@@ -40,6 +41,10 @@ final class CreateHuntRequest extends FormRequest
      */
     public function store(): Hunt
     {
-        return $this->user()->hunts()->create($this->validated());
+
+        $user = type($this->user())->as(User::class);
+
+        return $user->hunts()
+            ->create((array) $this->validated());
     }
 }
