@@ -9,7 +9,7 @@ import { BookOpen, EyeIcon, Folder, MessageCircleMore, NetworkIcon, RssIcon } fr
 const mainNavItems: NavItem[] = [
     {
         title: 'Hunt Line',
-        href: '/hunt-line',
+        href: route('hunts.index'),
         icon: RssIcon,
     },
     {

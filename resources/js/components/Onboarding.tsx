@@ -143,7 +143,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
     const has_followed = user.has_followed ?? hasFollowed;
 
     return (
-        <div {...props} className="effect">
+        <div {...props}>
             <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden">
                 <CardContent className="flex w-full flex-1 items-center justify-center gap-2">
                     <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
