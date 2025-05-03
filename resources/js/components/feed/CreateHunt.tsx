@@ -38,7 +38,7 @@ export function CreateHunt() {
     };
 
     return (
-        <Card className="effect gradient mx-auto w-full max-w-xl">
+        <Card className="gradient mx-auto w-full max-w-xl">
             <CardContent className="flex items-start gap-4">
                 <form className="relative flex w-full flex-col" onSubmit={shareHunt}>
                     <textarea
