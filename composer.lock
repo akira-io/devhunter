@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/akira-io/laravel-commentable.git",
-                "reference": "6aeaa3d31ea08a51240784f07d41ca2d203fbdd2"
+                "reference": "955afbba0275d06fa75c9c2eba3cee4107611535"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akira-io/laravel-commentable/zipball/6aeaa3d31ea08a51240784f07d41ca2d203fbdd2",
-                "reference": "6aeaa3d31ea08a51240784f07d41ca2d203fbdd2",
+                "url": "https://api.github.com/repos/akira-io/laravel-commentable/zipball/955afbba0275d06fa75c9c2eba3cee4107611535",
+                "reference": "955afbba0275d06fa75c9c2eba3cee4107611535",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-04T17:05:47+00:00"
+            "time": "2025-05-04T18:36:55+00:00"
         },
         {
             "name": "akira/laravel-followable",

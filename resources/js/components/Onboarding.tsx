@@ -116,7 +116,6 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
     ];
 
     const { truncate } = useTruncate();
-    const config = genConfig({ sex: 'man', hairStyle: 'thick' });
 
     const totalSteps = 4;
 
@@ -152,7 +151,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
         <div {...props}>
             <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden">
                 <CardContent className="flex w-full flex-1 items-center justify-center gap-2">
-                    <OnboardingAvatar avatarUrl={user.avatar_url} config={config} />
+                    <OnboardingAvatar avatarUrl={user.avatar_url} />
                     <div className="w-full">
                         <div className="flex items-center justify-between">
                             <CardTitle className="text-xl">{user.name}</CardTitle>
@@ -186,7 +185,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                 <DialogContent className="w-ful overflow-auto">
                     <DialogHeader className="effect bg-card gradient sticky mb-0 w-full items-center justify-between rounded-lg px-4 pb-2 shadow-lg">
                         <div className="flex w-full items-start justify-start pt-4">
-                            <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
+                            <OnboardingAvatar avatarUrl={user.avatar_url} />
                             <div className="ml-2 flex flex-col gap-1 text-left">
                                 <div>
                                     <DialogTitle className="text-xl">{user.name}</DialogTitle>

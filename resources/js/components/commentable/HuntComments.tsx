@@ -1,3 +1,4 @@
+import InputError from '@/components/input-error';
 import { LikeButton } from '@/components/likeable/LikeButton';
 import { OnboardingAvatar } from '@/components/Onboarding';
 import { Button } from '@/components/ui/button';
@@ -15,7 +16,7 @@ interface TweetCommentsProps {
 
 export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
     const { toast } = useToast();
-    const { data, post, setData } = useForm({
+    const { data, post, setData, errors } = useForm({
         content: '',
     });
 
@@ -44,17 +45,27 @@ export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
                 <>
                     <form className="relative flex gap-2" onSubmit={handleAddComment}>
                         <Textarea
-                            name="comment"
+                            name="content"
                             placeholder="Deixe o seu comentário aqui..."
                             value={data.content}
                             onChange={(e) => setData('content', e.target.value)}
                             className="focus:ring-primary focus:border-primary transition-all duration-300 focus:ring-2"
                         />
-                        <Button variant="ghost" size="sm" type="submit" className="absolute right-0 bottom-0 flex items-center gap-1">
-                            <SendHorizonal />
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            type="submit"
+                            className="hover:bg-transparente group absolute right-0 bottom-0 flex items-center gap-1"
+                        >
+                            <SendHorizonal className="group-hover:text-purple-500" />
                         </Button>
                     </form>
-                    <div className="space-y-2.5">
+                    {errors.content ? (
+                        <InputError message={errors.content} />
+                    ) : (
+                        <span className="float-right text-right text-xs text-gray-500">{data.content.length}/200</span>
+                    )}
+                    <div className="mt-8 space-y-2.5">
                         {hunt.comments.map((comment) => (
                             <div
                                 key={comment.id}
