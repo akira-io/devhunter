@@ -14,7 +14,7 @@ use Spatie\RouteAttributes\Attributes\Prefix;
 
 #[Middleware(['auth', 'verified'])]
 #[Prefix('commentable/hunts')]
-final class HuntCommentController
+final readonly class HuntCommentController
 {
     /**
      * Store a new comment for the hunt.

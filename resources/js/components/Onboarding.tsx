@@ -32,7 +32,7 @@ export function OnboardingAvatar({ avatarUrl, size = 16 }: OnboardingAvatarProps
     return (
         <Avatar className={`h-${size} w-auto shadow`}>
             {avatarUrl ? (
-                <AvatarImage src={avatarUrl} alt={avatarUrl} className={`h-${size} w-${size}`} />
+                <AvatarImage src={avatarUrl} alt={avatarUrl} className={cn('h-auto w-auto rounded-full object-cover', `h-${size} w-${size}`)} />
             ) : (
                 <AvatarGenerator style={{ width: `${avatarSize}px`, height: `${avatarSize}px` }} {...config} />
             )}

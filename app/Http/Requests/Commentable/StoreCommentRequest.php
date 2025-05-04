@@ -8,6 +8,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 final class StoreCommentRequest extends FormRequest
 {
+    /**
+     * The rules that apply to the request.
+     *
+     * @return array<string, string>
+     */
     public function rules(): array
     {
 
@@ -16,6 +21,9 @@ final class StoreCommentRequest extends FormRequest
         ];
     }
 
+    /**
+     * Handle the authorization logic.
+     */
     public function authorize(): bool
     {
 
