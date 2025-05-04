@@ -19,7 +19,7 @@ const mainNavItems: NavItem[] = [
     },
 
     {
-        title: 'Trackers',
+        title: 'Huntings',
         href: route('followable.followings'),
         icon: NetworkIcon,
     },

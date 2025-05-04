@@ -13,13 +13,13 @@ use Spatie\RouteAttributes\Attributes\Post;
 use Spatie\RouteAttributes\Attributes\Prefix;
 
 #[Middleware(['auth', 'verified'])]
-#[Prefix('commentable')]
-final class CommentController
+#[Prefix('commentable/hunts')]
+final class HuntCommentController
 {
     /**
      * Store a new comment for the hunt.
      */
-    #[Post('/hunts/{hunt}', name: 'hunts.comment')]
+    #[Post('{hunt}', name: 'hunts.comment')]
     public function store(StoreCommentRequest $request, Hunt $hunt): RedirectResponse
     {
         /** @var User $user */

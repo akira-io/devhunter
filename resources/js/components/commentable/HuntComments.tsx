@@ -1,12 +1,14 @@
+import DeleteComment from '@/components/commentable/DeleteComment';
 import InputError from '@/components/input-error';
 import { LikeButton } from '@/components/likeable/LikeButton';
 import { OnboardingAvatar } from '@/components/Onboarding';
 import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Hunt } from '@/types';
-import { useForm } from '@inertiajs/react';
-import { SendHorizonal } from 'lucide-react';
+import { Hunt, SharedData } from '@/types';
+import { useForm, usePage } from '@inertiajs/react';
+import { EllipsisVerticalIcon, SendHorizonal } from 'lucide-react';
 import { FormEvent } from 'react';
 
 interface TweetCommentsProps {
@@ -15,6 +17,7 @@ interface TweetCommentsProps {
 }
 
 export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
+    const { auth } = usePage<SharedData>().props;
     const { toast } = useToast();
     const { data, post, setData, errors } = useForm({
         content: '',
@@ -23,6 +26,8 @@ export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
     const handleAddComment = (e: FormEvent) => {
         e.preventDefault();
         post(route('hunts.comment', hunt.id), {
+            preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 setData('content', '');
                 toast({
@@ -40,7 +45,7 @@ export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
     };
 
     return (
-        <div className="mx-auto w-full max-w-xl space-y-2 px-6">
+        <div className="mx-auto max-h-100 w-full max-w-xl space-y-2 overflow-x-auto px-6">
             {isOpen && (
                 <>
                     <form className="relative flex gap-2" onSubmit={handleAddComment}>
@@ -82,8 +87,25 @@ export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
                                         <div className="flex w-full flex-1 flex-grow items-start gap-1">
                                             <OnboardingAvatar avatarUrl={comment.commenter.avatar_url} size={4} />
                                             <small className="fleex text-xs">{comment.commenter.name}</small>
+                                            <small className="text-xs text-gray-400">{comment.created_at}</small>
                                         </div>
-                                        <small className="text-xs text-gray-400">{comment.created_at}</small>
+                                        {auth.user.id === comment.commenter.id && (
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Button
+                                                        className="text-muted-forground bg-tr absolute top-0 right-0 flex cursor-pointer"
+                                                        variant="secondary"
+                                                    >
+                                                        <EllipsisVerticalIcon />
+                                                    </Button>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent className="effect gradient">
+                                                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                                                        <DeleteComment comment={comment} />
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
+                                        )}
                                     </div>
                                     <p className="text-sm leading-relaxed">{comment.content}</p>
                                 </div>

@@ -30,7 +30,7 @@ final class HuntResource extends JsonResource
             'updated_at' => $this->updated_at->diffForHumans(),
             'owner' => $this->owner,
             'image_url' => null,
-            'comments' => CommentResource::collection($request->user()->attachLikeStatus($this->comments)),
+            'comments' => CommentResource::collection($request->user()->attachLikeStatus($this->comments)->sortByDesc('created_at')),
             'likes_count' => $this->likesCount(),
             'views' => 0,
             'shares' => 0,

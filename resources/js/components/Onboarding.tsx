@@ -27,13 +27,14 @@ interface OnboardingAvatarProps {
 }
 
 export function OnboardingAvatar({ avatarUrl, size = 16 }: OnboardingAvatarProps) {
+    const avatarSize = size * 4;
     const config = genConfig({ sex: 'man', hairStyle: 'thick' });
     return (
         <Avatar className={`h-${size} w-auto shadow`}>
             {avatarUrl ? (
                 <AvatarImage src={avatarUrl} alt={avatarUrl} className={`h-${size} w-${size}`} />
             ) : (
-                <AvatarGenerator className={`h-${size} w-${size}`} {...config} />
+                <AvatarGenerator style={{ width: `${avatarSize}px`, height: `${avatarSize}px` }} {...config} />
             )}
         </Avatar>
     );
