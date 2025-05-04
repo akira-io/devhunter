@@ -32,7 +32,7 @@ final readonly class HuntController
             ->latest()
             ->paginate(20);
 
-        return Inertia::render('hunts/line', [
+        return Inertia::render('hunts/hunts', [
             'hunts' => HuntResource::collection($hunts),
         ]);
     }
