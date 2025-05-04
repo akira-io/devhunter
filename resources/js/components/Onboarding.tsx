@@ -14,20 +14,26 @@ import { format } from 'date-fns';
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap, UserPlusIcon } from 'lucide-react';
 import * as React from 'react';
 import { useState } from 'react';
-import AvatarGenerator, { AvatarFullConfig, genConfig } from 'react-nice-avatar';
+import AvatarGenerator, { genConfig } from 'react-nice-avatar';
 
 interface OnboardingProps extends React.ComponentProps<'div'> {
     user: User;
     hasFollowed?: boolean;
 }
 
-function OnboardingAvatar(props: { avatarUrl: string | undefined; alt: string; config: Required<AvatarFullConfig> }) {
+interface OnboardingAvatarProps {
+    avatarUrl: string | undefined;
+    size?: number;
+}
+
+export function OnboardingAvatar({ avatarUrl, size = 16 }: OnboardingAvatarProps) {
+    const config = genConfig({ sex: 'man', hairStyle: 'thick' });
     return (
-        <Avatar className="h-16 w-auto shadow">
-            {props.avatarUrl ? (
-                <AvatarImage src={props.avatarUrl} alt={props.alt} className="h-16 w-16" />
+        <Avatar className={`h-${size} w-auto shadow`}>
+            {avatarUrl ? (
+                <AvatarImage src={avatarUrl} alt={avatarUrl} className={`h-${size} w-${size}`} />
             ) : (
-                <AvatarGenerator className="h-16 w-16" {...props.config} />
+                <AvatarGenerator className={`h-${size} w-${size}`} {...config} />
             )}
         </Avatar>
     );
@@ -146,7 +152,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
         <div {...props}>
             <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden">
                 <CardContent className="flex w-full flex-1 items-center justify-center gap-2">
-                    <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
+                    <OnboardingAvatar avatarUrl={user.avatar_url} config={config} />
                     <div className="w-full">
                         <div className="flex items-center justify-between">
                             <CardTitle className="text-xl">{user.name}</CardTitle>

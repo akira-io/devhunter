@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Akira\Commentable\Concerns\Commentable;
+use Akira\Commentable\Models\Comment;
 use Akira\Likeable\Concerns\Likeable;
 use Database\Factories\HuntFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -11,6 +13,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -24,10 +27,14 @@ use Illuminate\Support\Carbon;
  * @property-read  bool $is_ignored
  * @property-read  Carbon $created_at
  * @property-read  Carbon $updated_at
+ * @property-read  bool $has_likes
  * @property-read  User $owner
+ * @property-read MorphMany<Comment, $this> $comments
  */
 final class Hunt extends Model
 {
+    use Commentable;
+
     /** @use HasFactory<HuntFactory> */
     use HasFactory;
 

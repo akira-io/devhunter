@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Akira\Commentable\Concerns\Commenter;
 use Akira\Followable\Concerns\Followable;
 use Akira\Followable\Concerns\Follower;
 use Akira\Likeable\Concerns\Liker;
@@ -40,6 +41,7 @@ use Laravel\Scout\Searchable;
  */
 final class User extends Authenticatable implements MustVerifyEmail
 {
+    use Commenter;
     use Followable;
     use Follower;
 

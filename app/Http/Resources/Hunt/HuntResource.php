@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Hunt;
 
+use App\Http\Resources\Commentable\CommentResource;
 use App\Models\Hunt;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -29,8 +30,8 @@ final class HuntResource extends JsonResource
             'updated_at' => $this->updated_at->diffForHumans(),
             'owner' => $this->owner,
             'image_url' => null,
-            'comments' => [],
-            'likes' => $this->likesCount(),
+            'comments' => CommentResource::collection($request->user()->attachLikeStatus($this->comments)),
+            'likes_count' => $this->likesCount(),
             'views' => 0,
             'shares' => 0,
             'has_liked' => $this->has_liked,

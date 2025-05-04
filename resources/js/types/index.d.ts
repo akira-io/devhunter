@@ -81,9 +81,20 @@ export interface Hunt {
     updated_at: string;
     owner: User;
     image_url?: string;
-    comments?: [];
+    comments: Comment[];
     shares: number;
-    likes: number;
+    likes_count: number;
     views: number;
+    has_liked: boolean;
+}
+
+export interface Comment {
+    id: number;
+    content: string;
+    created_at: string;
+    updated_at: string;
+    commenter: User;
+    hunt_id: number;
+    likes_count: number;
     has_liked: boolean;
 }

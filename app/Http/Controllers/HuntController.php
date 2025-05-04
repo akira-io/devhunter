@@ -33,6 +33,8 @@ final readonly class HuntController
         /** @var User $user */
         $user = $request->user();
 
+        //        dd(Hunt::latest()->first()->comments);
+
         $hunts = Hunt::query()
             ->latest()
             ->paginate();

@@ -1,6 +1,6 @@
+import { HuntComments } from '@/components/commentable/HuntComments';
 import DeleteHunt from '@/components/feed/DeleteHunt';
-import { HuntComments } from '@/components/feed/HuntComments';
-import { HuntLikes } from '@/components/feed/HuntLikes';
+import { HuntLikes } from '@/components/likeable/HuntLikes';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -102,7 +102,7 @@ export function HuntCard({ hunt }: HuntCardProps) {
                 </CardFooter>
                 {isOpenComments && (
                     <div className="mt-0">
-                        <HuntComments isOpen={isOpenComments} />
+                        <HuntComments isOpen={isOpenComments} hunt={hunt} />
                     </div>
                 )}
                 <HuntCardConnector />
