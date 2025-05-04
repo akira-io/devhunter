@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Commentable;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/** @mixin Comment */
 final class CommentResource extends JsonResource
 {
     /**

@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Commentable;
 use App\Http\Requests\Commentable\StoreCommentRequest;
 use App\Models\Hunt;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Post;
@@ -18,6 +19,8 @@ final readonly class HuntCommentController
 {
     /**
      * Store a new comment for the hunt.
+     *
+     * @throws Exception
      */
     #[Post('{hunt}', name: 'hunts.comment')]
     public function store(StoreCommentRequest $request, Hunt $hunt): RedirectResponse
@@ -25,7 +28,7 @@ final readonly class HuntCommentController
         /** @var User $user */
         $user = $request->user();
 
-        $user->comment($hunt, $request->validated('content'));
+        $user->comment($hunt, $request->string('content')->value());
 
         return to_route('hunts.index');
     }

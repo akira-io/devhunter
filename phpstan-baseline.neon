@@ -11,3 +11,21 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: app/Http/Middleware/HandleInertiaRequests.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Contracts\\Pagination\\Paginator\|Illuminate\\Database\\Eloquent\\Model\|Illuminate\\Pagination\\AbstractCursorPaginator\|Illuminate\\Pagination\\AbstractPaginator\|Illuminate\\Support\\Collection\|Illuminate\\Support\\LazyCollection\:\:sortByDesc\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Hunt/HuntResource.php
+
+		-
+			message: '#^Parameter \#1 \$entities of method App\\Models\\User\:\:attachLikeStatus\(\) expects Illuminate\\Contracts\\Pagination\\Paginator\|Illuminate\\Database\\Eloquent\\Model\|Illuminate\\Pagination\\AbstractCursorPaginator\|Illuminate\\Pagination\\AbstractPaginator\|Illuminate\\Support\\Collection\|Illuminate\\Support\\LazyCollection, Illuminate\\Database\\Eloquent\\Relations\\MorphMany\<Akira\\Commentable\\Models\\Comment, App\\Models\\Hunt\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Resources/Hunt/HuntResource.php
+
+		-
+			message: '#^Property App\\Models\\Hunt\:\:\$comments \(Illuminate\\Database\\Eloquent\\Relations\\MorphMany\<Akira\\Commentable\\Models\\Comment, App\\Models\\Hunt\>\) does not accept Illuminate\\Contracts\\Pagination\\Paginator\|Illuminate\\Database\\Eloquent\\Model\|Illuminate\\Pagination\\AbstractCursorPaginator\|Illuminate\\Pagination\\AbstractPaginator\|Illuminate\\Support\\Collection\|Illuminate\\Support\\LazyCollection\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Resources/Hunt/HuntResource.php

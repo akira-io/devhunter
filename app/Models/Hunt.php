@@ -29,7 +29,9 @@ use Illuminate\Support\Carbon;
  * @property-read  Carbon $updated_at
  * @property-read  bool $has_likes
  * @property-read  User $owner
- * @property-read MorphMany<Comment, $this> $comments
+ * @property MorphMany<Comment, $this> $comments
+ * @property-read int $likes_count
+ * @property-read bool $has_liked
  */
 final class Hunt extends Model
 {

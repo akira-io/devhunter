@@ -6,6 +6,7 @@ namespace App\Http\Resources\Hunt;
 
 use App\Http\Resources\Commentable\CommentResource;
 use App\Models\Hunt;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,6 +20,8 @@ final class HuntResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        /** @var User $user */
+        $user = $request->user();
 
         return [
             'id' => $this->id,
@@ -30,7 +33,7 @@ final class HuntResource extends JsonResource
             'updated_at' => $this->updated_at->diffForHumans(),
             'owner' => $this->owner,
             'image_url' => null,
-            'comments' => CommentResource::collection($request->user()->attachLikeStatus($this->comments)->sortByDesc('created_at')),
+            'comments' => CommentResource::collection($user->attachLikeStatus($this->comments)->sortByDesc('created_at')),
             'likes_count' => $this->likesCount(),
             'views' => 0,
             'shares' => 0,
