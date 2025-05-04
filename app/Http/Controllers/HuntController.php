@@ -8,7 +8,9 @@ use App\Http\Requests\Hunt\CreateHuntRequest;
 use App\Http\Requests\Hunt\DeleteHuntRequest;
 use App\Http\Resources\Hunt\HuntResource;
 use App\Models\Hunt;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Spatie\RouteAttributes\Attributes\Delete;
@@ -26,14 +28,17 @@ final readonly class HuntController
      * Display the hunt line.
      */
     #[Get(uri: '/', name: 'hunts.index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        /** @var User $user */
+        $user = $request->user();
+
         $hunts = Hunt::query()
             ->latest()
-            ->paginate(20);
+            ->paginate();
 
         return Inertia::render('hunts/hunts', [
-            'hunts' => HuntResource::collection($hunts),
+            'hunts' => HuntResource::collection($user->attachLikeStatus($hunts)),
         ]);
     }
 

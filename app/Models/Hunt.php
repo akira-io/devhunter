@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Akira\Likeable\Concerns\Likeable;
 use Database\Factories\HuntFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -31,6 +32,7 @@ final class Hunt extends Model
     use HasFactory;
 
     use HasUuids;
+    use Likeable;
 
     /**
      * The attributes that are mass assignable.

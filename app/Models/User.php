@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Akira\Followable\Concerns\Followable;
 use Akira\Followable\Concerns\Follower;
+use Akira\Likeable\Concerns\Liker;
 use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -45,6 +46,7 @@ final class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 
+    use Liker;
     use Notifiable;
     use Searchable;
 

@@ -30,9 +30,10 @@ final class HuntResource extends JsonResource
             'owner' => $this->owner,
             'image_url' => null,
             'comments' => [],
-            'likes' => 0,
+            'likes' => $this->likesCount(),
             'views' => 0,
             'shares' => 0,
+            'has_liked' => $this->has_liked,
         ];
     }
 }

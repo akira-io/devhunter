@@ -11,6 +11,7 @@
   "require": {
     "php": "^8.4",
     "akira/laravel-followable": "^0.1.0",
+    "akira/laravel-likeable": "^0.2.0",
     "inertiajs/inertia-laravel": "^2.0.2",
     "laravel/framework": "^12.9.2",
     "laravel/pulse": "^1.4",
