@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4c8a8cfc519a359a3d9734cee6210bf",
+    "content-hash": "b14815607d03e151bbe7b2a7ff16247d",
     "packages": [
         {
             "name": "akira/laravel-commentable",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/akira-io/laravel-commentable.git",
-                "reference": "955afbba0275d06fa75c9c2eba3cee4107611535"
+                "reference": "0033c901b48366dd6008921ee14c6ffad36fbfa4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akira-io/laravel-commentable/zipball/955afbba0275d06fa75c9c2eba3cee4107611535",
-                "reference": "955afbba0275d06fa75c9c2eba3cee4107611535",
+                "url": "https://api.github.com/repos/akira-io/laravel-commentable/zipball/0033c901b48366dd6008921ee14c6ffad36fbfa4",
+                "reference": "0033c901b48366dd6008921ee14c6ffad36fbfa4",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-04T18:36:55+00:00"
+            "time": "2025-05-04T19:58:34+00:00"
         },
         {
             "name": "akira/laravel-followable",
@@ -12076,7 +12076,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "akira/laravel-commentable": 20
     },
