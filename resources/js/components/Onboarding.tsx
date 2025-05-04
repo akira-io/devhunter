@@ -30,9 +30,14 @@ export function OnboardingAvatar({ avatarUrl, size = 16 }: OnboardingAvatarProps
     const avatarSize = size * 4;
     const config = genConfig({ sex: 'man', hairStyle: 'thick' });
     return (
-        <Avatar className={`h-${size} w-auto shadow`}>
+        <Avatar style={{ height: `${avatarSize}px`, width: `${avatarSize}px` }} className="shadow">
             {avatarUrl ? (
-                <AvatarImage src={avatarUrl} alt={avatarUrl} className={cn('h-auto w-auto rounded-full object-cover', `h-${size} w-${size}`)} />
+                <AvatarImage
+                    src={avatarUrl}
+                    alt={avatarUrl}
+                    className="rounded-full object-cover"
+                    style={{ height: `${avatarSize}px`, width: `${avatarSize}px` }}
+                />
             ) : (
                 <AvatarGenerator style={{ width: `${avatarSize}px`, height: `${avatarSize}px` }} {...config} />
             )}
