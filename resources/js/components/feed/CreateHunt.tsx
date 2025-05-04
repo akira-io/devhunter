@@ -7,7 +7,7 @@ import { Loader2, PlusCircleIcon } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 
 export function CreateHunt() {
-    const { errors, processing, post, data, setData, reset } = useForm({
+    const { errors, processing, post, data, setData } = useForm({
         content: '',
     });
 

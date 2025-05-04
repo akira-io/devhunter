@@ -1,12 +1,12 @@
 import DeleteHunt from '@/components/feed/DeleteHunt';
 import { HuntComments } from '@/components/feed/HuntComments';
+import { HuntLikes } from '@/components/feed/HuntLikes';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 import { Hunt, SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
-import { BarChart, Edit, EllipsisVerticalIcon, Heart, MessageCircle, Repeat2, SaveIcon, Share2Icon, ShieldAlert, StopCircle } from 'lucide-react';
+import { BarChart, Edit, EllipsisVerticalIcon, MessageCircle, Repeat2, SaveIcon, Share2Icon, ShieldAlert, StopCircle } from 'lucide-react';
 import { useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
@@ -26,13 +26,6 @@ export function HuntCardConnector() {
 export function HuntCard({ hunt }: HuntCardProps) {
     const { auth } = usePage<SharedData>().props;
     const [isOpenComments, setOpenComments] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
-    // /const [likes, setLikes] = useState(0);
-    const handleLike = () => {
-        // setLikes((prev) => prev + 1);
-        setIsAnimating(true);
-        setTimeout(() => setIsAnimating(false), 300); // animação dura 300ms
-    };
 
     return (
         <>
@@ -96,18 +89,15 @@ export function HuntCard({ hunt }: HuntCardProps) {
                     {hunt.image_url && <img src={hunt.image_url} alt="Tweet image" className="max-h-30 w-full rounded-md object-cover" />}
                 </CardContent>
                 <CardFooter className="text-muted-foreground flex justify-between text-sm">
+                    <HuntLikes hunt={hunt} />
                     <Button variant="ghost" size="sm" className="flex items-center gap-1" onClick={() => setOpenComments((prev) => !prev)}>
-                        <MessageCircle size={16} /> {hunt.comments?.length || 0}
+                        <MessageCircle size={20} /> {hunt.comments?.length || 0}
                     </Button>
                     <Button variant="ghost" size="sm" className="flex items-center gap-1">
-                        <Repeat2 size={16} /> {hunt.shares}
-                    </Button>
-                    <Button variant="ghost" size="sm" onClick={handleLike} className="flex items-center gap-1">
-                        <Heart size={16} className={cn('transition-transform duration-300', { 'text-primary scale-150': isAnimating })} />
-                        {hunt.likes}
+                        <Repeat2 size={20} /> {hunt.shares}
                     </Button>
                     <Button variant="ghost" size="sm" className="flex items-center gap-1">
-                        <BarChart size={16} /> {hunt.views}
+                        <BarChart size={20} /> {hunt.views}
                     </Button>
                 </CardFooter>
                 {isOpenComments && (

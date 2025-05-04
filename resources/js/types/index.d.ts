@@ -85,4 +85,5 @@ export interface Hunt {
     shares: number;
     likes: number;
     views: number;
+    has_liked: boolean;
 }

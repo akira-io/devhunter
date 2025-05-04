@@ -1,15 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
-import { useTweetStore } from '@/stores/tweet';
+import { useHuntStore } from '@/stores/huntStore';
 import { ImageIcon, Plus } from 'lucide-react';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export function FloatingCreateHunt() {
-    const { isFloatCreateTweetOpen, setIsFloatCreateTweetOpen } = useTweetStore();
+    const { isFloatCreateHuntOpen, setIsFloatCreateHuntOpen } = useHuntStore();
     const [tweetContent, setTweetContent] = useState('');
     const [imagePreview, setImagePreview] = useState<string[]>([]);
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files) {
             const fileArray = Array.from(files).map((file) => URL.createObjectURL(file));
@@ -21,7 +21,7 @@ export function FloatingCreateHunt() {
         if (!tweetContent.trim()) return;
         setTweetContent('');
         setImagePreview([]);
-        setIsFloatCreateTweetOpen(false);
+        setIsFloatCreateHuntOpen(false);
     };
 
     const handleTweetChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -30,7 +30,7 @@ export function FloatingCreateHunt() {
 
     return (
         <div className="fixed right-4 bottom-4 z-50 md:right-10 md:bottom-10">
-            <Dialog open={isFloatCreateTweetOpen} onOpenChange={setIsFloatCreateTweetOpen}>
+            <Dialog open={isFloatCreateHuntOpen} onOpenChange={setIsFloatCreateHuntOpen}>
                 <DialogTrigger className="bg-primary hover:bg-primary-dark flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg transition-all duration-300">
                     <Plus size={24} />
                 </DialogTrigger>
@@ -65,7 +65,7 @@ export function FloatingCreateHunt() {
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsFloatCreateTweetOpen(false)} className="mr-2">
+                        <Button variant="outline" onClick={() => setIsFloatCreateHuntOpen(false)} className="mr-2">
                             Cancelar
                         </Button>
                         <Button onClick={handleTweetPost} disabled={!tweetContent.trim()}>
