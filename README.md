@@ -1,5 +1,7 @@
 <h1 align='center'> Hunter</h1>
-The Cape Verdean Network for Creators, Thinkers, and Builders
+<p align='center'>The Cape Verdean Network for Creators, Thinkers, and Builders</p>
+<p align='center'>**Hunter is your space to grow, collaborate, and be seen.**</p>
+
 
 <p align="center">
   <a href="https://github.com/akira-io/devhunter/actions">
@@ -16,17 +18,7 @@ The Cape Verdean Network for Creators, Thinkers, and Builders
   </a>
 </p>
 
-**Hunter** is more than a platform — it’s a movement.  
-Built by Cape Verdeans for Cape Verdeans, **Hunter** is where ideas take shape, projects find visibility, and people
-connect with purpose.
 
-Whether you're:
-
-- Showcasing your latest creation
-- Sharing a bold vision
-- Discovering others on the same journey
-
-**Hunter is your space to grow, collaborate, and be seen.**
 
 ![img.png](/public/img.png)
 
