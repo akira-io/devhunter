@@ -26,7 +26,7 @@ export function Finder({ users, paginator, onSearch, isSearchLoading }: FinderPr
                 <form className="relative mb-10 w-full md:mb-20">
                     <Input
                         id="search"
-                        className="peer placeholder:text-muted-foreground dark:placeholder:text-muted h-12 w-full rounded-md border border-black bg-transparent px-4 px-9 text-sm dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
+                        className="peer placeholder:text-muted-foreground dark:placeholder:text-muted h-12 w-full rounded-md border border-black bg-transparent px-4 px-9 dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
                         placeholder="Procurar por nome, email, skills..."
                         type="text"
                         name="query"
