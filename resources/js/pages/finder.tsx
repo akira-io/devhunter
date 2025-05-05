@@ -9,10 +9,6 @@ import React, { useState } from 'react';
 
 interface FinderProps {
     users: User[];
-    paginator: {
-        data: User[];
-        total: 0;
-    };
 }
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -21,7 +17,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/finder',
     },
 ];
-export default function Finder({ users, paginator }: FinderProps) {
+export default function Finder({ users }: FinderProps) {
     const [isSearchLoading, setIsSearchLoading] = useState(false);
 
     function search(e: React.ChangeEvent<HTMLInputElement>) {
@@ -51,7 +47,7 @@ export default function Finder({ users, paginator }: FinderProps) {
                 </Button>
             </div>
             <div className="mb-50 flex w-full flex-col items-center justify-start px-4 opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-                <FinderComponent users={users} paginator={paginator} onSearch={search} isSearchLoading={isSearchLoading} />
+                <FinderComponent users={users} onSearch={search} isSearchLoading={isSearchLoading} />
             </div>
         </Layout>
     );

@@ -1,25 +1,17 @@
 import Onboarding from '@/components/Onboarding';
 import { ScrollDown } from '@/components/scroll-down';
-import { type SharedData, User } from '@/types';
+import { User } from '@/types';
 import { Input } from '@headlessui/react';
-import { usePage } from '@inertiajs/react';
 import { Loader, SearchIcon } from 'lucide-react';
 import { ChangeEvent } from 'react';
 
 interface FinderProps {
     users: User[];
-    paginator: {
-        data: User[];
-        total: 0;
-    };
     onSearch: (event: ChangeEvent<HTMLInputElement>) => void;
     isSearchLoading: boolean;
 }
 
-export function Finder({ users, paginator, onSearch, isSearchLoading }: FinderProps) {
-    const { auth } = usePage<SharedData>().props;
-
-    const filteredUsers = users.length > 0 ? users.filter((user) => user.id !== auth.user.id) : paginator.data;
+export function Finder({ users, onSearch, isSearchLoading }: FinderProps) {
     return (
         <>
             <div className="my-10 flex w-full max-w-xl flex-col items-center justify-center dark:text-white">
@@ -38,7 +30,7 @@ export function Finder({ users, paginator, onSearch, isSearchLoading }: FinderPr
                 </form>
             </div>
             <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 sm:grid-cols-2 md:px-10 xl:grid-cols-3">
-                {filteredUsers.map((user) => (
+                {users.map((user) => (
                     <Onboarding user={user} key={user.email} />
                 ))}
             </div>

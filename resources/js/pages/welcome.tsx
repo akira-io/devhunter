@@ -105,13 +105,13 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                         <p className="text-md mb-10 max-w-2xl text-center font-normal text-[#1b1b18] sm:text-lg dark:text-[#EDEDEC]">
                             O ponto de partida para inovação, colaboração e tecnologia em Cabo Verde. Um ecossistema digital onde projetos ganham vida
                             e talento local encontra visibilidade global.
-                            <p className="text-muted-foreground mt-4 text-xs">
+                            <span className="text-muted-foreground mt-4 text-xs">
                                 "{quote.message} - <b>{quote.author}</b>"
-                            </p>
+                            </span>
                         </p>
                         <DevCount users={_users} total={_total} />
                     </div>
-                    <Finder users={users} paginator={paginator} onSearch={search} isSearchLoading={isSearchLoading} />
+                    <Finder users={users} onSearch={search} isSearchLoading={isSearchLoading} />
                 </div>
             </SidebarProvider>
             <Toaster />
