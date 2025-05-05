@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Welcome;
 
-use App\Models\User;
+use App\Actions\GetHuntersAction;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Inertia\Inertia;
 use Inertia\Response;
 use Throwable;
@@ -18,28 +17,12 @@ final readonly class WelcomeController
      *
      * @throws Throwable
      */
-    public function index(Request $request): Response
+    public function index(Request $request, GetHuntersAction $action): Response
     {
-        /** @var User|null $user */
-        $user = $request->user() ?: null;
-
-        $query = $request->string('q');
-
-        $usersQuery = $query->isNotEmpty()
-            ? User::search($query->value())
-            : User::query()->inRandomOrder();
-
-        /**
-         * @var LengthAwarePaginator<int, string> $paginator
-         */
-        $paginator = $usersQuery
-            ->paginate(20)->withQueryString();
-
-        // @phpstan-ignore-next-line
-        $paginator->load(['academicBackgrounds']);
+        [$user, $paginator] = $action->handle($request);
 
         return Inertia::render('welcome', [
-            'users' => $user?->attachFollowStatus($paginator) ?? [], // phpstan-ignore-line
+            'users' => $user,
             'paginator' => $paginator,
         ]);
     }

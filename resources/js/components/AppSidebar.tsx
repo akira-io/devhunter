@@ -4,7 +4,7 @@ import { NavMain } from '@/components/nav-main';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, EyeIcon, Folder, MessageCircleMore, NetworkIcon, RssIcon } from 'lucide-react';
+import { BookOpen, EyeIcon, FileSearch, Folder, MessageCircleMore, NetworkIcon, RssIcon } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
@@ -22,6 +22,12 @@ const mainNavItems: NavItem[] = [
         title: 'Huntings',
         href: route('followable.followings'),
         icon: NetworkIcon,
+    },
+
+    {
+        title: 'Explorar',
+        href: route('finder.index'),
+        icon: FileSearch,
     },
 ];
 

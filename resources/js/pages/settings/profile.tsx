@@ -63,12 +63,12 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Definições Perfil" />
-            <div className="bg-background flex flex-col gap-4 text-gray-200 sm:flex-row sm:p-8">
-                <aside className="bg-background flex w-full flex-shrink-0 flex-col items-center p-6 sm:w-80">
+            <div className="bg-background mx-auto flex max-w-6xl flex-col gap-4 text-gray-200 md:flex-row md:p-8">
+                <aside className="bg-background sticky top-4 flex w-full flex-shrink-0 flex-col items-center self-start p-6 sm:w-80">
                     <div className="mb-4 w-full md:hidden">
                         <ProfileCompletion academicBackgrounds={academicBackgrounds} skills={highlightedSkills} />
                     </div>
-                    <Card className="gradient effect w-full items-center justify-center p-6 sm:w-80">
+                    <Card className="gradient effect w-full items-center justify-center p-6 md:w-80">
                         <CardContent className="effect flex flex-col items-center text-center">
                             <Avatar className="h-32 w-auto">
                                 {auth.user.avatar_url ? (
@@ -97,7 +97,7 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                                 <b>{followers}</b> Hunters
                             </Link>
                             <Link href={route('followable.followings')} className="flex gap-1 text-xs">
-                                <b>{followings}</b> Trackers
+                                <b>{followings}</b> Huntings
                             </Link>
                         </div>
                         <HighlightSkills skills={skills} authSkills={highlightedSkills} />
@@ -136,8 +136,8 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                                     </DialogHeader>
                                     <Textarea id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} maxLength={200} />
                                     <InputError className="mt-2" message={errors.bio} />
-                                    <div className="flex flex-col sm:flex-row sm:justify-end">
-                                        <span className="text-muted-foreground float-end flex-1 text-sm">{data.bio.length} / 200</span>
+                                    <div className="flex flex-col md:flex-row md:justify-end">
+                                        <span className="text-muted-foreground text-md float-end flex-1">{data.bio.length} / 200</span>
                                         <Button type="button" onClick={submit}>
                                             <DialogClose>Guardar</DialogClose>
                                         </Button>
@@ -155,7 +155,7 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
             </div>
             {mustVerifyEmail && auth.user.email_verified_at === null && (
                 <div>
-                    <p className="text-muted-foreground -mt-4 text-sm">
+                    <p className="text-muted-foreground text-md -mt-4">
                         O seu endereço de e-mail não está verificado.
                         <Link
                             href={route('verification.send')}
@@ -167,7 +167,7 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                         </Link>
                     </p>
                     {status === 'verification-link-sent' && (
-                        <div className="mt-2 text-sm font-medium text-green-600">
+                        <div className="text-md mt-2 font-medium text-green-600">
                             Um novo link de verificação foi enviado para o seu endereço de e-mail.
                         </div>
                     )}

@@ -2,11 +2,13 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { useHuntStore } from '@/stores/huntStore';
 import { useForm } from '@inertiajs/react';
 import { Loader2, PlusCircleIcon } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 
 export function CreateHunt() {
+    const { setIsFloatCreateHuntOpen } = useHuntStore();
     const { errors, processing, post, data, setData } = useForm({
         content: '',
     });
@@ -33,6 +35,7 @@ export function CreateHunt() {
                 });
                 setData('content', '');
                 setImagePreview([]);
+                setIsFloatCreateHuntOpen(false);
             },
         });
     };

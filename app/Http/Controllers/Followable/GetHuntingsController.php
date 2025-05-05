@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Followable;
 
+use Akira\Followable\Exceptions\FollowableTraitNotFoundException;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -12,22 +13,22 @@ use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Middleware;
 
 #[Middleware(['auth', 'verified'])]
-final readonly class FollowerController
+final readonly class GetHuntingsController
 {
     /**
-     * Display the followers of the authenticated user.
+     * Display the followings of the authenticated user.
+     *
+     * @throws FollowableTraitNotFoundException
      */
-    #[Get('followable/followers', name: 'followable.followers')]
+    #[Get('followable/followings', name: 'followable.followings')]
     public function __invoke(Request $request): Response|ResponseFactory
     {
-
         /*** @var User $user */
         $user = type($request->user())->as(User::class);
+        $followings = $user->followings()->with(['followable'])->paginate(20);
 
-        $followers = $user->followers()->paginate(20);
-
-        return inertia('followable/hunters', [
-            'followers' => $user->attachFollowStatus($followers),
+        return inertia('followable/huntings', [
+            'followings' => $user->attachFollowStatus($followings),
         ]);
     }
 }

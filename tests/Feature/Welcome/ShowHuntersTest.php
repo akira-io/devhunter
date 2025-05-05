@@ -10,7 +10,7 @@ use function Pest\Laravel\get;
 
 beforeEach(fn () => User::factory()->count(25)->create());
 
-it('should renders welcome page with users paginated by 20', function () {
+it('should renders welcome page with users paginated by 15', function () {
 
     $response = get(route('home'));
 
@@ -19,9 +19,9 @@ it('should renders welcome page with users paginated by 20', function () {
         ->assertInertia(fn (AssertableInertia $page) => $page
             ->component('welcome')
             ->has('paginator', fn (AssertableInertia $paginator) => $paginator
-                ->where('per_page', 20)
+                ->where('per_page', 15)
                 ->where('total', 25)
-                ->has('data', 20)
+                ->has('data', 15)
                 ->etc()
             )
 
@@ -35,9 +35,9 @@ it('should renders welcome page with users paginated by 20', function () {
     $paginator = $props['paginator'];
 
     Assert::assertSame(25, $paginator['total']);
-    Assert::assertSame(20, $paginator['per_page']);
+    Assert::assertSame(15, $paginator['per_page']);
 
-    Assert::assertCount(20, $paginator['data']);
+    Assert::assertCount(15, $paginator['data']);
 
     $returnedIds = collect($paginator['data'])->pluck('id')->all();
 
@@ -46,8 +46,8 @@ it('should renders welcome page with users paginated by 20', function () {
         'Há IDs inválidos no paginator'
     );
 
-    $first20Factory = User::pluck('id')->take(20)->all();
-    $diffAssoc = array_diff_assoc($first20Factory, $returnedIds);
+    $first15Factory = User::pluck('id')->take(15)->all();
+    $diffAssoc = array_diff_assoc($first15Factory, $returnedIds);
     Assert::assertNotEmpty(
         $diffAssoc,
         'Pelo menos um usuário deveria estar em posição diferente'

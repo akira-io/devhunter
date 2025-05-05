@@ -71,7 +71,7 @@ export function ProfileCompletion({ skills, academicBackgrounds }: ProfileComple
     const profileCompletionPercentage = calculateProfileCompletion(profileCompletion);
 
     return (
-        <section className="bg-card gradient effect rounded-lg p-6">
+        <section className="bg-card gradient effect max-w-4xl rounded-lg p-6">
             <div className="mb-4 flex w-full items-center justify-between">
                 <div>
                     <h3 className="text-foreground text-lg font-semibold">

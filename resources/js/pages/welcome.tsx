@@ -1,15 +1,13 @@
 import AppLogo from '@/components/app-logo';
 import DevCount from '@/components/dev-count';
+import { Finder } from '@/components/Finder';
 import { NavUser } from '@/components/nav-user';
-import Onboarding from '@/components/Onboarding';
-import { ScrollDown } from '@/components/scroll-down';
-import { Input } from '@/components/ui/input';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/toaster';
 import { type SharedData, User } from '@/types';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { RiDiscordFill, RiGithubFill } from '@remixicon/react';
-import { Loader, LogInIcon, SearchIcon, UserPlus } from 'lucide-react';
+import { LogInIcon, UserPlus } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 
 export interface WelcomeProps {
@@ -47,8 +45,6 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
             },
         );
     }
-
-    const filteredUsers = users.length > 0 ? users.filter((user) => user.id !== auth.user.id) : paginator.data;
 
     return (
         <>
@@ -115,27 +111,7 @@ export default function Welcome({ users, paginator }: WelcomeProps) {
                         </p>
                         <DevCount users={_users} total={_total} />
                     </div>
-                    <div className="my-10 w-full max-w-xl dark:text-white">
-                        <form className="relative mb-10 md:mb-20">
-                            <Input
-                                id="search"
-                                className="peer dark:placeholder:text-muted dark:border-foreground h-12 border border-black ps-9 pe-9 placeholder:text-gray-500 dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
-                                placeholder="procurar  desenvolvedores por nome, email, skills, etc.."
-                                type="text"
-                                name="query"
-                                onChange={(e) => search(e)}
-                            />
-                            <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
-                                {!isSearchLoading ? <SearchIcon size={16} /> : <Loader className="animate-spin" size={16} />}
-                            </div>
-                        </form>
-                    </div>
-                    <div className="grid w-full max-w-7xl grid-cols-1 justify-center gap-4 transition-all duration-1 sm:grid-cols-2 md:px-10 xl:grid-cols-3">
-                        {filteredUsers.map((user) => (
-                            <Onboarding user={user} key={user.email} />
-                        ))}
-                    </div>
-                    <ScrollDown className="bg-foreground fixed bottom-0 h-8 w-8 rounded-md text-white dark:text-zinc-900" />
+                    <Finder users={users} paginator={paginator} onSearch={search} isSearchLoading={isSearchLoading} />
                 </div>
             </SidebarProvider>
             <Toaster />

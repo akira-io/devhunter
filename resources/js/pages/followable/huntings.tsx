@@ -12,16 +12,16 @@ interface FollowingsProps {
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Trackers',
+        title: 'Huntings',
         href: '/followable/follower',
     },
 ];
-export default function Trackers({ followings }: FollowingsProps) {
+export default function Huntings({ followings }: FollowingsProps) {
     return (
         <Layout breadcrumbs={breadcrumbs}>
-            <Head title="Seguindo" />
+            <Head title="Huntings" />
             <div className="mb-4 flex items-start justify-between px-5">
-                <SectionHeader title="Trackers" description="São hunters que admiras, que te inspiram e te fazem querer evoluir." />
+                <SectionHeader title="Huntings" description="São hunters que admiras, que te inspiram e te fazem querer evoluir." />
                 <Button className="text-muted-forground flex h-8 w-8 cursor-pointer border-none shadow-none" variant="secondary">
                     <ListFilterPlusIcon />
                 </Button>

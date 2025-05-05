@@ -1,25 +1,26 @@
 {
-  "preset": "laravel",
-  "ignore": {
-    "words": [
-      "php",
-      "ssr",
-      "tsconfig",
-      "utils",
-      "tooltip",
-      "filesystems",
-      "cors",
-      "infolist",
-      "commentable",
-      "likeable"
-    ],
-    "paths": [
-      "resources",
-      "eslint.config.js",
-      "public",
-      "tests",
-      "storage",
-      "app/Enums/SkillsEnum.php"
-    ]
-  }
+    "preset": "laravel",
+    "ignore": {
+        "words": [
+            "php",
+            "ssr",
+            "tsconfig",
+            "utils",
+            "tooltip",
+            "filesystems",
+            "cors",
+            "infolist",
+            "commentable",
+            "likeable",
+            "huntings"
+        ],
+        "paths": [
+            "resources",
+            "eslint.config.js",
+            "public",
+            "tests",
+            "storage",
+            "app\/Enums\/SkillsEnum.php"
+        ]
+    }
 }

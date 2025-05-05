@@ -109,7 +109,7 @@ export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
                                     </div>
                                     <p className="text-sm leading-relaxed">{comment.content}</p>
                                 </div>
-                                <div className="text-muted-foreground mb-4 flex p-2 text-sm">
+                                <div className="text-muted-foreground mb-4 flex px-4 py-2 text-sm">
                                     <LikeButton
                                         count={comment.likes_count}
                                         hasLiked={comment.has_liked}
