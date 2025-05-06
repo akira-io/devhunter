@@ -16,7 +16,11 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
         <>
             <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                    <UserInfo user={user} showEmail={true} />
+                    <UserInfo user={user} />
+                    <div className="grid flex-1 text-left text-sm leading-tight">
+                        <span className="truncate font-medium">{user.name}</span>
+                        <span className="text-muted-foreground truncate text-xs">{user.email}</span>
+                    </div>
                 </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
