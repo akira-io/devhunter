@@ -14,7 +14,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, Di
 import { Option } from '@/components/ui/multiselect';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { type AcademicBackground as ProfessionalEducationType, type BreadcrumbItem, type SharedData } from '@/types';
+import { type BreadcrumbItem, type AcademicBackground as ProfessionalEducationType, type SharedData } from '@/types';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { Award, PlusIcon } from 'lucide-react';
 import { FormEventHandler } from 'react';
