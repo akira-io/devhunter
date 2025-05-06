@@ -78,7 +78,7 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
+    --background: oklch(0.95 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
@@ -155,5 +155,23 @@
 
     body {
         @apply bg-background text-foreground;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
+}
+
+@layer utilities {
+    .effect {
+        @apply transition-transform duration-500 ease-in-out odd:-rotate-1 even:rotate-1 hover:rotate-0 hover:duration-600;
+
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+.gradient {
+    @apply dark:bg-gradient-to-t dark:from-zinc-900 dark:to-zinc-900/50;
 }

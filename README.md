@@ -1,8 +1,24 @@
-# Dev Hunter
+<h1 align='center'> Hunter</h1>
+<p align='center'>The Cape Verdean Network for Creators, Thinkers, and Builders</p>
+<p align='center'>**Hunter is your space to grow, collaborate, and be seen.**</p>
 
-**Dev Hunter** is a social network for developers to showcase their projects, share ideas, and connect with others in
-the tech community. It's a platform built by developers, for developers, focusing on the human side of coding and
-fostering collaboration and growth.
+
+<p align="center">
+  <a href="https://github.com/akira-io/devhunter/actions">
+    <img alt="Testes" src="https://github.com/akira-io/devhunter/actions/workflows/tests.yml/badge.svg">
+  </a>
+  <a href="https://github.com/akira-io/devhunter/releases">
+    <img alt="Última versão" src="https://img.shields.io/github/v/release/akira-io/devhunter?style=flat-square">
+  </a>
+  <a href="https://github.com/akira-io/devhunter/issues">
+    <img alt="Issues abertas" src="https://img.shields.io/github/issues/akira-io/devhunter?style=flat-square">
+  </a>
+  <a href="https://github.com/akira-io/devhunter/blob/main/LICENSE.md">
+    <img alt="Licença" src="https://img.shields.io/github/license/akira-io/devhunter?style=flat-square">
+  </a>
+</p>
+
+
 
 ![img.png](/public/img.png)
 
@@ -76,7 +92,7 @@ the [Laravel Sail documentation](https://laravel.com/docs/10.x/sail) for step-by
 - **Developer Profiles**: Create your profile with tech stack, bio, and achievements.
 - **Project Showcase**: Share your coding projects, highlight your best work.
 - **Devlogs & Posts**: Post ideas, reflections, devlogs, and share your learning experiences.
-- **Interactive Feed**: Like, comment, and follow other devs for engagement and collaboration.
+- **Interactive HuntLine**: Like, comment, and follow other devs for engagement and collaboration.
 - **Explore by Stack**: Discover projects based on programming language, framework, and more.
 - **Community First**: A 100% developer-focused community, without algorithms hiding your content.
 
@@ -108,7 +124,7 @@ Current platforms don’t fully value the developer as a creator:
 
 1. **Create Your Profile**: Add your tech stack, bio, and showcase your best work.
 2. **Post and Share**: Write quick posts or long devlogs to share your experiences and ideas.
-3. **Interactive Feed**: Engage with others through likes, comments, and follow developers.
+3. **Interactive HuntLine**: Engage with others through likes, comments, and follow developers.
 4. **Explore by Stack**: Filter projects by programming language, framework, or tool.
 
 ---

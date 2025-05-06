@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Models\ProfessionalEducation;
+use App\Models\AcademicBackground;
+use App\Models\Hunt;
 use App\Models\User;
 
 test('to array', function () {
@@ -33,39 +34,29 @@ test('to array', function () {
         ]);
 });
 
-it('should access the admin panel', function ($email) {
-
-    $user = User::factory()
-        ->withEmail($email)
-        ->create();
-    expect($user->canAccessPanel(filament()->getPanel('admin')))
-        ->toBeTrue();
-})->with([
-    'kidiatoliny@gmail.com',
-    'kid@akira-io.com',
-]);
-
-it('should dennie access to the admin panel', function ($email) {
-
-    $user = User::factory()
-        ->withEmail($email)
-        ->create();
-    expect($user->canAccessPanel(filament()->getPanel('admin')))
-        ->not->toBeTrue();
-})->with([
-    'user@gmail.com',
-    'user2@akiraa-io.com',
-]);
-
-it('should has many professional educations', function () {
+it('should has many academic backgrounds', function () {
     $user = User::factory()->create();
-    $user->professionalEducations()->createMany(
-        ProfessionalEducation::factory()->count(3)->make()->toArray()
+    $user->academicBackgrounds()->createMany(
+        AcademicBackground::factory()->count(3)->make()->toArray()
     );
 
-    expect($user->professionalEducations)
+    expect($user->academicBackgrounds)
         ->each
-        ->toBeInstanceOf(ProfessionalEducation::class)
-        ->and($user->professionalEducations)
+        ->toBeInstanceOf(AcademicBackground::class)
+        ->and($user->academicBackgrounds)
+        ->toHaveCount(3);
+});
+
+it('should has many hunts', function () {
+    $user = User::factory()->create();
+
+    $user->hunts()->createMany(
+        Hunt::factory()->count(3)->make()->toArray()
+    );
+
+    expect($user->hunts)
+        ->each
+        ->toBeInstanceOf(Hunt::class)
+        ->and($user->hunts)
         ->toHaveCount(3);
 });

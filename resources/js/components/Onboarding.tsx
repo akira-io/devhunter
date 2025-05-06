@@ -1,3 +1,4 @@
+import UnfollowButton from '@/components/followable/UnfollowButton';
 import { HighlightedSkills } from '@/components/profile/HighlightedSkills';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -10,23 +11,35 @@ import { SharedData, User } from '@/types';
 import { useForm, usePage } from '@inertiajs/react';
 import { RiBlueskyFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
 import { format } from 'date-fns';
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap, UserMinus2, UserPlusIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap, UserPlusIcon } from 'lucide-react';
 import * as React from 'react';
 import { useState } from 'react';
-import AvatarGenerator, { AvatarFullConfig, genConfig } from 'react-nice-avatar';
+import AvatarGenerator, { genConfig } from 'react-nice-avatar';
 
 interface OnboardingProps extends React.ComponentProps<'div'> {
     user: User;
     hasFollowed?: boolean;
 }
 
-function OnboardingAvatar(props: { avatarUrl: string | undefined; alt: string; config: Required<AvatarFullConfig> }) {
+interface OnboardingAvatarProps {
+    avatarUrl: string | undefined;
+    size?: number;
+}
+
+export function OnboardingAvatar({ avatarUrl, size = 16 }: OnboardingAvatarProps) {
+    const avatarSize = size * 4;
+    const config = genConfig({ sex: 'man', hairStyle: 'thick' });
     return (
-        <Avatar className="h-20 w-auto">
-            {props.avatarUrl ? (
-                <AvatarImage src={props.avatarUrl} alt={props.alt} className="h-20 w-20" />
+        <Avatar style={{ height: `${avatarSize}px`, width: `${avatarSize}px` }} className="shadow">
+            {avatarUrl ? (
+                <AvatarImage
+                    src={avatarUrl}
+                    alt={avatarUrl}
+                    className="rounded-full object-cover"
+                    style={{ height: `${avatarSize}px`, width: `${avatarSize}px` }}
+                />
             ) : (
-                <AvatarGenerator className="h-20 w-20" {...props.config} />
+                <AvatarGenerator style={{ width: `${avatarSize}px`, height: `${avatarSize}px` }} {...config} />
             )}
         </Avatar>
     );
@@ -55,23 +68,23 @@ function OnboardingLinks({ links }: { links: { name: string; url: string | undef
 
 function OnboardingSkills({ skills }: { skills: User['skills'] }) {
     return (
-        <>
+        <div className="effect gradient bg-card mt-8 flex w-full flex-col items-start gap-2 space-y-6 rounded-lg p-4">
             <small>Skills</small>
             {skills?.length == 0 && <small className="dark:text-muted text-xs text-gray-300">nenhuma skill definida</small>}
             <div className="-mt-4 flex flex-wrap items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {skills && <HighlightedSkills techs={skills} />}
             </div>
-        </>
+        </div>
     );
 }
 
 function OnboardingAbout({ about }: { about: string | undefined }) {
     return (
-        <>
+        <div className="effect gradient bg-card flex w-full flex-col items-start gap-2 space-y-6 rounded-lg p-4">
             <small>Sobre</small>
             {!about && <small className="dark:text-muted -mt-6 text-xs text-gray-300">nenhuma informação disponivel</small>}
             {about && <div className="-mt-4">{about}</div>}
-        </>
+        </div>
     );
 }
 
@@ -99,23 +112,6 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
         });
     }
 
-    function unFollow(user: User) {
-        post(route('followable.unfollow', { user_id: user.id }), {
-            preserveScroll: true,
-            onSuccess: () => {
-                toast({
-                    description: `Você deixou de seguir  ${user.name}`,
-                });
-            },
-            onError: () => {
-                toast({
-                    variant: 'destructive',
-                    description: `Erro ao seguir ${user.name}`,
-                });
-            },
-        });
-    }
-
     const links = [
         { name: 'GitHub', url: user.github_url, icon: <RiGithubFill /> },
         { name: 'Twitter', url: user.twitter_url, icon: <RiTwitterXFill /> },
@@ -126,7 +122,6 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
     ];
 
     const { truncate } = useTruncate();
-    const config = genConfig({ sex: 'man', hairStyle: 'thick' });
 
     const totalSteps = 4;
 
@@ -161,12 +156,13 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
     return (
         <div {...props}>
             <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden">
-                <CardContent className="flex w-full flex-1 items-center justify-center gap-4">
-                    <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
+                <CardContent className="flex w-full flex-1 items-center justify-center gap-2">
+                    <OnboardingAvatar avatarUrl={user.avatar_url} />
                     <div className="w-full">
                         <div className="flex items-center justify-between">
                             <CardTitle className="text-xl">{user.name}</CardTitle>
                             <Button
+                                data-pan="onbording-profile"
                                 className="text-muted-forground absolute top-4 right-4 flex h-8 w-8 cursor-pointer border-none shadow-none"
                                 variant="secondary"
                                 onClick={handleCardClick}
@@ -187,27 +183,25 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                                 Seguir
                             </Button>
                         )}
-                        {has_followed && (
-                            <Button className="" size="sm" variant="outline" onClick={() => unFollow(user)} disabled={processing}>
-                                <UserMinus2 />
-                                Deixar de Seguir
-                            </Button>
-                        )}
+                        {has_followed && <UnfollowButton user={user} />}
                     </CardFooter>
                 )}
             </Card>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="w-ful overflow-auto">
-                    <DialogHeader className="bg-background sticky mb-0 w-full items-center justify-between pb-2">
-                        <div className="flex w-full items-center justify-start pt-4">
-                            <OnboardingAvatar avatarUrl={user.avatar_url} alt={user.name} config={config} />
-                            <div className="ml-2 flex flex-col gap-2 text-left">
-                                <DialogTitle className="text-2xl">{user.name}</DialogTitle>
+                    <DialogHeader className="effect bg-card gradient sticky mb-0 w-full items-center justify-between rounded-lg px-4 pb-2 shadow-lg">
+                        <div className="flex w-full items-start justify-start pt-4">
+                            <OnboardingAvatar avatarUrl={user.avatar_url} />
+                            <div className="ml-2 flex flex-col gap-1 text-left">
+                                <div>
+                                    <DialogTitle className="text-xl">{user.name}</DialogTitle>
+                                    <small className="text-xs">{user.email}</small>
+                                </div>
                                 <OnboardingLinks links={links} />
                             </div>
                         </div>
                     </DialogHeader>
-                    <div className="bg-background h-100 space-y-6 overflow-y-auto md:px-6">
+                    <div className="h-100 space-y-6 overflow-y-auto md:px-6">
                         {step === 1 && (
                             <div className="flex shrink-0 flex-col items-start gap-8">
                                 <OnboardingSkills skills={user.skills} />
@@ -217,7 +211,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                         {step === 2 && (
                             <div className="flex w-full shrink-0 flex-col items-start gap-8">
                                 <span className="mt-4">Formação Academica</span>
-                                <DialogDescription className="w-full space-y-2">
+                                <DialogDescription className="w-full space-y-4">
                                     {user.professional_educations?.map((education) => (
                                         <Card className="w-full items-start p-4" key={education.id}>
                                             <CardTitle className="flex w-full items-center gap-1 text-sm font-semibold">
@@ -262,7 +256,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                                 </DialogDescription>
                             </>
                         )}
-                        <DialogFooter className="bg-background fixed right-0 bottom-0 left-0 z-10 flex w-full items-center justify-between border-t p-3">
+                        <DialogFooter className="fixed right-0 bottom-0 left-0 z-10 flex w-full items-center justify-between border-t p-3">
                             <div className="max:order-1 flex justify-center space-x-1.5">
                                 {[1, 2, 3, 4].map((s) => (
                                     <div key={s} className={cn('bg-primary size-1.5 rounded-full', step === s ? 'bg-primary' : 'opacity-20')} />

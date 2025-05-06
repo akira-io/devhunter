@@ -10,9 +10,9 @@
   "license": "MIT",
   "require": {
     "php": "^8.4",
-    "akira/filament-tool-kit": "^1.26",
+    "akira/laravel-commentable": "1.x-dev",
     "akira/laravel-followable": "^0.1.0",
-    "filament/filament": "^3.3",
+    "akira/laravel-likeable": "^0.2.0",
     "inertiajs/inertia-laravel": "^2.0.2",
     "laravel/framework": "^12.9.2",
     "laravel/pulse": "^1.4",
@@ -21,6 +21,7 @@
     "laravel/tinker": "^2.10.1",
     "league/flysystem-aws-s3-v3": "^3.0",
     "meilisearch/meilisearch-php": "^1.14",
+    "panphp/pan": "^0.1.8",
     "pinkary-project/type-guard": "^0.1.0",
     "spatie/laravel-route-attributes": "^1.25",
     "tightenco/ziggy": "^2.5.2"
@@ -55,8 +56,7 @@
   "scripts": {
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-      "@php artisan package:discover --ansi",
-      "@php artisan filament:upgrade"
+      "@php artisan package:discover --ansi"
     ],
     "post-update-cmd": [
       "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -84,8 +84,8 @@
     "test:refactor": "rector --dry-run",
     "test:types": "phpstan",
     "test:arch": "pest --filter=arch",
-    "test:type-coverage": "pest --type-coverage --min=100",
-    "test:coverage": "pest --parallel --coverage --compact --exactly=61.3",
+    "test:type-coverage": "pest --type-coverage --min=100 --compact",
+    "test:coverage": "pest --parallel --coverage --compact --exactly=73.8",
     "test:typos": "peck",
     "test": [
       "@php artisan config:clear --ansi",
@@ -94,7 +94,8 @@
       "@test:typos",
       "@test:arch",
       "@test:types",
-      "@test:coverage"
+      "@test:coverage",
+      "@test:type-coverage"
     ]
   },
   "extra": {

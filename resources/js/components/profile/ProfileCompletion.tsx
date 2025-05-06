@@ -1,22 +1,24 @@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Option } from '@/components/ui/multiselect';
 import { useAboutStore } from '@/stores/about';
+import { useAcademicBackground } from '@/stores/academicBackground';
 import { useHighlightedSkills } from '@/stores/highlightedSkills';
 import { useLinkStore } from '@/stores/link';
-import { ProfessionalEducation, SharedData } from '@/types';
+import { AcademicBackground, SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
 
 interface ProfileCompletionProps {
-    professionalEducations: ProfessionalEducation[];
+    academicBackgrounds: AcademicBackground[];
     skills: Option[];
 }
 
-export function ProfileCompletion({ skills, professionalEducations }: ProfileCompletionProps) {
+export function ProfileCompletion({ skills, academicBackgrounds }: ProfileCompletionProps) {
     const { auth } = usePage<SharedData>().props;
 
     const { open: openAbout } = useAboutStore();
     const { open: openLink } = useLinkStore();
     const { open: openHighLightSkills } = useHighlightedSkills();
+    const { open: openAcademicBackground } = useAcademicBackground();
 
     const profileCompletion = [
         {
@@ -46,11 +48,12 @@ export function ProfileCompletion({ skills, professionalEducations }: ProfileCom
         },
         {
             label: 'Formação Acadêmica',
-            done: professionalEducations.length > 0,
+            done: academicBackgrounds.length > 0,
+            onclick: () => openAcademicBackground(),
         },
         // {
         //     label: 'Destaques Profissionais',
-        //     done: professionalEducations.length > 0, // ou outro campo de destaque
+        //     done: academicBackgrounds.length > 0, // ou outro campo de destaque
         // },
         {
             label: 'Destacar Tecnolodias',
@@ -68,15 +71,19 @@ export function ProfileCompletion({ skills, professionalEducations }: ProfileCom
     const profileCompletionPercentage = calculateProfileCompletion(profileCompletion);
 
     return (
-        <section className="bg-background rounded-lg border p-6">
-            <div className="mb-4 flex items-center justify-between">
+        <section className="bg-card gradient effect max-w-4xl rounded-lg p-6">
+            <div className="mb-4 flex w-full items-center justify-between">
                 <div>
-                    <h3 className="text-lg font-semibold">{profileCompletionPercentage < 100 ? 'Complete seu perfil' : 'Perfil Completo'}</h3>
-                    <p className="text-sm text-gray-400">Perfis completos atraem mais oportunidades!</p>
+                    <h3 className="text-foreground text-lg font-semibold">
+                        {profileCompletionPercentage < 100 ? 'Complete seu perfil' : 'Perfil Completo'}
+                    </h3>
+                    <p className="text-sm text-gray-500">Perfis completos atraem mais oportunidades!</p>
                 </div>
-                <span className="text-sm text-gray-400">
-                    {Math.round((profileCompletion.filter((item) => item.done).length / profileCompletion.length) * 100)}% completo
-                </span>
+                {profileCompletionPercentage < 100 && (
+                    <span className="text-sm text-gray-400">
+                        {Math.round((profileCompletion.filter((item) => item.done).length / profileCompletion.length) * 100)}% completo
+                    </span>
+                )}
             </div>
             <div className="mb-6 h-2 overflow-hidden rounded-full bg-gray-700">
                 <div className="h-full bg-green-500 transition-all" style={{ width: `${profileCompletionPercentage}%` }} />

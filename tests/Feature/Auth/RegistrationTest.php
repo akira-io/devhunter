@@ -20,5 +20,5 @@ test('new users can register', function () {
         'password_confirmation' => 'password',
     ]);
 
-    $response->assertRedirect(route('feed', absolute: false));
+    $response->assertRedirect(route('hunts.index', absolute: false));
 });

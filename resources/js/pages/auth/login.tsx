@@ -43,7 +43,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     };
 
     return (
-        <AuthLayout title="Login" description="Iniciar sessão na sua conta">
+        <AuthLayout title="Login" description="Iniciar sessão na sua conta Hunter">
             <Head title="Login" />
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">

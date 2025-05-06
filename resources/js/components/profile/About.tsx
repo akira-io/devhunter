@@ -44,7 +44,7 @@ export function About() {
                     Compartilhe um pouco sobre você e suas experiências. Isso ajudará os recrutadores a conhecerem melhor o seu perfil.
                 </>
             )}
-            <p className="block w-full break-all whitespace-normal">{auth.user.bio}</p>
+            <p className="block w-full break-all whitespace-normal dark:text-gray-400">{auth.user.bio}</p>
             <Dialog open={isOpen} onOpenChange={set}>
                 <DialogTrigger asChild>
                     <Button>
@@ -63,9 +63,7 @@ export function About() {
                         <Textarea id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} maxLength={200} className="h-50" />
                         <InputError className="mt-2" message={errors.bio} />
                         <div className="mt-4 flex flex-col sm:flex-row sm:justify-end">
-                            <span className="text-muted-foreground float-end mb-4 flex-1 text-right text-sm md:text-left">
-                                {data.bio.length} / 200
-                            </span>
+                            <span className="text-muted float-end mb-4 flex-1 text-right text-sm md:text-left">{data.bio.length} / 200</span>
                             <Button type="submit" disabled={processing}>
                                 <UserIcon /> Guardar
                             </Button>

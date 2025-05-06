@@ -16,17 +16,18 @@ final readonly class VerifyEmailController
      */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('feed', absolute: false).'?verified=1');
+        /** @var MustVerifyEmail $user */
+        $user = $request->user();
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->intended(route('hunts.index', absolute: false).'?verified=1');
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            /** @var MustVerifyEmail $user */
-            $user = $request->user();
+        if ($user->markEmailAsVerified()) {
 
             event(new Verified($user));
         }
 
-        return redirect()->intended(route('feed', absolute: false).'?verified=1');
+        return redirect()->intended(route('hunts.index', absolute: false).'?verified=1');
     }
 }

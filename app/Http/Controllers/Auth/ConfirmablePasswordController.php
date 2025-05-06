@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,9 +27,10 @@ final readonly class ConfirmablePasswordController
      */
     public function store(Request $request): RedirectResponse
     {
+        $user = type($request->user())->as(User::class);
         if (! Auth::guard('web')->validate([
-            'email' => $request->user()->email,
-            'password' => $request->password,
+            'email' => $user->email,
+            'password' => $request->get('password'),
         ])) {
             throw ValidationException::withMessages([
                 'password' => __('auth.password'),
@@ -37,6 +39,6 @@ final readonly class ConfirmablePasswordController
 
         $request->session()->put('auth.password_confirmed_at', time());
 
-        return redirect()->intended(route('feed', absolute: false));
+        return redirect()->intended(route('hunts.index', absolute: false));
     }
 }

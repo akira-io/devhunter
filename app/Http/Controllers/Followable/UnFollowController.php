@@ -11,7 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Post;
 
-#[Middleware('auth')]
+#[Middleware(['auth', 'verified'])]
 final readonly class UnFollowController
 {
     /**

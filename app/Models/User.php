@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Akira\Commentable\Concerns\Commenter;
 use Akira\Followable\Concerns\Followable;
 use Akira\Followable\Concerns\Follower;
+use Akira\Likeable\Concerns\Liker;
 use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
-use Exception;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
 /**
@@ -33,22 +31,24 @@ use Laravel\Scout\Searchable;
  * @property-read  string $github_token
  * @property-read  string $github_refresh_token
  * @property-read  string $github_user_name
- * @property string $email_verified_at
+ * @property string|null $email_verified_at
  * @property-read  CarbonImmutable $created_at
  * @property-read  CarbonImmutable $updated_at
  * @property-read  list<mixed> $skills
- * @property-read  HasMany<ProfessionalEducation,$this> $professionalEducations
+ * @property-read  HasMany<AcademicBackground,$this> $academicBackgrounds
  * @property-read  MorphMany<User, $this> $followers
  * @property-read  MorphMany<User, $this> $followings
  */
-final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+final class User extends Authenticatable implements MustVerifyEmail
 {
+    use Commenter;
     use Followable;
     use Follower;
 
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 
+    use Liker;
     use Notifiable;
     use Searchable;
 
@@ -90,16 +90,6 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
     ];
 
     /**
-     *Validate if the user can access the panel
-     *
-     * @throws Exception
-     */
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return Str::contains($this->email, ['@akira-io.com', 'kidiatoliny']);
-    }
-
-    /**
      * The attributes that should be searchable.
      *
      * @return array<string, list<mixed>|string>
@@ -119,12 +109,23 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
     /**
      * Professional education relationship
      *
-     * @return HasMany<ProfessionalEducation, $this>
+     * @return HasMany<AcademicBackground, $this>
      */
-    public function professionalEducations(): HasMany
+    public function academicBackgrounds(): HasMany
     {
 
-        return $this->hasMany(ProfessionalEducation::class, 'user_id');
+        return $this->hasMany(AcademicBackground::class, 'user_id');
+    }
+
+    /**
+     * The user's hunts
+     *
+     * @return HasMany<Hunt, $this>
+     */
+    public function hunts(): HasMany
+    {
+
+        return $this->hasMany(Hunt::class, 'owner_id');
     }
 
     /**

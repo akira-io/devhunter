@@ -5,7 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.1] - 2025-04-29
+## 0.2.0 (2025-05-06)
+
+### Features
+
+- Introduced the Finder component with user search functionality
+- Added hunts: users can now create, like, and comment on hunts
+- Implemented comment support with like and delete actions
+- Added command dialog for faster search interactions
+- Integrated Pan analytics to improve insights and metrics
+
+### UI and UX Improvements
+
+- Enhanced the ProfileCompletion component with visual feedback and responsive layout
+- Updated the Welcome component with new styles, GitHub and Discord links, and improved placeholder text
+- Improved responsiveness for Links, Sidebar, and other layout elements
+- Refined styles across components with better spacing, gradients, and accessibility features
+
+### Refactors and Naming Consistency
+
+- Renamed "Dev Hunter" to "Hunter" throughout the interface
+- Rebranded "Feed" to "Hunt Line" and updated routes and components accordingly
+- Replaced "Followers" with "Hunters" for a more consistent brand language
+- Simplified sidebar state handling and reorganized related logic
+- Cleaned up class names and removed redundant styling for better maintainability
+
+### Fixes and General Improvements
+
+- Improved avatar rendering for better responsiveness
+- Adjusted padding and spacing in multiple components
+- Improved test coverage configuration and internal documentation
+
+## 0.1.1 (2025-04-29)
 
 ### Added
 
@@ -20,13 +51,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated environment configuration and README to provide clearer setup instructions. (`67708dc`)
 
-## [0.1.0] - 2025-04-29
+## 0.1.0 (2025-04-29)
 
 ### Added
 
 - User follow/unfollow system.
 - GitHub authentication and extended user profiles.
-- `CreateTweet` and `FloatingCreatePost` components.
+- `CreateHunt` and `FloatingCreateHunt` components.
 - Onboarding flow with follow suggestions.
 - Admin panel for platform management.
 - Meilisearch integration via Laravel Scout.
