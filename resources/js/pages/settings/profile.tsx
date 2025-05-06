@@ -14,7 +14,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, Di
 import { Option } from '@/components/ui/multiselect';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem, type AcademicBackground as ProfessionalEducationType, type SharedData } from '@/types';
+import { type AcademicBackground as ProfessionalEducationType, type BreadcrumbItem, type SharedData } from '@/types';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { Award, PlusIcon } from 'lucide-react';
 import { FormEventHandler } from 'react';
@@ -64,7 +64,7 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Definições Perfil" />
             <div className="bg-background mx-auto flex max-w-6xl flex-col gap-4 text-gray-200 md:flex-row md:p-8">
-                <aside className="bg-background sticky top-4 flex w-full flex-shrink-0 flex-col items-center self-start p-6 sm:w-80">
+                <aside className="bg-background flex w-full flex-shrink-0 flex-col items-center self-start p-6 md:sticky md:top-10 md:w-80">
                     <div className="mb-4 w-full md:hidden">
                         <ProfileCompletion academicBackgrounds={academicBackgrounds} skills={highlightedSkills} />
                     </div>
