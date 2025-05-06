@@ -13,6 +13,11 @@ const mainNavItems: NavItem[] = [
         icon: RssIcon,
     },
     {
+        title: 'Explorar',
+        href: route('finder.index'),
+        icon: FileSearch,
+    },
+    {
         title: 'Hunters',
         href: route('followable.followers'),
         icon: EyeIcon,
@@ -22,12 +27,6 @@ const mainNavItems: NavItem[] = [
         title: 'Huntings',
         href: route('followable.followings'),
         icon: NetworkIcon,
-    },
-
-    {
-        title: 'Explorar',
-        href: route('finder.index'),
-        icon: FileSearch,
     },
 ];
 
