@@ -12,7 +12,8 @@
             "infolist",
             "commentable",
             "likeable",
-            "huntings"
+            "huntings",
+            "commitlint"
         ],
         "paths": [
             "resources",
