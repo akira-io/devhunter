@@ -1,6 +1,5 @@
 {
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "vite build",
     "build:ssr": "vite build && vite build --ssr",
@@ -14,6 +13,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.19.0",
     "@release-it/conventional-changelog": "^10.0.1",
     "@release-it/keep-a-changelog": "^7.0.0",
@@ -22,10 +22,11 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-react": "^7.37.3",
     "eslint-plugin-react-hooks": "^5.1.0",
+    "husky": "^9.1.7",
     "prettier": "^3.4.2",
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "release-it": "^19.0.1",
+    "release-it": "^19.0.2",
     "typescript-eslint": "^8.23.0"
   },
   "dependencies": {
@@ -81,28 +82,50 @@
     "lightningcss-linux-x64-gnu": "^1.29.1"
   },
   "release-it": {
-    "$schema": "https://unpkg.com/release-it/schema/release-it.json",
     "git": {
-      "commitMessage": "chore: release v${version}"
+      "commitMessage": "chore(release): ${version}"
     },
     "github": {
-      "release": true
+      "release": true,
+      "releaseName": "v${version}",
+      "draft": false,
+      "preRelease": false,
+      "tokenRef": "GITHUB_TOKEN"
+    },
+    "npm": {
+      "publish": false
     },
     "plugins": {
       "@release-it/conventional-changelog": {
-        "preset": {
-          "name": "angular"
-        },
         "infile": "CHANGELOG.md",
-        "writerOpts": {
-          "groupBy": "scope"
-        },
+        "preset": "conventionalcommits",
         "types": {
           "feat": {
             "section": "Features"
           },
           "fix": {
             "section": "Bug Fixes"
+          },
+          "chore": {
+            "section": "Miscellaneous Chores"
+          },
+          "refactor": {
+            "section": "Code Refactoring"
+          },
+          "revert": {
+            "section": "Reverts"
+          },
+          "docs": {
+            "section": "Documentation",
+            "hidden": true
+          },
+          "style": {
+            "section": "Styles",
+            "hidden": true
+          },
+          "test": {
+            "section": "Tests",
+            "hidden": true
           }
         }
       }

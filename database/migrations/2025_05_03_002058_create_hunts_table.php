@@ -12,7 +12,7 @@ return new class extends Migration
     {
 
         Schema::create('hunts', function (Blueprint $table): void {
-            $table->uuid('id');
+            $table->id();
             $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete();
             $table->text('content');
             $table->boolean('is_reported')->default(false);
