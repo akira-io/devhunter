@@ -38,7 +38,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y aspell aspell-en
 
       - name: Install Node Dependencies
-        run: yarn ci --force
+        run: yarn
 
       - name: Build Assets
         run: yarn run build
