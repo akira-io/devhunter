@@ -29,8 +29,6 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-      - name: Install Yarn
-        run: npm install --global yarn
 
       - name: Install Aspell
         shell: bash
@@ -38,10 +36,10 @@ jobs:
           sudo apt-get update && sudo apt-get install -y aspell aspell-en
 
       - name: Install Node Dependencies
-        run: yarn
+        run: npm ci --force
 
       - name: Build Assets
-        run: yarn run build
+        run: npm run build
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
