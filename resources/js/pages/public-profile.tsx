@@ -59,13 +59,13 @@ function Avatar({ user, huntingsCount, huntersCount, huntsCount }: { user: User;
                     <OnboardingAvatar avatarUrl={user.avatar_url} size={isMobile ? 20 : 32} />
                 </div>
             </div>
-            <div className="grid grid-cols-1 items-start justify-start gap-4 pt-2 md:grid-cols-2 md:pt-4">
+            <div className="grid grid-cols-1 items-start justify-start gap-6 pt-2 sm:grid-cols-2 sm:gap-8 sm:pt-4">
                 <div className="grid grid-cols-1">
-                    <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-start">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-start">
                         <h1 className="flex items-center gap-2 text-xl font-bold">{user.name}</h1>
                     </div>
                     <div className="space-x-2 text-xs">
-                        <span className="text-muted-foreground">@{user.github_user_name}</span>
+                        {user.github_user_name && <span className="text-muted-foreground">@{user.github_user_name}</span>}
                         <span className="text-muted-foreground">{user.location}</span>
                     </div>
                     <span className="text-muted-foreground text-xs">{user.email}</span>
@@ -107,7 +107,7 @@ function Hunters({ hunters }: { hunters: User[] }) {
 
 function MobileTabList() {
     return (
-        <TabsList className="gradient relative z-20 mx-auto flex w-full md:hidden">
+        <TabsList className="gradient relative z-20 mx-auto flex w-full sm:hidden">
             {tabLists.map((tab, index) => (
                 <TooltipProvider delayDuration={0}>
                     <Tooltip>
@@ -128,7 +128,7 @@ function MobileTabList() {
 
 function DesktopTabList() {
     return (
-        <TabsList className="gradient relative z-20 m-3 mx-auto hidden w-full md:flex">
+        <TabsList className="gradient relative z-20 m-3 mx-auto hidden w-full sm:flex">
             {tabLists.map((tab, index) => (
                 <TabsTrigger value={`tab-${index + 1}`} className="cursor-pointer">
                     <Icon iconNode={tab.icon} aria-hidden="true" />
@@ -195,7 +195,7 @@ export default function PublicProfile({ user, hunts, hunters, huntings }: Public
                             <TabsContent value="tab-1">
                                 <NoData count={hunts.data.length} />
                                 {hunts.data.map((hunt) => (
-                                    <HuntCard key={hunt.id} hunt={hunt} />
+                                    <HuntCard key={hunt.id} hunt={hunt} ligatures={false} />
                                 ))}
                             </TabsContent>
                             <TabsContent value="tab-2">

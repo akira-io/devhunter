@@ -12,6 +12,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 interface HuntCardProps {
     hunt: Hunt;
+    ligatures?: boolean;
 }
 
 export function HuntCardConnector() {
@@ -23,7 +24,7 @@ export function HuntCardConnector() {
     );
 }
 
-export function HuntCard({ hunt }: HuntCardProps) {
+export function HuntCard({ hunt, ligatures = true }: HuntCardProps) {
     const { auth } = usePage<SharedData>().props;
     const [isOpenComments, setOpenComments] = useState(false);
 
@@ -114,7 +115,7 @@ export function HuntCard({ hunt }: HuntCardProps) {
                         <HuntComments isOpen={isOpenComments} hunt={hunt} />
                     </div>
                 )}
-                <HuntCardConnector />
+                {ligatures && <HuntCardConnector />}
             </Card>
         </>
     );
