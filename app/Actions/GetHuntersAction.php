@@ -15,10 +15,10 @@ final readonly class GetHuntersAction
      *
      * @return array{mixed,LengthAwarePaginator<int, string>}
      */
-    public function handle(Request $request, int $perPage = 15): array
+    public function handle(Request $request, int $perPage = 15, ?User $user = null): array
     {
         /** @var User|null $user */
-        $user = $request->user() ?: null;
+        $user = $user ?: $request->user() ?: null;
 
         $query = $request->string('q')->value();
 

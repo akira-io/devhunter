@@ -14,7 +14,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, Di
 import { Option } from '@/components/ui/multiselect';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem, type AcademicBackground as ProfessionalEducationType, type SharedData } from '@/types';
+import { type AcademicBackground as ProfessionalEducationType, type BreadcrumbItem, type SharedData } from '@/types';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { Award, PlusIcon } from 'lucide-react';
 import { FormEventHandler } from 'react';
@@ -84,9 +84,9 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                             <h2 className="mt-4 text-xl font-semibold">{auth.user.name}</h2>
                             <div className="space-y-2 text-center text-xs text-gray-400">
                                 <p>{auth.user.email}</p>
-                                <p>
-                                    <span>Software Developer :</span> <b>Debtges</b>
-                                </p>
+                                {/*<p>*/}
+                                {/*    <span>Software Developer :</span> <b>Debtges</b>*/}
+                                {/*</p>*/}
                                 <p className="flex items-center justify-center gap-1">
                                     <GoLocation /> {auth.user.location}
                                 </p>
