@@ -92,9 +92,22 @@ function Avatar({ user, huntingsCount, huntersCount, huntsCount }: { user: User;
     );
 }
 
+function Hunters({ hunters }: { hunters: User[] }) {
+    return (
+        <>
+            <NoData count={hunters.length} />
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+                {hunters.map((hunter) => (
+                    <Onboarding user={hunter} key={hunter.id} />
+                ))}
+            </div>
+        </>
+    );
+}
+
 function MobileTabList() {
     return (
-        <TabsList className="relative z-10 mx-auto flex w-full md:hidden">
+        <TabsList className="gradient relative z-20 mx-auto flex w-full md:hidden">
             {tabLists.map((tab, index) => (
                 <TooltipProvider delayDuration={0}>
                     <Tooltip>
@@ -113,22 +126,9 @@ function MobileTabList() {
     );
 }
 
-function Hunters({ hunters }: { hunters: User[] }) {
-    return (
-        <>
-            <NoData count={hunters.length} />
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-                {hunters.map((hunter) => (
-                    <Onboarding user={hunter} key={hunter.id} />
-                ))}
-            </div>
-        </>
-    );
-}
-
 function DesktopTabList() {
     return (
-        <TabsList className="relative z-10 m-3 mx-auto hidden w-full md:flex">
+        <TabsList className="gradient relative z-20 m-3 mx-auto hidden w-full md:flex">
             {tabLists.map((tab, index) => (
                 <TabsTrigger value={`tab-${index + 1}`} className="cursor-pointer">
                     <Icon iconNode={tab.icon} aria-hidden="true" />
