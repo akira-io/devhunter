@@ -96,7 +96,7 @@ function Hunters({ hunters }: { hunters: User[] }) {
     return (
         <>
             <NoData count={hunters.length} />
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {hunters.map((hunter) => (
                     <Onboarding user={hunter} key={hunter.id} />
                 ))}
