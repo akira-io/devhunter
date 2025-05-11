@@ -94,7 +94,7 @@ function Avatar({ user, huntingsCount, huntersCount, huntsCount }: { user: User;
 
 function MobileTabList() {
     return (
-        <TabsList className="gradient relative z-50 mx-auto flex w-full md:hidden">
+        <TabsList className="relative z-10 mx-auto flex w-full md:hidden">
             {tabLists.map((tab, index) => (
                 <TooltipProvider delayDuration={0}>
                     <Tooltip>
@@ -128,7 +128,7 @@ function Hunters({ hunters }: { hunters: User[] }) {
 
 function DesktopTabList() {
     return (
-        <TabsList className="gradient relative z-50 m-3 mx-auto hidden w-full md:flex">
+        <TabsList className="relative z-10 m-3 mx-auto hidden w-full md:flex">
             {tabLists.map((tab, index) => (
                 <TabsTrigger value={`tab-${index + 1}`} className="cursor-pointer">
                     <Icon iconNode={tab.icon} aria-hidden="true" />
