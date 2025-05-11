@@ -9,11 +9,14 @@ use App\Actions\Followable\GetHuntingsAction;
 use App\Http\Resources\Hunt\HuntResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Inertia\Response;
+use Inertia\ResponseFactory;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Middleware;
 
 #[Middleware(['auth', 'verified'])]
-final class PublicProfileController
+final readonly class PublicProfileController
 {
     /**
      * Display the public profile of a user.
@@ -21,7 +24,7 @@ final class PublicProfileController
      * @throws FollowableTraitNotFoundException
      */
     #[Get('public-profile/{user}', name: 'public.profile.show')]
-    public function show(Request $request, User $user, GetHuntingsAction $huntingsAction)
+    public function show(Request $request, User $user, GetHuntingsAction $huntingsAction): Response|ResponseFactory
     {
         /** @var User $authUser */
         $authUser = $request->user();
@@ -31,8 +34,8 @@ final class PublicProfileController
         $huntings = $huntingsAction->handle($user);
 
         return inertia('public-profile', [
-            'user' => $authUser?->attachFollowStatus($user)->sole(),
-            'hunts' => HuntResource::collection($authUser?->attachLikeStatus($hunts)),
+            'user' => type($authUser->attachFollowStatus($user))->as(Collection::class)->sole(),
+            'hunts' => HuntResource::collection($authUser->attachLikeStatus($hunts)),
             'hunters' => $authUser->attachFollowStatus($hunters),
             'huntings' => $authUser->attachFollowStatus($huntings),
         ]);

@@ -18,7 +18,7 @@ final readonly class GetHuntersAction
     public function handle(Request $request, int $perPage = 15, ?User $user = null): array
     {
         /** @var User|null $user */
-        $user = $user ?: $request->user() ?: null;
+        $user = ($user instanceof User ? $user : $request->user()) ?: null;
 
         $query = $request->string('q')->value();
 

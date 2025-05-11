@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace App\Actions\Followable;
 
 use Akira\Followable\Exceptions\FollowableTraitNotFoundException;
+use Akira\Followable\Followable;
 use App\Models\User;
+use Illuminate\Support\Collection;
 
-final class GetHuntingsAction
+final readonly class GetHuntingsAction
 {
     /**
      * Get the huntings of the authenticated user.
      *
+     * @return Collection<int, mixed>
+     *
      * @throws FollowableTraitNotFoundException
      */
-    public function handle(User $user)
+    public function handle(User $user): Collection
     {
-        return $user->followings()
+        return $user->followings() // @phpstan-ignore-line
             ->with(['followable'])
-            ->paginate()->map(function ($followable) {
-                return $followable->followable;
-            })
+            ->paginate()->map(fn (Followable $followable) => $followable->followable) // @phpstan-ignore-line
             ->filter()
             ->values();
     }
