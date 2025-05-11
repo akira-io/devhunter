@@ -36,7 +36,7 @@ const tabLists: TabList[] = [
 
 function ProfileBg() {
     return (
-        <div className="h-20 md:h-40">
+        <div className="h-30 sm:h-40">
             <div className="bg-muted relative flex size-full items-center justify-center overflow-hidden rounded-2xl">
                 <div className="absolute inset-0 flex items-center justify-center gap-2">
                     <img
@@ -54,12 +54,12 @@ function Avatar({ user, huntingsCount, huntersCount, huntsCount }: { user: User;
     const isMobile = useIsMobile();
     return (
         <div className="flex items-start justify-start">
-            <div className="-mt-10 px-2 md:px-6">
-                <div className="border-background bg-muted relative flex size-20 overflow-hidden rounded-full border-4 shadow-xs shadow-black/10 md:size-32">
+            <div className="px-2">
+                <div className="border-background bg-muted absolute top-10 flex size-20 overflow-hidden rounded-full border-4 shadow-2xl shadow-xs shadow-black/10 md:size-32">
                     <OnboardingAvatar avatarUrl={user.avatar_url} size={isMobile ? 20 : 32} />
                 </div>
             </div>
-            <div className="grid grid-cols-1 items-start justify-start gap-6 pt-2 sm:grid-cols-2 sm:gap-8 sm:pt-4">
+            <div className="grid w-full grid-cols-1 items-start justify-start gap-6 pt-2 sm:grid-cols-2 sm:gap-8 sm:pt-4">
                 <div className="grid grid-cols-1">
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-start">
                         <h1 className="flex items-center gap-2 text-xl font-bold">{user.name}</h1>
@@ -70,7 +70,7 @@ function Avatar({ user, huntingsCount, huntersCount, huntsCount }: { user: User;
                     </div>
                     <span className="text-muted-foreground text-xs">{user.email}</span>
                 </div>
-                <div className="flex w-full flex-col items-end justify-end gap-2">
+                <div className="flex w-full flex-col items-center justify-end gap-2 sm:pr-4">
                     <div className="flex items-center justify-start gap-2">
                         <span className="text-muted-foreground text-sm">
                             <b>{huntersCount}</b> hunters
