@@ -40,7 +40,7 @@ function ProfileBg() {
             <div className="bg-muted relative flex size-full items-center justify-center overflow-hidden rounded-2xl">
                 <div className="absolute inset-0 flex items-center justify-center gap-2">
                     <img
-                        className="size-full object-cover"
+                        className="size-full object-cover brightness-40 grayscale"
                         src="https://images.unsplash.com/photo-1746768934151-8c5cb84bcf11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzMHx8fGVufDB8fHx8fA%3D%3D"
                         alt="Default profile background"
                     />
