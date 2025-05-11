@@ -3,6 +3,7 @@ import { FollowButton } from '@/components/followable/FollowButton';
 import UnfollowButton from '@/components/followable/UnfollowButton';
 import Onboarding, { OnboardingAvatar } from '@/components/Onboarding';
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
+import { Icon } from '@/components/ui/icon';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -10,7 +11,12 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import AppLayout from '@/layouts/app-layout';
 import { Hunt, User } from '@/types';
 import { Head } from '@inertiajs/react';
-import { EyeIcon, Globe, MonitorUpIcon, NetworkIcon, UserIcon } from 'lucide-react';
+import { EyeIcon, GraduationCapIcon, LucideProps, MonitorUpIcon, NetworkIcon, UserIcon } from 'lucide-react';
+
+type TabList = {
+    icon: React.ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>>;
+    title: string;
+};
 
 interface PublicProfileProps {
     user: User;
@@ -20,6 +26,13 @@ interface PublicProfileProps {
         data: Hunt[];
     };
 }
+
+const tabLists: TabList[] = [
+    { title: 'Hunts', icon: MonitorUpIcon },
+    { title: 'Hunters', icon: EyeIcon },
+    { title: 'Huntings', icon: NetworkIcon },
+    { title: 'Sobre', icon: UserIcon },
+];
 
 function ProfileBg() {
     return (
@@ -82,66 +95,20 @@ function Avatar({ user, huntingsCount, huntersCount, huntsCount }: { user: User;
 function MobileTabList() {
     return (
         <TabsList className="relative z-50 mx-auto flex w-full md:hidden">
-            <TooltipProvider delayDuration={0}>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <span>
-                            <TabsTrigger value="tab-1" className="py-1.5">
-                                <MonitorUpIcon size={16} aria-hidden="true" />
-                            </TabsTrigger>
-                        </span>
-                    </TooltipTrigger>
-                    <TooltipContent className="px-2 py-1 text-xs">Hunts</TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
-            <TooltipProvider delayDuration={0}>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <span>
-                            <TabsTrigger value="tab-2" className="py-1">
-                                <EyeIcon size={16} aria-hidden="true" />
-                            </TabsTrigger>
-                        </span>
-                    </TooltipTrigger>
-                    <TooltipContent className="px-2 py-1 text-xs">Hunters</TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
-            <TooltipProvider delayDuration={0}>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <span>
-                            <TabsTrigger value="tab-3" className="py-1">
-                                <NetworkIcon size={16} aria-hidden="true" />
-                            </TabsTrigger>
-                        </span>
-                    </TooltipTrigger>
-                    <TooltipContent className="px-2 py-1 text-xs">Huntings</TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
-            <TooltipProvider delayDuration={0}>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <span>
-                            <TabsTrigger value="tab-4" className="py-1">
-                                <Globe size={16} aria-hidden="true" />
-                            </TabsTrigger>
-                        </span>
-                    </TooltipTrigger>
-                    <TooltipContent className="px-2 py-1 text-xs">Links</TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
-            <TooltipProvider delayDuration={0}>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <span>
-                            <TabsTrigger value="tab-5" className="py-1">
-                                <UserIcon size={16} aria-hidden="true" />
-                            </TabsTrigger>
-                        </span>
-                    </TooltipTrigger>
-                    <TooltipContent className="px-2 py-1 text-xs">Sobre</TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
+            {tabLists.map((tab, index) => (
+                <TooltipProvider delayDuration={0}>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <span>
+                                <TabsTrigger value={`tab-${index + 1}`} className="py-1.5">
+                                    <Icon iconNode={tab.icon} aria-hidden="true" />
+                                </TabsTrigger>
+                            </span>
+                        </TooltipTrigger>
+                        <TooltipContent className="px-2 py-1 text-xs">{tab.title}</TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+            ))}
         </TabsList>
     );
 }
@@ -162,32 +129,48 @@ function Hunters({ hunters }: { hunters: User[] }) {
 function DesktopTabList() {
     return (
         <TabsList className="relative z-50 m-3 mx-auto hidden w-full md:flex">
-            <TabsTrigger value="tab-1">
-                <MonitorUpIcon className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                Hunts
-            </TabsTrigger>
-            <TabsTrigger value="tab-2" className="group">
-                <EyeIcon className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                Hunters
-            </TabsTrigger>
-            <TabsTrigger value="tab-3" className="group">
-                <NetworkIcon className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                Huntings
-            </TabsTrigger>
-            <TabsTrigger value="tab-4" className="group">
-                <Globe className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                Links
-            </TabsTrigger>
-            <TabsTrigger value="tab-5" className="group">
-                <UserIcon className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                Sobre
-            </TabsTrigger>
+            {tabLists.map((tab, index) => (
+                <TabsTrigger value={`tab-${index + 1}`} className="cursor-pointer">
+                    <Icon iconNode={tab.icon} aria-hidden="true" />
+                    {tab.title}
+                </TabsTrigger>
+            ))}
         </TabsList>
     );
 }
 
 function NoData(props: { count: number }) {
     return <>{props.count === 0 && <p className="text-muted text-center">Sem dados a apresentar</p>}</>;
+}
+
+function About({ user }: { user: User }) {
+    const tabLists: TabList[] = [
+        { title: 'Bio', icon: UserIcon },
+        {
+            title: 'Formação',
+            icon: GraduationCapIcon,
+        },
+    ];
+    return (
+        <Tabs defaultValue="tab-1" orientation="vertical" className="w-full md:mt-4 md:flex-row">
+            <TabsList className="text-foreground mb-4 gap-1 rounded-none !bg-transparent md:flex-col dark:bg-none">
+                {tabLists.map((tab, index) => (
+                    <TabsTrigger
+                        value={`tab-${index + 1}`}
+                        className="hover:bg-accent hover:text-foreground data-[state=active]:hover:bg-accent data-[state=active]:bg-muted relative flex w-full items-center justify-center justify-start after:absolute after:inset-y-0 after:start-0 after:-ms-1 after:w-0.5 data-[state=active]:shadow-none data-[state=active]:after:bg-transparent"
+                    >
+                        <Icon iconNode={tab.icon} aria-hidden="true" />
+                        <span> {tab.title}</span>
+                    </TabsTrigger>
+                ))}
+            </TabsList>
+            <div className="-mt-3 grow rounded-md border text-start">
+                <TabsContent value="tab-1">
+                    <p className="text-muted-foreground px-4 py-3 text-sm">{user.bio}</p>
+                </TabsContent>
+            </div>
+        </Tabs>
+    );
 }
 
 export default function PublicProfile({ user, hunts, hunters, huntings }: PublicProfileProps) {
@@ -201,7 +184,7 @@ export default function PublicProfile({ user, hunts, hunters, huntings }: Public
                         <Avatar user={user} huntersCount={hunters.length} huntingsCount={huntings.length} huntsCount={hunts.data.length} />
                     </CardDescription>
                 </Card>
-                <div className="sticky top-10 mt-4 w-full max-w-2xl items-center px-4">
+                <div className="mt-4 w-full max-w-2xl items-center px-2">
                     <CardContent className="w-full items-center justify-start px-2">
                         <Tabs defaultValue="tab-1">
                             <ScrollArea>
@@ -220,6 +203,11 @@ export default function PublicProfile({ user, hunts, hunters, huntings }: Public
                             </TabsContent>
                             <TabsContent value="tab-3" className="">
                                 <Hunters hunters={huntings} />
+                            </TabsContent>
+                            <TabsContent value="tab-4" className="">
+                                <Card className="px-4">
+                                    <About user={user} />
+                                </Card>
                             </TabsContent>
                         </Tabs>
                     </CardContent>
