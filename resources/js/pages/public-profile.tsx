@@ -37,10 +37,10 @@ const tabLists: TabList[] = [
 function ProfileBg() {
     return (
         <div className="h-30 sm:h-40">
-            <div className="bg-muted relative flex size-full items-center justify-center overflow-hidden rounded-2xl">
+            <div className="bg-muted relative flex size-full items-center justify-center overflow-hidden rounded-xl shadow-2xl">
                 <div className="absolute inset-0 flex items-center justify-center gap-2">
                     <img
-                        className="size-full object-cover brightness-40 grayscale"
+                        className="size-full object-cover"
                         src="https://images.unsplash.com/photo-1746768934151-8c5cb84bcf11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzMHx8fGVufDB8fHx8fA%3D%3D"
                         alt="Default profile background"
                     />
@@ -55,7 +55,7 @@ function Avatar({ user, huntingsCount, huntersCount, huntsCount }: { user: User;
     return (
         <div className="flex items-start justify-start">
             <div className="px-2">
-                <div className="border-background bg-muted absolute top-10 flex size-20 overflow-hidden rounded-full border-4 shadow-2xl shadow-xs shadow-black/10 md:size-32">
+                <div className="border-background bg-muted absolute top-10 flex size-20 overflow-hidden rounded-full border-2 shadow-2xl md:size-32">
                     <OnboardingAvatar avatarUrl={user.avatar_url} size={isMobile ? 20 : 32} />
                 </div>
             </div>

@@ -32,7 +32,7 @@ export function FollowButton({ user, className }: FollowButtonProps) {
     }
 
     return (
-        <Button className={cn(className)} size="sm" variant="secondary" onClick={() => follow(user)} disabled={processing}>
+        <Button className={cn(className)} size="sm" variant="default" onClick={() => follow(user)} disabled={processing}>
             <UserPlusIcon />
             Seguir
         </Button>
