@@ -9,6 +9,7 @@ use App\Models\Hunt;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Collection;
 
 /** @mixin Hunt */
 final class HuntResource extends JsonResource
@@ -33,11 +34,27 @@ final class HuntResource extends JsonResource
             'updated_at' => $this->updated_at->diffForHumans(),
             'owner' => $this->owner,
             'image_url' => null,
-            'comments' => CommentResource::collection($user->attachLikeStatus($this->comments)->sortByDesc('created_at')),
+            'comments' => CommentResource::collection($this->commentsWithHasLiked()),
             'likes_count' => $this->likesCount(),
             'views' => 0,
             'shares' => 0,
             'has_liked' => $this->has_liked,
         ];
+
+    }
+
+    /**
+     * Get the comments with the has_liked status.
+     */
+    public function commentsWithHasLiked(): Collection
+    {
+        /** @var User $user */
+        $user = request()->user();
+
+        return collect($this->comments)->map(function ($comment) use ($user) {
+            $comment->has_liked = $comment->likes->contains('user_id', $user->id);
+
+            return $comment;
+        })->sortByDesc('created_at');
     }
 }

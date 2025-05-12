@@ -21,7 +21,6 @@ final readonly class GetHuntingsAction
     public function handle(User $user): Collection
     {
         return $user->followings() // @phpstan-ignore-line
-            ->with(['followable'])
             ->paginate()->map(fn (Followable $followable) => $followable->followable) // @phpstan-ignore-line
             ->filter()
             ->values();
