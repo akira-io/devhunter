@@ -2,7 +2,7 @@ import { HuntCard } from '@/components/feed/HuntCard';
 import { FollowButton } from '@/components/followable/FollowButton';
 import UnfollowButton from '@/components/followable/UnfollowButton';
 import Onboarding, { OnboardingAvatar } from '@/components/Onboarding';
-import { Card, CardContent, CardDescription } from '@/components/ui/card';
+import { Card, CardDescription } from '@/components/ui/card';
 import { Icon } from '@/components/ui/icon';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -185,7 +185,7 @@ export default function PublicProfile({ user, hunts, hunters, huntings }: Public
                     </CardDescription>
                 </Card>
                 <div className="mt-4 w-full max-w-2xl items-center px-2">
-                    <CardContent className="w-full items-center justify-start px-2">
+                    <div className="w-full items-center justify-start px-2">
                         <Tabs defaultValue="tab-1">
                             <ScrollArea>
                                 <MobileTabList />
@@ -210,7 +210,7 @@ export default function PublicProfile({ user, hunts, hunters, huntings }: Public
                                 </Card>
                             </TabsContent>
                         </Tabs>
-                    </CardContent>
+                    </div>
                 </div>
             </div>
         </AppLayout>
