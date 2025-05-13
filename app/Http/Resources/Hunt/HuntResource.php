@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Resources\Hunt;
 
 use App\Http\Resources\Commentable\CommentResource;
+use App\Models\Comment;
 use App\Models\Hunt;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ final class HuntResource extends JsonResource
         /** @var User $user */
         $user = request()->user();
 
-        return collect($this->comments)->map(function ($comment) use ($user) {
+        return collect($this->comments)->map(function (Comment $comment) use ($user): Comment {
             $comment->has_liked = $comment->likes->contains('user_id', $user->id);
 
             return $comment;

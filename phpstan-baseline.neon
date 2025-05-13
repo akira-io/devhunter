@@ -13,20 +13,8 @@ parameters:
 			path: app/Http/Middleware/HandleInertiaRequests.php
 
 		-
-			message: '#^Cannot access property \$has_liked on mixed\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: app/Http/Resources/Hunt/HuntResource.php
-
-		-
-			message: '#^Cannot access property \$likes on mixed\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: app/Http/Resources/Hunt/HuntResource.php
-
-		-
-			message: '#^Cannot call method contains\(\) on mixed\.$#'
-			identifier: method.nonObject
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\MorphMany\<Illuminate\\Database\\Eloquent\\Model, App\\Models\\Comment\>\:\:contains\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Http/Resources/Hunt/HuntResource.php
 
@@ -37,8 +25,20 @@ parameters:
 			path: app/Http/Resources/Hunt/HuntResource.php
 
 		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<\(int\|string\),mixed\>\:\:map\(\) expects callable\(mixed, int\|string\)\: App\\Models\\Comment, Closure\(App\\Models\\Comment\)\: App\\Models\\Comment given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Resources/Hunt/HuntResource.php
+
+		-
 			message: '#^Parameter \#1 \$value of function collect expects Illuminate\\Contracts\\Support\\Arrayable\<\(int\|string\), mixed\>\|iterable\<\(int\|string\), mixed\>\|null, Illuminate\\Database\\Eloquent\\Relations\\MorphMany\<Akira\\Commentable\\Models\\Comment, App\\Models\\Hunt\> given\.$#'
 			identifier: argument.type
+			count: 1
+			path: app/Http/Resources/Hunt/HuntResource.php
+
+		-
+			message: '#^Property App\\Models\\Comment\:\:\$has_liked \(bool\) does not accept mixed\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Resources/Hunt/HuntResource.php
 
