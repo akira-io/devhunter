@@ -2,12 +2,18 @@ import { Button } from '@/components/ui/button';
 
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 import { User } from '@/types';
 import { useForm } from '@inertiajs/react';
 import { CheckCircle, UserMinus2Icon } from 'lucide-react';
+import { HTMLAttributes } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-export default function UnfollowButton({ user }: { user: User }) {
+interface UnfollowButtonProps extends HTMLAttributes<HTMLButtonElement> {
+    user: User;
+}
+
+export default function UnfollowButton({ user, className }: UnfollowButtonProps) {
     const { toast } = useToast();
     const { post, processing } = useForm();
 
@@ -36,7 +42,7 @@ export default function UnfollowButton({ user }: { user: User }) {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="secondary">
+                <Button variant="secondary" className={cn(className)}>
                     <UserMinus2Icon /> Deixar de Seguir
                 </Button>
             </DialogTrigger>

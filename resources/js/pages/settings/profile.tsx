@@ -84,9 +84,9 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                             <h2 className="mt-4 text-xl font-semibold">{auth.user.name}</h2>
                             <div className="space-y-2 text-center text-xs text-gray-400">
                                 <p>{auth.user.email}</p>
-                                <p>
-                                    <span>Software Developer :</span> <b>Debtges</b>
-                                </p>
+                                {/*<p>*/}
+                                {/*    <span>Software Developer :</span> <b>Debtges</b>*/}
+                                {/*</p>*/}
                                 <p className="flex items-center justify-center gap-1">
                                     <GoLocation /> {auth.user.location}
                                 </p>

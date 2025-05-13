@@ -30,6 +30,6 @@ final readonly class HuntCommentController
 
         $user->comment($hunt, $request->string('content')->value());
 
-        return to_route('hunts.index');
+        return back();
     }
 }

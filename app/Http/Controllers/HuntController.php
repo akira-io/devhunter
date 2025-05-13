@@ -63,6 +63,6 @@ final readonly class HuntController
     {
         $request->destroy($hunt);
 
-        return to_route('hunts.index');
+        return back();
     }
 }

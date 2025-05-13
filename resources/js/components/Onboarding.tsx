@@ -1,17 +1,17 @@
+import { FollowButton } from '@/components/followable/FollowButton';
 import UnfollowButton from '@/components/followable/UnfollowButton';
 import { HighlightedSkills } from '@/components/profile/HighlightedSkills';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useToast } from '@/hooks/use-toast';
 import { useTruncate } from '@/hooks/use-truncate-text';
 import { cn } from '@/lib/utils';
 import { SharedData, User } from '@/types';
 import { useForm, usePage } from '@inertiajs/react';
 import { RiBlueskyFill, RiGithubFill, RiLinkedinBoxFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
 import { format } from 'date-fns';
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap, UserPlusIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVerticalIcon, Globe, GraduationCap } from 'lucide-react';
 import * as React from 'react';
 import { useState } from 'react';
 import AvatarGenerator, { genConfig } from 'react-nice-avatar';
@@ -24,13 +24,14 @@ interface OnboardingProps extends React.ComponentProps<'div'> {
 interface OnboardingAvatarProps {
     avatarUrl: string | undefined;
     size?: number;
+    onClick?: () => void;
 }
 
-export function OnboardingAvatar({ avatarUrl, size = 16 }: OnboardingAvatarProps) {
+export function OnboardingAvatar({ avatarUrl, onClick, size = 16 }: OnboardingAvatarProps) {
     const avatarSize = size * 4;
     const config = genConfig({ sex: 'man', hairStyle: 'thick' });
     return (
-        <Avatar style={{ height: `${avatarSize}px`, width: `${avatarSize}px` }} className="shadow">
+        <Avatar style={{ height: `${avatarSize}px`, width: `${avatarSize}px` }} className="shadow" onClick={onClick}>
             {avatarUrl ? (
                 <AvatarImage
                     src={avatarUrl}
@@ -92,25 +93,7 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
     const { auth } = usePage<SharedData>().props;
     const [step, setStep] = useState(1);
     const [open, setOpen] = useState(false);
-    const { post, processing } = useForm();
-    const { toast } = useToast();
-
-    function follow(user: User) {
-        post(route('followable.follow', { user_id: user.id }), {
-            preserveScroll: true,
-            onSuccess: () => {
-                toast({
-                    description: `Você começou a seguir  ${user.name}`,
-                });
-            },
-            onError: () => {
-                toast({
-                    variant: 'destructive',
-                    description: `Erro ao seguir ${user.name}`,
-                });
-            },
-        });
-    }
+    const { get } = useForm();
 
     const links = [
         { name: 'GitHub', url: user.github_url, icon: <RiGithubFill /> },
@@ -153,14 +136,23 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
 
     const has_followed = user.has_followed ?? hasFollowed;
 
+    function gotoProfile() {
+        get(route('public.profile.show', { user: user.id }), {
+            preserveScroll: true,
+            preserveState: true,
+        });
+    }
+
     return (
         <div {...props}>
             <Card className="relative min-h-40 w-full cursor-pointer overflow-hidden">
                 <CardContent className="flex w-full flex-1 items-center justify-center gap-2">
-                    <OnboardingAvatar avatarUrl={user.avatar_url} />
+                    <OnboardingAvatar avatarUrl={user.avatar_url} onClick={gotoProfile} />
                     <div className="w-full">
                         <div className="flex items-center justify-between">
-                            <CardTitle className="text-xl">{user.name}</CardTitle>
+                            <CardTitle className="text-xl" onClick={gotoProfile}>
+                                {user.name}
+                            </CardTitle>
                             <Button
                                 data-pan="onbording-profile"
                                 className="text-muted-forground absolute top-4 right-4 flex h-8 w-8 cursor-pointer border-none shadow-none"
@@ -171,18 +163,13 @@ export default function Onboarding({ user, hasFollowed = false, ...props }: Onbo
                             </Button>
                         </div>
                         <CardDescription className="text-sm">
-                            {user.bio ? truncate(user.bio) : <span className="text-muted">Bio indisponível...</span>}
+                            {user.bio ? truncate(user.bio, 45) : <span className="text-muted">Bio indisponível...</span>}
                         </CardDescription>
                     </div>
                 </CardContent>
-                {auth.user && (
+                {auth.user && auth.user.id !== user.id && (
                     <CardFooter className="flex justify-end">
-                        {!has_followed && (
-                            <Button className="" size="sm" variant="secondary" onClick={() => follow(user)} disabled={processing}>
-                                <UserPlusIcon />
-                                Seguir
-                            </Button>
-                        )}
+                        {!has_followed && <FollowButton user={user} />}
                         {has_followed && <UnfollowButton user={user} />}
                     </CardFooter>
                 )}

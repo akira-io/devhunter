@@ -5,13 +5,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Hunt, SharedData } from '@/types';
-import { usePage } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 import { BarChart, Edit, EllipsisVerticalIcon, MessageCircle, Repeat2, SaveIcon, Share2Icon, ShieldAlert, StopCircle } from 'lucide-react';
 import { useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
 interface HuntCardProps {
     hunt: Hunt;
+    ligatures?: boolean;
 }
 
 export function HuntCardConnector() {
@@ -23,21 +24,30 @@ export function HuntCardConnector() {
     );
 }
 
-export function HuntCard({ hunt }: HuntCardProps) {
+export function HuntCard({ hunt, ligatures = true }: HuntCardProps) {
     const { auth } = usePage<SharedData>().props;
     const [isOpenComments, setOpenComments] = useState(false);
+
+    function gotoProfile() {
+        router.get(route('public.profile.show', { user: hunt.owner.id }));
+    }
 
     return (
         <>
             <Card className="relative mx-auto w-full max-w-xl">
                 <CardHeader className="flex flex-row items-start gap-4">
-                    <Avatar>
+                    <Avatar onClick={gotoProfile}>
                         <AvatarImage src={hunt.owner.avatar_url} />
                         <AvatarFallback>U</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                        <CardTitle className="text-base font-semibold">{hunt.owner.name}</CardTitle>
-                        <div className="text-muted-foreground text-sm">
+                        <CardTitle className="cursor-pointer text-base font-semibold" onClick={gotoProfile}>
+                            {hunt.owner.name}
+                        </CardTitle>
+                        <div
+                            className="text-muted-foreground cursor-pointer text-sm"
+                            onClick={() => router.get(route('public.profile.show', { user: hunt.owner.id }))}
+                        >
                             @{hunt.owner.github_user_name || hunt.owner.name} · {hunt.created_at}
                         </div>
                     </div>
@@ -105,7 +115,7 @@ export function HuntCard({ hunt }: HuntCardProps) {
                         <HuntComments isOpen={isOpenComments} hunt={hunt} />
                     </div>
                 )}
-                <HuntCardConnector />
+                {ligatures && <HuntCardConnector />}
             </Card>
         </>
     );

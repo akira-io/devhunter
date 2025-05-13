@@ -1,9 +1,30 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## 0.3.0 (2025-05-13)
+
+### UI and UX Improvements
+
+- Enhanced `ProfileCompletion` component with visual feedback and responsive layout
+- Updated `Welcome` component styles, added GitHub and Discord links, and improved placeholder text
+- Improved layout responsiveness across `Links`, `Sidebar`, and other components
+- Refined component styles with better spacing, gradients, and accessibility enhancements
+
+### Refactors and Naming Consistency
+
+- Renamed all mentions of "Dev Hunter" to "Hunter" throughout the UI
+- Rebranded "Feed" as "Hunt Line", including updated routes and components
+- Replaced the term "Followers" with "Hunters" for consistent branding
+- Simplified sidebar state handling and reorganized related logic
+- Cleaned up class names and removed redundant styles for better maintainability
+
+### Fixes and General Improvements
+
+- Improved avatar rendering responsiveness
+- Adjusted padding and spacing across various components
+- Enhanced test coverage configuration and updated internal documentation
 
 ## 0.2.0 (2025-05-06)
 

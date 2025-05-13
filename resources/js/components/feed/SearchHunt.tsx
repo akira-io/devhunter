@@ -31,7 +31,7 @@ export default function SearchHunt() {
     return (
         <>
             <button
-                className="border-input bg-background text-foreground placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-ring/50 inline-flex w-fit rounded-md border px-2 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
+                className="border-input bg-background text-foreground placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-ring/50 hidden w-fit rounded-md border px-2 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] md:inline-flex"
                 onClick={() => setOpen(true)}
             >
                 <span className="flex grow items-center">
@@ -42,6 +42,7 @@ export default function SearchHunt() {
                     ⌘K
                 </kbd>
             </button>
+            <SearchIcon className="text-muted-foreground/80 md:hidden" size={24} aria-hidden="true" onClick={() => setOpen(true)} />
             <CommandDialog open={open} onOpenChange={setOpen}>
                 <CommandInput placeholder="Type a command or search..." />
                 <CommandList>

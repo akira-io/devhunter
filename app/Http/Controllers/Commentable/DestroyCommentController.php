@@ -31,6 +31,6 @@ final readonly class DestroyCommentController
 
         $user->deleteComment($comment);
 
-        return to_route('hunts.index');
+        return back();
     }
 }
