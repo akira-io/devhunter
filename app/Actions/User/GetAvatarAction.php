@@ -6,7 +6,7 @@ namespace App\Actions\User;
 
 use App\Models\User;
 
-final class GetAvatarAction
+final readonly class GetAvatarAction
 {
     /**
      * Get the avatar URL for the user.

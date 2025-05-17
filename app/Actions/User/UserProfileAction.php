@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
-final class UserProfileAction
+final readonly class UserProfileAction
 {
     /**
      * Get the avatar URL for the user.

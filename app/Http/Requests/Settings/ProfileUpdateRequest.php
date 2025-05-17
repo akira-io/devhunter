@@ -10,6 +10,11 @@ use Illuminate\Validation\Rule;
 
 final class ProfileUpdateRequest extends FormRequest
 {
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
     public function rules(): array
     {
         $userId = type($this->user())->as(User::class)->id;
@@ -34,6 +39,11 @@ final class ProfileUpdateRequest extends FormRequest
         ];
     }
 
+    /**
+     * Get the avatar rules
+     *
+     * @return string[]
+     */
     private function avatarRules(): array
     {
         if ($this->hasFile('avatar_url')) {
@@ -47,6 +57,11 @@ final class ProfileUpdateRequest extends FormRequest
         return ['nullable'];
     }
 
+    /**
+     * Get background rules
+     *
+     * @return string[]
+     */
     private function backgroundRules(): array
     {
         if ($this->hasFile('background_url')) {
