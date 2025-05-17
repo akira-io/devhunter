@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Actions\User;
+
+use App\Models\User;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+
+final class UserProfileAction
+{
+    /**
+     * Get the avatar URL for the user.
+     */
+    public function handle(User $user): User
+    {
+
+        /**
+         * @var User $authUser
+         */
+        $authUser = type(Auth::user())->as(User::class);
+
+        $user->avatar_url = new GetAvatarAction()->handle($user);
+
+        $user->setAttribute('background_image_url', new GetBackgroundImageAction()->handle($user));
+
+        $t = $authUser->attachFollowStatus(followables: $user);
+
+        return type($t)->as(Collection::class)->sole();
+
+    }
+}

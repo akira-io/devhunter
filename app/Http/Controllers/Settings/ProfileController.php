@@ -39,8 +39,22 @@ final readonly class ProfileController
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+
         $user = type($request->user())->as(User::class);
-        $user->fill((array) $request->validated());
+
+        if ($request->hasFile('avatar_url')) {
+            $user->clearMediaCollection('profile_avatar');
+            $user->addMedia($request->file('avatar_url'))
+                ->toMediaCollection('profile_avatar');
+        }
+
+        if ($request->hasFile('background_image_url')) {
+            $user->clearMediaCollection('profile_background');
+            $user->addMedia($request->file('background_image_url'))
+                ->toMediaCollection('profile_background');
+        }
+
+        $user->fill($request->except('avatar_url', 'background_image_url'));
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
@@ -48,7 +62,7 @@ final readonly class ProfileController
 
         $user->save();
 
-        return to_route('profile.edit');
+        return back();
     }
 
     /**

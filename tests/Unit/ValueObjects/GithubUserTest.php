@@ -46,7 +46,7 @@ it('returns correct structure from toArray', function () {
     expect($array)->toMatchArray([
         'name' => 'gitnick',
         'email' => 'github@example.com',
-        'github_user_name' => 'githubuser',
+        'user_name' => 'githubuser',
         'avatar_url' => 'https://avatars.githubusercontent.com/u/123?v=4',
         'github_id' => 123,
         'email_verified_at' => now()->toDateTimeString(),

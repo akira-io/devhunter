@@ -52,7 +52,8 @@ export interface User {
     youtube_url?: string;
     professional_educations?: AcademicBackground[];
     has_followed: boolean;
-    github_user_name?: string;
+    user_name?: string;
+    background_image_url: string;
 
     [key: string]: unknown; // This allows for additional properties...
 }

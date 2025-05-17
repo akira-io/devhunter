@@ -6,14 +6,15 @@ namespace App\Http\Controllers;
 
 use Akira\Followable\Exceptions\FollowableTraitNotFoundException;
 use App\Actions\Followable\GetHuntingsAction;
+use App\Actions\User\UserProfileAction;
 use App\Http\Resources\Hunt\HuntResource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Middleware;
+use Throwable;
 
 #[Middleware(['auth', 'verified'])]
 final readonly class PublicProfileController
@@ -22,9 +23,10 @@ final readonly class PublicProfileController
      * Display the public profile of a user.
      *
      * @throws FollowableTraitNotFoundException
+     * @throws Throwable
      */
     #[Get('public-profile/{user}', name: 'public.profile.show')]
-    public function show(Request $request, User $user, GetHuntingsAction $huntingsAction): Response|ResponseFactory
+    public function show(Request $request, User $user, GetHuntingsAction $huntingsAction, UserProfileAction $userProfileAction): Response|ResponseFactory
     {
         /** @var User $authUser */
         $authUser = $request->user();
@@ -34,7 +36,7 @@ final readonly class PublicProfileController
         $huntings = $huntingsAction->handle($user);
 
         return inertia('public-profile', [
-            'user' => type($authUser->attachFollowStatus($user))->as(Collection::class)->sole(),
+            'user' => $userProfileAction->handle($user),
             'hunts' => HuntResource::collection($authUser->attachLikeStatus($hunts)),
             'hunters' => $authUser->attachFollowStatus($hunters),
             'huntings' => $authUser->attachFollowStatus($huntings),

@@ -18,7 +18,7 @@ interface HuntCardProps {
 export function HuntCardConnector() {
     return (
         <>
-            <div className="effect absolute -top-10 left-5 flex h-10 w-1 items-center justify-center rounded-full bg-red-500 bg-white text-xs dark:bg-zinc-900" />
+            <div className="effect absolute -top-10 left-5 flex h-10 w-1 items-center justify-center rounded-full bg-white text-xs dark:bg-zinc-900" />
             <div className="effect bg-card absolute -top-10 right-5 flex h-10 w-1 items-center justify-center rounded-full text-xs dark:bg-zinc-900" />
         </>
     );
@@ -37,7 +37,7 @@ export function HuntCard({ hunt, ligatures = true }: HuntCardProps) {
             <Card className="relative mx-auto w-full max-w-xl">
                 <CardHeader className="flex flex-row items-start gap-4">
                     <Avatar onClick={gotoProfile}>
-                        <AvatarImage src={hunt.owner.avatar_url} />
+                        <AvatarImage src={hunt.owner.avatar_url} className="object-cover" />
                         <AvatarFallback>U</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
@@ -48,7 +48,7 @@ export function HuntCard({ hunt, ligatures = true }: HuntCardProps) {
                             className="text-muted-foreground cursor-pointer text-sm"
                             onClick={() => router.get(route('public.profile.show', { user: hunt.owner.id }))}
                         >
-                            @{hunt.owner.github_user_name || hunt.owner.name} · {hunt.created_at}
+                            @{hunt.owner.user_name || hunt.owner.name} · {hunt.created_at}
                         </div>
                     </div>
                     <DropdownMenu>

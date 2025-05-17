@@ -11,7 +11,7 @@
   "require": {
     "php": "^8.4",
     "akira/laravel-commentable": "1.x-dev",
-    "akira/laravel-followable": "^0.1.0",
+    "akira/laravel-followable": "^0.2.0",
     "akira/laravel-likeable": "^0.2.0",
     "inertiajs/inertia-laravel": "^2.0.2",
     "laravel/framework": "^12.9.2",
@@ -24,6 +24,7 @@
     "meilisearch/meilisearch-php": "^1.14",
     "panphp/pan": "^0.1.8",
     "pinkary-project/type-guard": "^0.1.0",
+    "spatie/laravel-medialibrary": "^11.12",
     "spatie/laravel-route-attributes": "^1.25",
     "tightenco/ziggy": "^2.5.2"
   },

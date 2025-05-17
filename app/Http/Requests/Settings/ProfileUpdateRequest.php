@@ -5,19 +5,15 @@ declare(strict_types=1);
 namespace App\Http\Requests\Settings;
 
 use App\Models\User;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 final class ProfileUpdateRequest extends FormRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+        $userId = type($this->user())->as(User::class)->id;
+
         return [
             'name' => ['required', 'string', 'max:255'],
 
@@ -27,9 +23,40 @@ final class ProfileUpdateRequest extends FormRequest
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class)->ignore(type($this->user())->as(User::class)->id),
+                Rule::unique(User::class)->ignore($userId),
             ],
+
             'bio' => ['nullable', 'string', 'max:200'],
+            'location' => ['nullable', 'string', 'max:100'],
+
+            'avatar_url' => $this->avatarRules(),
+            'background_url' => $this->backgroundRules(),
         ];
+    }
+
+    private function avatarRules(): array
+    {
+        if ($this->hasFile('avatar_url')) {
+            return ['nullable', 'image', 'max:400', 'mimes:jpg,jpeg,png'];
+        }
+
+        if (is_string($this->input('avatar_url'))) {
+            return ['nullable', 'url'];
+        }
+
+        return ['nullable'];
+    }
+
+    private function backgroundRules(): array
+    {
+        if ($this->hasFile('background_url')) {
+            return ['nullable', 'image', 'max:400', 'mimes:jpg,jpeg,png'];
+        }
+
+        if (is_string($this->input('background_url'))) {
+            return ['nullable', 'url'];
+        }
+
+        return ['nullable'];
     }
 }

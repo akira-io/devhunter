@@ -39,7 +39,7 @@ final readonly class GithubUser
         return [
             'name' => $this->user->getName() ?? $this->user->getNickname(),
             'email' => $this->user->getEmail() ?? ($raw['notification_email'] ?? $this->generateFakeEmail()),
-            'github_user_name' => $raw['login'] ?? null,
+            'user_name' => $raw['login'] ?? null,
             'avatar_url' => $this->user->getAvatar(),
             'github_id' => $this->user->getId(),
             'github_token' => $this->user->token,

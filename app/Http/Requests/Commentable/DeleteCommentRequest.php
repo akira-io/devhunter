@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Commentable;
 
-use App\Models\Hunt;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -35,10 +34,10 @@ final class DeleteCommentRequest extends FormRequest
     }
 
     /**
-     * Delete the hunt.
+     * Delete the comment.
      */
-    public function destroy(Hunt $hunt): ?bool
+    public function destroy(Comment $comment): ?bool
     {
-        return $hunt->delete();
+        return $comment->delete();
     }
 }
