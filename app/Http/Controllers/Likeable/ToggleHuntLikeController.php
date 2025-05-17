@@ -8,8 +8,10 @@ use App\Models\Hunt;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Post;
 
+#[Middleware(['auth', 'verified'])]
 final readonly class ToggleHuntLikeController
 {
     /**

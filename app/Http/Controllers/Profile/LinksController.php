@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Patch;
 
-#[Middleware('auth')]
+#[Middleware(['auth', 'verified'])]
 final readonly class LinksController
 {
     /**
