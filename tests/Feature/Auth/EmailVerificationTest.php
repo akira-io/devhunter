@@ -48,3 +48,45 @@ test('email is not verified with invalid hash', function () {
 
     expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
 });
+
+test('verification notification is sent to unverified user', function () {
+    $user = User::factory()->unverified()->create();
+
+    $response = $this->actingAs($user)
+        ->from('/verify-email')
+        ->post(route('verification.send'));
+
+    $response->assertRedirect('/verify-email');
+    $response->assertSessionHas('status', 'verification-link-sent');
+});
+
+test('verification notification is not sent to verified user', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('verification.send'));
+
+    $response->assertRedirect(route('hunts.index', absolute: false));
+});
+
+test('verified user is redirected from verification screen', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)->get('/verify-email');
+
+    $response->assertRedirect(route('hunts.index', absolute: false));
+});
+
+test('already verified user is redirected when trying to verify again', function () {
+    $user = User::factory()->create();
+
+    $verificationUrl = URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addMinutes(60),
+        ['id' => $user->id, 'hash' => sha1($user->email)]
+    );
+
+    $response = $this->actingAs($user)->get($verificationUrl);
+
+    $response->assertRedirect(route('hunts.index', absolute: false).'?verified=1');
+});

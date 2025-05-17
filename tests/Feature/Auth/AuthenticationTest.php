@@ -43,3 +43,26 @@ test('users can logout', function () {
     $this->assertGuest();
     $response->assertRedirect('/');
 });
+
+test('users are rate limited after too many login attempts', function () {
+    $user = User::factory()->create();
+
+    // Attempt to login with wrong password multiple times to trigger rate limiting
+    for ($i = 0; $i < 5; $i++) {
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'wrong-password',
+        ]);
+    }
+
+    // The next attempt should be rate limited
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'wrong-password',
+    ]);
+
+    $response->assertSessionHasErrors('email');
+    $this->assertStringContainsString(__('auth.throttle', ['seconds' => 59]), $response->getSession()->get('errors')
+        ->getBag('default')
+        ->first('email'));
+});
