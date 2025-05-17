@@ -35,7 +35,7 @@ final class ProfileUpdateRequest extends FormRequest
             'location' => ['nullable', 'string', 'max:100'],
 
             'avatar_url' => $this->avatarRules(),
-            'background_url' => $this->backgroundRules(),
+            'background_image_url' => $this->backgroundRules(),
         ];
     }
 
@@ -64,11 +64,11 @@ final class ProfileUpdateRequest extends FormRequest
      */
     private function backgroundRules(): array
     {
-        if ($this->hasFile('background_url')) {
+        if ($this->hasFile('background_image_url')) {
             return ['nullable', 'image', 'max:400', 'mimes:jpg,jpeg,png'];
         }
 
-        if (is_string($this->input('background_url'))) {
+        if (is_string($this->input('background_image_url'))) {
             return ['nullable', 'url'];
         }
 

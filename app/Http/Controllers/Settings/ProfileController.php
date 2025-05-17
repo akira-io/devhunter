@@ -44,13 +44,13 @@ final readonly class ProfileController
 
         if ($request->hasFile('avatar_url')) {
             $user->clearMediaCollection('profile_avatar');
-            $user->addMedia($request->file('avatar_url'))
+            $user->addMedia($request->validated('avatar_url'))
                 ->toMediaCollection('profile_avatar');
         }
 
         if ($request->hasFile('background_image_url')) {
             $user->clearMediaCollection('profile_background');
-            $user->addMedia($request->file('background_image_url'))
+            $user->addMedia($request->validated('background_image_url'))
                 ->toMediaCollection('profile_background');
         }
 

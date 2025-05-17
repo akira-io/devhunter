@@ -130,7 +130,7 @@ test('user can provide background url as string', function () {
         ->post(route('profile.update'), [
             'name' => 'Test User',
             'email' => $user->email,
-            'background_url' => 'https://example.com/background.jpg',
+            'background_image_url' => 'https://example.com/background.jpg',
         ]);
 
     $response
