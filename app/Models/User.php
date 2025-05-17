@@ -40,6 +40,12 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property-read  HasMany<AcademicBackground,$this> $academicBackgrounds
  * @property-read  MorphMany<User, $this> $followers
  * @property-read  MorphMany<User, $this> $followings
+ * @property-read  string|null $github_url
+ * @property-read  string|null $twitter_url
+ * @property-read  string|null $linkedin_url
+ * @property-read  string|null $bluesky_url
+ * @property-read  string|null $website_url
+ * @property-read  string|null $youtube_url
  */
 final class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {

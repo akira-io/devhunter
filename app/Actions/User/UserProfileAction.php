@@ -13,7 +13,7 @@ final readonly class UserProfileAction
     /**
      * Get the avatar URL for the user.
      */
-    public function handle(User $user): User
+    public function handle(User $user): mixed
     {
 
         /**
@@ -25,9 +25,7 @@ final readonly class UserProfileAction
 
         $user->setAttribute('background_image_url', new GetBackgroundImageAction()->handle($user));
 
-        $t = $authUser->attachFollowStatus(followables: $user);
-
-        return type($t)->as(Collection::class)->sole();
+        return type($authUser->attachFollowStatus(followables: $user))->as(Collection::class)->sole();
 
     }
 }

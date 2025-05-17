@@ -32,7 +32,7 @@ final class HuntResource extends JsonResource
             'is_ignored' => $this->is_ignored,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
-            'owner' => $this->owner,
+            'owner' => HuntOwnerResource::make($this->owner),
             'image_url' => null,
             'comments' => CommentResource::collection($this->commentsWithHasLiked()),
             'likes_count' => $this->likesCount(),

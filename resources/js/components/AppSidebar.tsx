@@ -39,12 +39,12 @@ const footerNavItems: NavItem[] = [
     },
     {
         title: 'Repositório',
-        href: 'https://github.com/akira-io/devhunter',
+        href: 'https://github.com/akira-io/hunter',
         icon: AiFillGithub,
     },
     {
         title: 'Documentação',
-        href: 'https://github.com/akira-io/devhunter/blob/main/README.md',
+        href: 'https://github.com/akira-io/hunter/blob/main/README.md',
         icon: BookOpen,
     },
 ];

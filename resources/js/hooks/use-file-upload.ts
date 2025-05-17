@@ -2,11 +2,11 @@ import type React from 'react';
 import { type ChangeEvent, type DragEvent, type InputHTMLAttributes, useCallback, useRef, useState } from 'react';
 
 export type FileMetadata = {
-    // name: string
-    // size: number
-    // type: string
+    name: string;
+    size: number;
+    type: string;
     url?: string;
-    //id: string
+    id: string;
 };
 
 export type FileWithPreview = {
@@ -223,7 +223,7 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
                 inputRef.current.value = '';
             }
         },
-        [state.files.length, maxFiles, multiple, maxSize, validateFile, createPreview, generateUniqueId, clearFiles, onFilesChange, onFilesAdded],
+        [multiple, maxFiles, state.files, clearFiles, maxSize, validateFile, generateUniqueId, createPreview, onFilesAdded, onFilesChange],
     );
 
     const removeFile = useCallback(

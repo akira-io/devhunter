@@ -10,7 +10,7 @@ import ProfileAvatarCard from '@/components/ProfileAvatarCard';
 import { Card, CardContent } from '@/components/ui/card';
 import { Option } from '@/components/ui/multiselect';
 import AppLayout from '@/layouts/app-layout';
-import { type AcademicBackground as ProfessionalEducationType, type BreadcrumbItem, type SharedData } from '@/types';
+import { type BreadcrumbItem, type AcademicBackground as ProfessionalEducationType, type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { GoLocation } from 'react-icons/go';
 
