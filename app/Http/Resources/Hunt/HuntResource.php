@@ -52,6 +52,7 @@ final class HuntResource extends JsonResource
         $user = request()->user();
 
         return collect($this->comments)->map(function (Comment $comment) use ($user): Comment {
+
             $comment->has_liked = $comment->likes->contains('user_id', $user->id);
 
             return $comment;
