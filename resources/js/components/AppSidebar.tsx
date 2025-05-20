@@ -4,7 +4,8 @@ import { NavMain } from '@/components/nav-main';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, EyeIcon, FileSearch, Folder, MessageCircleMore, NetworkIcon, RssIcon } from 'lucide-react';
+import { BookOpen, EyeIcon, FileSearch, MessageCircleMore, NetworkIcon, RssIcon } from 'lucide-react';
+import { AiFillGithub } from 'react-icons/ai';
 
 const mainNavItems: NavItem[] = [
     {
@@ -38,12 +39,12 @@ const footerNavItems: NavItem[] = [
     },
     {
         title: 'Repositório',
-        href: 'https://github.com/akira-io/devhunter',
-        icon: Folder,
+        href: 'https://github.com/akira-io/hunter',
+        icon: AiFillGithub,
     },
     {
         title: 'Documentação',
-        href: 'https://github.com/akira-io/devhunter/blob/main/README.md',
+        href: 'https://github.com/akira-io/hunter/blob/main/README.md',
         icon: BookOpen,
     },
 ];

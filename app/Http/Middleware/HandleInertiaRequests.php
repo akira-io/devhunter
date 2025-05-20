@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Foundation\Inspiring;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Throwable;
 use Tighten\Ziggy\Ziggy;
 
 final class HandleInertiaRequests extends Middleware
@@ -36,6 +38,8 @@ final class HandleInertiaRequests extends Middleware
      * @see https://inertiajs.com/shared-data
      *
      * @return array<string, mixed>
+     *
+     * @throws Throwable
      */
     public function share(Request $request): array
     {
@@ -48,7 +52,7 @@ final class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'quote' => ['message' => mb_trim($message), 'author' => mb_trim($author)],
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user() ? UserResource::make($request->user())->resolve() : null,
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),

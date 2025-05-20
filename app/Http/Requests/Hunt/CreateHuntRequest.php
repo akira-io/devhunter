@@ -8,6 +8,7 @@ use App\Models\Hunt;
 use App\Models\User;
 use App\Rules\Rules\WithoutBlankCharactersRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 
 final class CreateHuntRequest extends FormRequest
 {
@@ -24,6 +25,7 @@ final class CreateHuntRequest extends FormRequest
             'is_reported' => ['boolean'],
             'is_pinned' => ['boolean'],
             'is_ignored' => ['boolean'],
+            'image' => ['nullable', 'image', 'max:400', 'mimes:jpg,jpeg,png'],
         ];
     }
 
@@ -44,7 +46,14 @@ final class CreateHuntRequest extends FormRequest
 
         $user = type($this->user())->as(User::class);
 
-        return $user->hunts()
-            ->create((array) $this->validated());
+        $hunt = $user->hunts()
+            ->create($this->except('image'));
+
+        if ($this->hasFile('image')) {
+            $hunt->addMedia(type($this->file('image'))->as(UploadedFile::class))
+                ->toMediaCollection('hunts');
+        }
+
+        return $hunt;
     }
 }

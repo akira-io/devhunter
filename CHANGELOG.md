@@ -3,6 +3,30 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.4.0 (2025-05-20)
+
+### Features
+
+- Added image upload functionality for hunts, enabling richer content sharing
+- Introduced `ProfileAvatarCard` component for user profile image management
+- Enhanced `GetHuntersAction` to include additional user profile data
+
+### Tests & Coverage
+
+- Added unit tests for avatar retrieval (`GetAvatarAction`)
+- Added tests for user rate limiting and email verification notifications
+- Improved GitHub authentication test coverage
+- Updated throttle error messages to reflect correct wait times
+- Increased test coverage thresholds to 100%
+
+### Refactors & Improvements
+
+- Updated profile image handling with consistent background image naming
+- Improved user resource structure and repository links
+- Required verified users for skill and comment actions
+- Marked action classes as `readonly` and improved validation in `ProfileUpdateRequest`
+- Removed `coverage/` folder for cleanup
+
 ## 0.3.0 (2025-05-13)
 
 ### UI and UX Improvements

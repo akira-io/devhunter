@@ -32,13 +32,13 @@ final class HuntResource extends JsonResource
             'is_ignored' => $this->is_ignored,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
-            'owner' => $this->owner,
-            'image_url' => null,
+            'owner' => HuntOwnerResource::make($this->owner),
             'comments' => CommentResource::collection($this->commentsWithHasLiked()),
             'likes_count' => $this->likesCount(),
             'views' => 0,
             'shares' => 0,
             'has_liked' => $this->has_liked,
+            'image_url' => $this->getFirstMediaUrl('hunts'),
         ];
 
     }
@@ -52,6 +52,7 @@ final class HuntResource extends JsonResource
         $user = request()->user();
 
         return collect($this->comments)->map(function (Comment $comment) use ($user): Comment {
+
             $comment->has_liked = $comment->likes->contains('user_id', $user->id);
 
             return $comment;

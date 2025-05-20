@@ -143,7 +143,7 @@ return [
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
             App\Models\User::class => [
-                'filterableAttributes' => ['id', 'name', 'email', 'location', 'github_user_name', 'skills'],
+                'filterableAttributes' => ['id', 'name', 'email', 'location', 'user_name', 'skills'],
                 'sortableAttributes' => ['created_at'],
             ],
         ],

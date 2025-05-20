@@ -25,5 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        //        $exceptions->renderable(function (PostTooLargeException $e) {
+        //            return back()->with('error', $e->getMessage());
+        //        });
     })->create();

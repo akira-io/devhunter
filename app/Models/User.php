@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property-read int $id
@@ -24,13 +26,13 @@ use Laravel\Scout\Searchable;
  * @property-read  string $email
  * @property-read  string $password
  * @property-read  string $remember_token
- * @property-read  string $avatar_url
+ * @property string|null $avatar_url
  * @property-read  string $location
  * @property-read  string $bio
  * @property-read  string $github_id
  * @property-read  string $github_token
  * @property-read  string $github_refresh_token
- * @property-read  string $github_user_name
+ * @property-read  string $user_name
  * @property string|null $email_verified_at
  * @property-read  CarbonImmutable $created_at
  * @property-read  CarbonImmutable $updated_at
@@ -38,8 +40,14 @@ use Laravel\Scout\Searchable;
  * @property-read  HasMany<AcademicBackground,$this> $academicBackgrounds
  * @property-read  MorphMany<User, $this> $followers
  * @property-read  MorphMany<User, $this> $followings
+ * @property-read  string|null $github_url
+ * @property-read  string|null $twitter_url
+ * @property-read  string|null $linkedin_url
+ * @property-read  string|null $bluesky_url
+ * @property-read  string|null $website_url
+ * @property-read  string|null $youtube_url
  */
-final class User extends Authenticatable implements MustVerifyEmail
+final class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use Commenter;
     use Followable;
@@ -48,9 +56,15 @@ final class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 
+    use InteractsWithMedia;
     use Liker;
     use Notifiable;
     use Searchable;
+
+    /**
+     * @var mixed|string
+     */
+    public mixed $background_image_url;
 
     /**
      * The attributes that are mass assignable.
@@ -69,7 +83,7 @@ final class User extends Authenticatable implements MustVerifyEmail
         'github_id',
         'github_token',
         'github_refresh_token',
-        'github_user_name',
+        'user_name',
         'skills',
         'github_url',
         'twitter_url',
@@ -101,7 +115,7 @@ final class User extends Authenticatable implements MustVerifyEmail
             'name' => $this->name,
             'email' => $this->email,
             'location' => $this->location,
-            'github_user_name' => $this->github_user_name,
+            'user_name' => $this->user_name,
             'skills' => $this->skills,
         ];
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings;
 
+use App\Actions\User\Profile\UpdateProfileAvatarAction;
+use App\Actions\User\Profile\UpdateProfileBackgroundAction;
 use App\Enums\SkillsEnum;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
 use App\Models\User;
@@ -13,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 final readonly class ProfileController
 {
@@ -36,19 +40,20 @@ final readonly class ProfileController
 
     /**
      * Update the user's profile settings.
+     *
+     * @throws FileIsTooBig
+     * @throws FileDoesNotExist
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request, UpdateProfileAvatarAction $profileAvatarAction, UpdateProfileBackgroundAction $profileBackgroundAction): RedirectResponse
     {
-        $user = type($request->user())->as(User::class);
-        $user->fill((array) $request->validated());
 
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
+        // $user = type($request->user())->as(User::class);
 
-        $user->save();
+        $request->updateImages($profileBackgroundAction, $profileAvatarAction);
 
-        return to_route('profile.edit');
+        $request->updateUserInformation();
+
+        return back();
     }
 
     /**

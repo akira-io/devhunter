@@ -1,5 +1,4 @@
 import DeleteUser from '@/components/delete-user';
-import InputError from '@/components/input-error';
 import { ProfileCard } from '@/components/profile-card';
 import { About } from '@/components/profile/About';
 import { AcademicBackground } from '@/components/profile/AcademicBackground';
@@ -7,19 +6,13 @@ import { HighlightedProjects } from '@/components/profile/HighlightedProjects';
 import { HighlightSkills } from '@/components/profile/HighlightSkills';
 import { ProfileLinks } from '@/components/profile/Links';
 import { ProfileCompletion } from '@/components/profile/ProfileCompletion';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import ProfileAvatarCard from '@/components/ProfileAvatarCard';
 import { Card, CardContent } from '@/components/ui/card';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Option } from '@/components/ui/multiselect';
-import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, type AcademicBackground as ProfessionalEducationType, type SharedData } from '@/types';
-import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { Award, PlusIcon } from 'lucide-react';
-import { FormEventHandler } from 'react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { GoLocation } from 'react-icons/go';
-import AvatarGenerator, { genConfig } from 'react-nice-avatar';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -27,12 +20,6 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/settings/profile',
     },
 ];
-
-type ProfileForm = {
-    name: string;
-    email: string;
-    bio: string;
-};
 
 interface ProfileProps {
     mustVerifyEmail: boolean;
@@ -46,19 +33,6 @@ interface ProfileProps {
 
 export default function Profile({ mustVerifyEmail, status, skills, highlightedSkills, academicBackgrounds, followings, followers }: ProfileProps) {
     const { auth } = usePage<SharedData>().props;
-    const { data, setData, patch, errors } = useForm<Required<ProfileForm>>({
-        name: auth.user.name,
-        email: auth.user.email,
-        bio: auth.user.bio ?? '',
-    });
-
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-        patch(route('profile.update'), {
-            preserveScroll: true,
-        });
-    };
-    const config = genConfig({ sex: 'man', hairStyle: 'thick' });
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -70,18 +44,17 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                     </div>
                     <Card className="gradient effect w-full items-center justify-center p-6 md:w-80">
                         <CardContent className="effect flex flex-col items-center text-center">
-                            <Avatar className="h-32 w-auto">
-                                {auth.user.avatar_url ? (
-                                    <AvatarImage
-                                        src={auth.user.avatar_url}
-                                        alt={auth.user.name}
-                                        className="mb-4 h-32 w-32 rounded-full object-cover"
-                                    />
-                                ) : (
-                                    <AvatarGenerator className="mb-4 h-32 w-32 rounded-full object-cover" {...config} />
-                                )}
-                            </Avatar>
-                            <h2 className="mt-4 text-xl font-semibold">{auth.user.name}</h2>
+                            <ProfileAvatarCard />
+                            <h2 className="mt-4 text-xl font-semibold">
+                                <Link
+                                    href={route('public.profile.show', {
+                                        user: auth.user.id,
+                                    })}
+                                    prefetch
+                                >
+                                    {auth.user.name}
+                                </Link>
+                            </h2>
                             <div className="space-y-2 text-center text-xs text-gray-400">
                                 <p>{auth.user.email}</p>
                                 {/*<p>*/}
@@ -114,38 +87,38 @@ export default function Profile({ mustVerifyEmail, status, skills, highlightedSk
                     <About />
                     <AcademicBackground academicBackgrounds={academicBackgrounds} />
                     <HighlightedProjects />
-                    <section className="space-y-6">
-                        <ProfileCard title="Habilidades" icon={<PlusIcon />}>
-                            <Award />
-                            <p className="mb-4 max-w-100 text-center">
-                                Potencialize sua trajetória: destaque suas principais habilidades e abra portas para novas oportunidades!
-                            </p>
-                            <Dialog>
-                                <DialogTrigger asChild>
-                                    <Button variant="secondary">
-                                        <Award />
-                                        Experiências Profissionais
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader>
-                                        <DialogTitle>Apresentação</DialogTitle>
-                                        <DialogDescription>
-                                            Adicione uma breve descrição sobre você. Isso ajudará os recrutadores a conhecerem melhor o seu perfil.
-                                        </DialogDescription>
-                                    </DialogHeader>
-                                    <Textarea id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} maxLength={200} />
-                                    <InputError className="mt-2" message={errors.bio} />
-                                    <div className="flex flex-col md:flex-row md:justify-end">
-                                        <span className="text-muted-foreground text-md float-end flex-1">{data.bio.length} / 200</span>
-                                        <Button type="button" onClick={submit}>
-                                            <DialogClose>Guardar</DialogClose>
-                                        </Button>
-                                    </div>
-                                </DialogContent>
-                            </Dialog>
-                        </ProfileCard>
-                    </section>
+                    {/*<section className="space-y-6">*/}
+                    {/*    <ProfileCard title="Habilidades" icon={<PlusIcon />}>*/}
+                    {/*        <Award />*/}
+                    {/*        <p className="mb-4 max-w-100 text-center">*/}
+                    {/*            Potencialize sua trajetória: destaque suas principais habilidades e abra portas para novas oportunidades!*/}
+                    {/*        </p>*/}
+                    {/*        <Dialog>*/}
+                    {/*            <DialogTrigger asChild>*/}
+                    {/*                <Button variant="secondary">*/}
+                    {/*                    <Award />*/}
+                    {/*                    Experiências Profissionais*/}
+                    {/*                </Button>*/}
+                    {/*            </DialogTrigger>*/}
+                    {/*            <DialogContent>*/}
+                    {/*                <DialogHeader>*/}
+                    {/*                    <DialogTitle>Apresentação</DialogTitle>*/}
+                    {/*                    <DialogDescription>*/}
+                    {/*                        Adicione uma breve descrição sobre você. Isso ajudará os recrutadores a conhecerem melhor o seu perfil.*/}
+                    {/*                    </DialogDescription>*/}
+                    {/*                </DialogHeader>*/}
+                    {/*                <Textarea id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} maxLength={200} />*/}
+                    {/*                <InputError className="mt-2" message={errors.bio} />*/}
+                    {/*                <div className="flex flex-col md:flex-row md:justify-end">*/}
+                    {/*                    <span className="text-muted-foreground text-md float-end flex-1">{data.bio.length} / 200</span>*/}
+                    {/*                    <Button type="button" onClick={submit}>*/}
+                    {/*                        <DialogClose>Guardar</DialogClose>*/}
+                    {/*                    </Button>*/}
+                    {/*                </div>*/}
+                    {/*            </DialogContent>*/}
+                    {/*        </Dialog>*/}
+                    {/*    </ProfileCard>*/}
+                    {/*</section>*/}
                     <section className="space-y-6">
                         <ProfileCard title="Eliminar Conta">
                             <DeleteUser />
