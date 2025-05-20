@@ -62,7 +62,7 @@ test('users are rate limited after too many login attempts', function () {
     ]);
 
     $response->assertSessionHasErrors('email');
-    $this->assertStringContainsString(__('auth.throttle', ['seconds' => 59]), $response->getSession()->get('errors')
+    $this->assertStringContainsString(__('auth.throttle', ['seconds' => 60]), $response->getSession()->get('errors')
         ->getBag('default')
         ->first('email'));
 });
