@@ -33,12 +33,12 @@ final class HuntResource extends JsonResource
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
             'owner' => HuntOwnerResource::make($this->owner),
-            'image_url' => null,
             'comments' => CommentResource::collection($this->commentsWithHasLiked()),
             'likes_count' => $this->likesCount(),
             'views' => 0,
             'shares' => 0,
             'has_liked' => $this->has_liked,
+            'image_url' => $this->getFirstMediaUrl('hunts'),
         ];
 
     }

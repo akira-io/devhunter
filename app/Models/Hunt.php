@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * The Hunt model.
@@ -32,13 +34,14 @@ use Illuminate\Support\Carbon;
  * @property-read int $likes_count
  * @property-read bool $has_liked
  */
-final class Hunt extends Model
+final class Hunt extends Model implements HasMedia
 {
     use Commentable;
 
     /** @use HasFactory<HuntFactory> */
     use HasFactory;
 
+    use InteractsWithMedia;
     use Likeable;
 
     /**

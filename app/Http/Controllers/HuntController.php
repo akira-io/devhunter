@@ -50,6 +50,7 @@ final readonly class HuntController
     #[Post(uri: '/', name: 'hunts.store')]
     public function store(CreateHuntRequest $request): RedirectResponse
     {
+
         $request->store();
 
         return to_route('hunts.index');

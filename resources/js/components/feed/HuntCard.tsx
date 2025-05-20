@@ -96,7 +96,7 @@ export function HuntCard({ hunt, ligatures = true }: HuntCardProps) {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <p>{hunt.content}</p>
-                    {hunt.image_url && <img src={hunt.image_url} alt="Tweet image" className="max-h-30 w-full rounded-md object-cover" />}
+                    {hunt.image_url && <img src={hunt.image_url} alt="Hunt image" className="max-h-50 w-full rounded-md object-cover" />}
                 </CardContent>
                 <CardFooter className="text-muted-foreground flex justify-between text-sm">
                     <HuntLikes hunt={hunt} />

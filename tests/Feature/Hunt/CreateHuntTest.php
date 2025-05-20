@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Illuminate\Http\UploadedFile;
+
 use function Pest\Laravel\from;
 
 beforeEach(function () {
@@ -163,5 +165,25 @@ it('should not create a hunt with blank characters', function () {
     $this->assertDatabaseMissing('hunts', [
         'content' => str_repeat(' ', 500),
     ]);
+
+});
+
+it('should create a hunt with image', function () {
+
+    Storage::fake('hunts');
+
+    $response = from(route('hunts.index'))
+        ->post(route('hunts.store'), [
+            'content' => 'Hunt Description',
+            'image' => UploadedFile::fake()->image('hunt.jpg'),
+        ]);
+
+    $response->assertRedirect(route('hunts.index'));
+
+    $this->assertDatabaseHas('hunts', [
+        'content' => 'Hunt Description',
+    ]);
+
+    expect($this->user->hunts()->first()->getMedia('hunts'))->toHaveCount(1);
 
 });

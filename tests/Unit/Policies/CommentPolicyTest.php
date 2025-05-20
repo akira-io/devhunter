@@ -31,13 +31,12 @@ test(/**
     expect($policy->view())->toBeTrue();
 });
 
-test(/**
- * @throws Exception
- */ 'update method returns true when user is the comment owner', function () {
+test('update method returns true when user is the comment owner', function () {
     // Arrange
     $policy = new CommentPolicy();
     $user = User::factory()->create();
     $hunt = Hunt::factory()->create(['owner_id' => $user->id]);
+
     $comment = $user->comment($hunt, 'Test comment');
 
     // Act & Assert
