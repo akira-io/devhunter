@@ -1,31 +1,31 @@
 # Changelog
 
-## 0.4.0 (2025-05-20)
-
-* test:  improve test coverage threshold ([c6d750e](https://github.com/akira-io/devhunter/commit/c6d750e))
-* test: add tests for user rate limiting and email verification notifications ([644261a](https://github.com/akira-io/devhunter/commit/644261a))
-* test: add unit tests for GetAvatarAction to verify avatar retrieval logic ([4de559e](https://github.com/akira-io/devhunter/commit/4de559e))
-* test: enhance GitHub authentication tests and update coverage to 100% ([a605a1a](https://github.com/akira-io/devhunter/commit/a605a1a))
-* test: update throttle error message to reflect correct wait time ([3d78151](https://github.com/akira-io/devhunter/commit/3d78151))
-* test: update throttle error message to reflect correct wait time ([8edde0a](https://github.com/akira-io/devhunter/commit/8edde0a))
-* feat: add image upload functionality for hunts and update related tests ([aa18522](https://github.com/akira-io/devhunter/commit/aa18522))
-* feat: add ProfileAvatarCard component for user profile image management ([a894f4f](https://github.com/akira-io/devhunter/commit/a894f4f))
-* feat: enhance GetHuntersAction to include additional user profile data ([f033a18](https://github.com/akira-io/devhunter/commit/f033a18))
-* refactor: remove coverage folder ([26e89a7](https://github.com/akira-io/devhunter/commit/26e89a7))
-* refactor: update action classes to be readonly and enhance validation rules in ProfileUpdateRequest ([1de42d9](https://github.com/akira-io/devhunter/commit/1de42d9))
-* refactor: update middleware to require verified users for skill and comment actions ([250d651](https://github.com/akira-io/devhunter/commit/250d651))
-* refactor: update profile image handling to use consistent naming for background image ([568de8d](https://github.com/akira-io/devhunter/commit/568de8d))
-* refactor: update repository links and enhance user resource structure ([56eb801](https://github.com/akira-io/devhunter/commit/56eb801))
-* refactor: update test coverage threshold to 82.7% ([018adc9](https://github.com/akira-io/devhunter/commit/018adc9))
-* refactor: update test coverage threshold to 91.2% ([62a6614](https://github.com/akira-io/devhunter/commit/62a6614))
-* refactor: update test coverage threshold to 96.2 ([7105037](https://github.com/akira-io/devhunter/commit/7105037))
-* refactor: update test coverage threshold to 97.4 ([f09a26d](https://github.com/akira-io/devhunter/commit/f09a26d))
-* refactor: update test coverage threshold to 97.7 ([67abf84](https://github.com/akira-io/devhunter/commit/67abf84))
-* refactor: update user profile handling with new avatar and background image management ([485f04b](https://github.com/akira-io/devhunter/commit/485f04b))
-* chore: update CHANGELOG for version 0.3.0 with UI improvements, refactors, and fixes ([cfc8880](https://github.com/akira-io/devhunter/commit/cfc8880))
-
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## 0.4.0 (2025-05-20)
+
+### Features
+
+- Added image upload functionality for hunts, enabling richer content sharing
+- Introduced `ProfileAvatarCard` component for user profile image management
+- Enhanced `GetHuntersAction` to include additional user profile data
+
+### Tests & Coverage
+
+- Added unit tests for avatar retrieval (`GetAvatarAction`)
+- Added tests for user rate limiting and email verification notifications
+- Improved GitHub authentication test coverage
+- Updated throttle error messages to reflect correct wait times
+- Increased test coverage thresholds to 100%
+
+### Refactors & Improvements
+
+- Updated profile image handling with consistent background image naming
+- Improved user resource structure and repository links
+- Required verified users for skill and comment actions
+- Marked action classes as `readonly` and improved validation in `ProfileUpdateRequest`
+- Removed `coverage/` folder for cleanup
 
 ## 0.3.0 (2025-05-13)
 
