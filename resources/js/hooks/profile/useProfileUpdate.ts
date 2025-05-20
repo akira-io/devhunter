@@ -38,15 +38,28 @@ export function useProfileUpdate() {
 
     function handleFileChange(e: React.ChangeEvent<HTMLInputElement>, type: 'avatar' | 'background') {
         const file = e.target.files?.[0];
-        if (file && file.size > 400 * 1024) {
-            setFileTooLarge(true);
-            setFileTooLargeDialogOpen(true);
-            return;
-        }
-
-        setFileTooLarge(false);
-
         if (file) {
+            // Validate file size
+            if (file.size > 400 * 1024) {
+                setFileTooLarge(true);
+                setFileTooLargeDialogOpen(true);
+                return;
+            }
+
+            // Validate file type
+            const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!validImageTypes.includes(file.type)) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Invalid File Type',
+                    description: 'Please upload a valid image file (JPEG, PNG, or GIF).',
+                });
+                return;
+            }
+
+            setFileTooLarge(false);
+
+            // Generate and set preview URL
             const url = URL.createObjectURL(file);
             if (type === 'avatar') {
                 setAvatarPreview(url);
