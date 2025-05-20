@@ -33,7 +33,7 @@ final readonly class GetHuntersAction
 
         $paginator->getCollection()->load('academicBackgrounds'); // @phpstan-ignore-line
         $hunters = $paginator->getCollection()->map(
-            static fn (User $user) => [
+            static fn (User $user): array => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
