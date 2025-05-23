@@ -13,8 +13,6 @@ use Spatie\RouteAttributes\Attributes\Get;
 
 final class GithubAuthController
 {
-    // Route::get('/auth/github', 'redirect')->name('github.login');
-    // Route::get('/auth/github/callback', 'callback')->name('github.callback');
     /**
      * Redirect the user to the GitHub authentication page.
      */

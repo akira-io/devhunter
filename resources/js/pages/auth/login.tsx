@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
 import { RiGithubFill } from '@remixicon/react';
+import { RiGoogleFill } from 'react-icons/ri';
 
 type LoginForm = {
     email: string;
@@ -24,6 +25,8 @@ interface LoginProps {
 
 export default function Login({ status, canResetPassword }: LoginProps) {
     const [loadingGithub, setLoadingGithub] = useState(false);
+    const [loadingGoogle, setLoadingGoogle] = useState(false);
+
     const { data, setData, post, processing, errors, reset } = useForm<Required<LoginForm>>({
         email: '',
         password: '',
@@ -40,6 +43,11 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     const handleGithubLogin = () => {
         setLoadingGithub(true);
         window.location.assign(route('github.login'));
+    };
+
+    const handleGoogleLogin = () => {
+        setLoadingGoogle(true);
+        window.location.assign(route('google.login'));
     };
 
     return (
@@ -97,18 +105,28 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         {processing ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <LogInIcon />}
                         Iniciar sessão
                     </Button>
-                    <Button variant="outline" type="button" className="w-full" onClick={handleGithubLogin} tabIndex={6} disabled={loadingGithub}>
-                        {loadingGithub ? (
-                            <LoaderCircle className="h-4 w-4 animate-spin" />
-                        ) : (
-                            <RiGithubFill className="me-1 text-[#333333] dark:text-white/60" size={16} aria-hidden="true" />
-                        )}
-                        Login com GitHub
-                    </Button>
+                    <div className="grid gap-1">
+                        <Button variant="outline" type="button" className="w-full" onClick={handleGithubLogin} tabIndex={5} disabled={loadingGithub}>
+                            {loadingGithub ? (
+                                <LoaderCircle className="h-4 w-4 animate-spin" />
+                            ) : (
+                                <RiGithubFill className="me-1 text-[#333333] dark:text-white/60" size={16} aria-hidden="true" />
+                            )}
+                            Continuar com GitHub
+                        </Button>
+                        <Button variant="outline" type="button" className="w-full" onClick={handleGoogleLogin} tabIndex={6} disabled={loadingGithub}>
+                            {loadingGoogle ? (
+                                <LoaderCircle className="h-4 w-4 animate-spin" />
+                            ) : (
+                                <RiGoogleFill className="me-1 text-[#333333] dark:text-white/60" size={16} aria-hidden="true" />
+                            )}
+                            Continuar com Google
+                        </Button>
+                    </div>
                 </div>
                 <div className="text-muted-foreground text-center text-sm">
                     Você não tem uma conta?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
+                    <TextLink href={route('register')} tabIndex={7}>
                         Criar conta
                     </TextLink>
                 </div>
