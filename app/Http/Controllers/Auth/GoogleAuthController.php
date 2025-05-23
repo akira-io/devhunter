@@ -38,7 +38,7 @@ final class GoogleAuthController
             ],
             [
                 'name' => $googleUser->getName(),
-                'avatar' => $googleUser->getAvatar(),
+                'avatar_url' => $googleUser->getAvatar(),
                 'password' => bcrypt(str()->random(16)),
             ]
         );
