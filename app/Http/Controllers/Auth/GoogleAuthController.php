@@ -40,6 +40,7 @@ final class GoogleAuthController
                 'name' => $googleUser->getName(),
                 'avatar_url' => $googleUser->getAvatar(),
                 'password' => bcrypt(str()->random(16)),
+                'email_verified_at' => now(),
             ]
         );
 
