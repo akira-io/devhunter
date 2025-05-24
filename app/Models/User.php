@@ -7,6 +7,7 @@ namespace App\Models;
 use Akira\Commentable\Concerns\Commenter;
 use Akira\Followable\Concerns\Followable;
 use Akira\Followable\Concerns\Follower;
+use Akira\LaravelAuthLogs\Concerns\AuthLogs;
 use Akira\Likeable\Concerns\Liker;
 use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
@@ -49,6 +50,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  */
 final class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
+    use AuthLogs;
     use Commenter;
     use Followable;
     use Follower;
