@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.0 (2025-05-27)
+
+### Features
+
+- Added Google authentication support
+- Included `email_verified_at` field in user data from GoogleAuthController
+- Implemented authentication logs
+
+### Fixes
+
+- Prevented multiple submissions during comment creation
+- Renamed `avatar` field to `avatar_url` in GoogleAuthController
+- Fixed potential DOM XSS issue: text incorrectly reinterpreted as HTML
+
+### Refactors & Improvements
+
+- Updated GoogleAuthController: now uses `readonly` class and improved password hashing
+
 ## 0.4.0 (2025-05-20)
 
 ### Features

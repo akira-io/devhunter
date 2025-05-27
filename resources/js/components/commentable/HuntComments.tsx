@@ -19,7 +19,7 @@ interface TweetCommentsProps {
 export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
     const { auth } = usePage<SharedData>().props;
     const { toast } = useToast();
-    const { data, post, setData, errors } = useForm({
+    const { data, post, setData, errors, processing } = useForm({
         content: '',
     });
 
@@ -57,6 +57,7 @@ export function HuntComments({ isOpen, hunt }: TweetCommentsProps) {
                             className="focus:ring-primary focus:border-primary transition-all duration-300 focus:ring-2"
                         />
                         <Button
+                            disabled={processing}
                             variant="ghost"
                             size="sm"
                             type="submit"
