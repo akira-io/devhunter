@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 (2025-05-27)
+
+* feat: add email_verified_at field to user data in GoogleAuthController ([fabf916](https://github.com/akira-io/devhunter/commit/fabf916))
+* feat: add Google authentication support ([76096b2](https://github.com/akira-io/devhunter/commit/76096b2))
+* feat: authentication logs ([c7c3b36](https://github.com/akira-io/devhunter/commit/c7c3b36))
+* fix: prevent multiple submissions on comment creation ([fb92abf](https://github.com/akira-io/devhunter/commit/fb92abf))
+* fix: rename avatar field to avatar_url in GoogleAuthController ([050609c](https://github.com/akira-io/devhunter/commit/050609c))
+* refactor: update GoogleAuthController to use readonly class and improve password hashing ([775b8a2](https://github.com/akira-io/devhunter/commit/775b8a2))
+* Potential fix for code scanning alert no. 16: DOM text reinterpreted as HTML ([80e2b4a](https://github.com/akira-io/devhunter/commit/80e2b4a))
+* chore: update CHANGELOG for version 0.4.0 with new features, tests, and refactors ([f5490de](https://github.com/akira-io/devhunter/commit/f5490de))
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
